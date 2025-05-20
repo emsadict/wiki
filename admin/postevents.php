@@ -39,8 +39,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // File upload handling
     $target_dir = "uploads/"; // Directory to store images
-    $event_image = $target_dir . basename($_FILES["event_image"]["name"]);
-    $event_thumbnail = $target_dir . basename($_FILES["event_thumbnail"]["name"]);
+    $event_image = basename($_FILES["event_image"]["name"]);
+    $event_thumbnail = basename($_FILES["event_thumbnail"]["name"]);
 
     if (move_uploaded_file($_FILES["event_image"]["tmp_name"], $event_image) &&
         move_uploaded_file($_FILES["event_thumbnail"]["tmp_name"], $event_thumbnail)) {

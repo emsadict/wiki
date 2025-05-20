@@ -1,221 +1,210 @@
-<?php 
+
+<?php
 session_start();
-    include_once("../fun.inc.php");
-    if(!isset($_SESSION['spgs_auth']))
-    {
+// Database connection
+$host = "localhost";
+$user = "root"; // Change to your DB username
+$password = ""; // Change to your DB password
+$database = "membership_management"; // Change to your DB name
 
-    header("location: index.php");
-    }
-   else{
+$conn = new mysqli($host, $user, $password, $database);
 
-    $spgs_auth=$_SESSION['spgs_auth'];
-
-    $user=$spgs_auth[1];
- 
-  }
-
-  $conn = new mysqli("localhost", "root", "", "oasis_college_database");
-
+// Check for connection errors
 if ($conn->connect_error) {
-  die("Connection failed: " . $conn->connect_error);
+    die("Connection failed: " . $conn->connect_error);
 }
 
+// Check if admin is logged in
+if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== true)
+ {
+    header("Location: adminlogin.php");
+    exit();
+}
+// Fetch unique values for year, membership_category, and state
+$years = $conn->query("SELECT DISTINCT year FROM payments ORDER BY year DESC");
+$categories = $conn->query("SELECT DISTINCT membership_category FROM payments ORDER BY membership_category");
+$states = $conn->query("SELECT DISTINCT state FROM biodata ORDER BY state");
 
-
-
+$conn->close();
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
+<?php include_once("header.php"); ?>
+<style>
 
-<head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+/* Custom styling for success button (green) */
+.btn-success {
+    background-color: #28a745 !important; /* Bootstrap default green */
+    border-color: #218838 !important;
+    color: #f7f7f7 !important;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 8px;
+    transition: all 0.3s ease-in-out;
+}
 
-  <title>Tables / General - NiceAdmin Bootstrap Template</title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
+.btn-success:hover {
+    background-color: #218838 !important;
+    border-color: #1e7e34 !important;
+}
 
-  <!-- Favicons -->
-  <link href="assets/img/favicon.ico" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+/* Custom styling for danger button (red) */
+.btn-danger {
+    background-color: #dc3545 !important; /* Bootstrap default red */
+    border-color: #c82333 !important;
+    color: white !important;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 8px;
+    transition: all 0.3s ease-in-out;
+}
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.gstatic.com" rel="preconnect">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+.btn-danger:hover {
+    background-color: #c82333 !important;
+    border-color: #bd2130 !important;
+}
 
-  <!-- Vendor CSS Files -->
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet">
-  <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet">
-  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-  <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
+/* Custom styling for primary button (blue) */
+.btn-primary {
+    background-color: #007bff !important; /* Bootstrap default blue */
+    border-color: #0056b3 !important;
+    color: white !important;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 8px;
+    transition: all 0.3s ease-in-out;
+}
 
-  <!-- Template Main CSS File -->
-  <link href="assets/css/style.css" rel="stylesheet">
+.btn-primary:hover {
+    background-color: #0056b3 !important;
+    border-color: #004085 !important;
+}
+.form-container {
+    width: 100%; /* Adjust width as needed */
+    max-width: 1000px; /* Prevents the form from being too wide */
+    padding: 20px;
+    background: #f9f9f9; /* Light background */
+    border-radius: 15px; /* Rounded border */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Optional shadow */
+    margin: 20px auto; /* Centers the form */
+}
 
-  <!-- =======================================================
-  * Template Name: NiceAdmin
-  * Updated: Mar 10 2024 with Bootstrap v5.3.3
-  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
-</head>
+.form-container input, 
+.form-container textarea,
+.form-container option,
+.form-container select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px; /* Rounds input fields */
+}
 
-<body>
+.form-container button {
+    display: block;
+    width: 50%; /* Adjust width */
+    padding: 10px;
+    background: #28a745; /* Green color */
+    color: white;
+    border: none;
+    border-radius: 8px; /* Rounded button */
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    margin: 0 auto; /* Centers the button */
+}
 
-  <!-- ======= Header ======= -->
-    <?php include_once("header.php"); ?>
-
-  <!-- End Header -->
-
+.form-container button:hover {
+    background: #218838;
+}
+#madewith{
+	max-width: 1600px;;
+}
+    </style>
+<!-- End Header -->
 
   <!-- ======= Sidebar ======= -->
-     <?php include_once("sidebar.php"); ?>
-     <!-- End Sidebar-->
+  <?php include_once("sidebar.php"); ?>
+  <!-- End Sidebar-->
 
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>View Course Registration</h1>
+      <h1>Dashboard</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="admindashboad.php">Dashboard</a></li>
-          <li class="breadcrumb-item">Student Registration</li>
-          <li class="breadcrumb-item active">Course Registration</li>
+          <li class="breadcrumb-item"><a href="admindashboad.php">Home</a></li>
+          <li class="breadcrumb-item active">Dashboard</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
 
-    <section class="section">
+    <section class="section dashboard">
       <div class="row">
-        <div class="col-lg-12">
 
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Course Registartion</h5>
+        <!-- Left side columns -->
+            
+              <!-- Customers Card -->
+            
+            <!-- End Customers Card -->
 
-              <!-- Default Table -->
-              
-               <form method="POST" action="">
-  <div class="row mb-3">
-    <div class="col-md-6">
-      <input type="text" name="matricno" class="form-control" placeholder="Enter Matric Number" value="<?php echo isset($_POST['matricno']) ? $_POST['matricno'] : ''; ?>">
-    </div>
-    <div class="col-md-3">
-      <button type="submit" name="search" class="btn btn-primary">Search</button>
-    </div>
-  </div>
+            <!-- Reports -->
+            <div class="col-12">
+              <div class="card recent-sales overflow-auto">
+
+                
+
+                <div class="card-body">
+                <h5 class="card-title">Download Membership Payment list <span>| YEAR|CATEGORY|STATE</span></h5>
+                <div class="form-container">
+                <form method="post" action="export_csv.php">
+    <label>Year:</label>
+    <select name="year">
+        <option value="all">All</option>
+        <?php while($row = $years->fetch_assoc()): ?>
+            <option value="<?= $row['year'] ?>"><?= $row['year'] ?></option>
+        <?php endwhile; ?>
+    </select>
+
+    <label>Membership Category:</label>
+    <select name="membership_category">
+        <option value="all">All</option>
+        <?php while($row = $categories->fetch_assoc()): ?>
+            <option value="<?= $row['membership_category'] ?>"><?= $row['membership_category'] ?></option>
+        <?php endwhile; ?>
+    </select>
+
+    <label>State:</label>
+    <select name="state">
+        <option value="all">All</option>
+        <?php while($row = $states->fetch_assoc()): ?>
+            <option value="<?= $row['state'] ?>"><?= $row['state'] ?></option>
+        <?php endwhile; ?>
+    </select>
+
+    <button type="submit" name="export">Download CSV</button>
 </form>
+                </div>
+              </div>
+              </div>
+            </div><!-- End Recent Sales -->
 
-<!-- Table -->
-<table class="table table-bordered">
-  <thead>
-    <tr>
-      <th>Matric No</th>
-      <th>level</th>
-      <th>Session</th>
-      <th>Semester</th>
-      <th>Course Code</th>
-      <th>Course Title</th>
-      <th>Units</th>
-      <th>Status</th>
-    </tr>
-  </thead>
-  <tbody>
-    <?php
-    // Database connection
-    $conn = new mysqli("localhost", "root", "", "oasis_college_database");
+            <!-- End Top Selling -->
 
-    if ($conn->connect_error) {
-      die("Connection failed: " . $conn->connect_error);
-    }
-
-    if (isset($_POST['search']) && !empty($_POST['matricno'])) {
-      $matricno = $conn->real_escape_string($_POST['matricno']);
-
-      $query = "SELECT * FROM course_reg WHERE matricno = '$matricno'";
-      $result = $conn->query($query);
-
-      if ($result && $result->num_rows > 0) {
-        $row = $result->fetch_assoc();
-        $total_units = 0;
-        $has_courses = false;
-
-        for ($i = 1; $i <= 20; $i++) { // Iterate through course1 to course20 columns
-          $course = $row["course$i"];
-          if (!empty($course) && strpos($course, '|') !== false) { // Check for valid course data
-            list($course_code, $course_title, $units, $status) = explode('|', $course);
-            if (!empty($course_code) && !empty($course_title) && !empty($units) && !empty($status)) {
-              $total_units += (int)$units;
-              $has_courses = true;
-              echo "<tr>
-                      <td>{$row['matricno']}</td>
-                      <td>{$row['level']}</td>
-                      <td>{$row['session']}</td>
-                      <td>{$row['semester']}</td>
-                      <td>$course_code</td>
-                      <td>$course_title</td>
-                      <td>$units</td>
-                      <td>$status</td>
-                    </tr>";
-            }
-          }
-        }
-
-        if ($has_courses) {
-          echo "<tr>
-                  <td colspan='5' class='text-end'><strong>Total Units:</strong></td>
-                  <td colspan='2'><strong>$total_units</strong></td>
-                </tr>";
-        } else {
-          echo "<tr><td colspan='7' class='text-center'>No valid courses found</td></tr>";
-        }
-      } else {
-        echo "<tr><td colspan='7' class='text-center'>No records found</td></tr>";
-      }
-    } else {
-      echo "<tr><td colspan='7' class='text-center'>Enter Matric Number to Search</td></tr>";
-    }
-
-    $conn->close();
-    ?>
-  </tbody>
-</table>
-
-              <!-- End Table -->
-
-              <!-- End Table -->
-            </div>
           </div>
-        </div>
-      </div>
-    </section>
-  </main>
-              <!-- End Default Table Example -->
-            </div>
-          </div>
-
-        </div>
-
-            </div>
-          </div>
-        </div>
-      </div>
+        
     </section>
 
   </main><!-- End #main -->
-
-  <!-- ======= Footer ======= -->
   <?php 
     include_once("footer.php");
 
 
 
    ?>
- <!-- End Footer -->
+  <!-- End Footer -->
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 

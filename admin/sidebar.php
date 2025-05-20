@@ -92,19 +92,20 @@
 
       <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-bar-chart"></i><span>Add </span><i class="bi bi-chevron-down ms-auto"></i>
+          <i class="bi bi-bar-chart"></i><span>Add/Manage </span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="charts-chartjs.php">
-              <i class="bi bi-circle"></i><span>Add Member</span>
+            <a href="addstaff.php">
+              <i class="bi bi-circle"></i><span>Add A Staff</span>
             </a>
           </li>
-           <li>
-            <a href="charts-echarts.php">
-              <i class="bi bi-circle"></i><span>Print Admission Letter</span>
+          <li>
+            <a href="manaexco.php">
+              <i class="bi bi-circle"></i><span>manage Staff/ EXCO Member</span>
             </a>
           </li>
+           
         </ul>
       </li><!-- End Charts Nav -->
 
@@ -119,6 +120,9 @@
             </a>
             <a href="managenews.php">
               <i class="bi bi-circle"></i><span>Manage News</span>
+            </a>
+            <a href="manage_event.php">
+              <i class="bi bi-circle"></i><span>Manage event</span>
             </a>
           </li>
           <li>

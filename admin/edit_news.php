@@ -44,7 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     if ($conn->query($update_sql) === TRUE) {
-        $message= "News updated successfully!";
+        $message= "<div class='alert alert-success'>News updated successfully!</div>";
         header("Location: managenews.php");
     } else {
         echo "Error updating news: " . $conn->error;

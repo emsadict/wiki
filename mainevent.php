@@ -189,7 +189,7 @@ if (isset($_GET['id'])) {
 
 <div class="kingster-page-wrapper" id="kingster-page-wrapper">
     <div class="kingster-blog-title-wrap kingster-style-custom kingster-feature-image" 
-         style="background-image: url(upload/<?php echo htmlspecialchars($event['event_image']); ?>); height:400px">
+         style="background-image: url(admin/uploads/<?php echo htmlspecialchars($event['event_image']); ?>); height:400px">
         <div class="kingster-header-transparent-substitute"></div>
         <div class="kingster-blog-title-overlay" style="opacity: 0.01;"></div>
         <div class="kingster-blog-title-bottom-overlay"></div>
@@ -245,7 +245,7 @@ if (isset($_GET['id'])) {
         
         <div class="event-images">
             <p><strong>Picture:</strong></p>
-            <img src="uploads/<?php echo htmlspecialchars($event['event_image']); ?>" alt="Event Thumbnail" width="75%">
+            <img src="./admin/uploads/<?php echo htmlspecialchars($event['event_image']); ?>" alt="Event Thumbnail" width="75%">
         </div>
         
         <h3>Virtual Event Links</h3>

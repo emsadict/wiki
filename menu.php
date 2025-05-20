@@ -17,38 +17,65 @@
                                     <li class="menu-item current-menu-item menu-item-has-children kingster-mega-menu" ><a href="organogram.php" class="sf-with-ul-pre">Who we are</a>
                                         <div class="sf-mega sf-mega-full ">
                                             <ul class="sub-menu">
-                                                <li class="menu-item menu-item-has-children" data-size="15"><a  href="vco.php" class="sf-with-ul-pre">Board of Trustees</a>
+                                                <li class="menu-item menu-item-has-children" data-size="15"><a  href="board.php" class="sf-with-ul-pre">Board of Trustees</a>
                                                     <ul class="sub-menu">
-                                                        <li class="menu-item"><a href="bachelor-of-science-in-business-administration.html">Legal Unit</a></li>
-                                                        <li class="menu-item"><a href="school-of-law.html">Public Relations Unit</a></li>
-                                                        <li class="menu-item"><a href="engineering.html">Identity Cards Units</a></li>
-                                                        <li class="menu-item"><a href="engineering.html">Internal Audit Unit</a></li>
-                                                        <li class="menu-item"><a href="medicine.html">SERVICOM/ACTM</a></li>
-                                                        <li class="menu-item"><a href="art-science.html">MIS</a></li>
-                                                      
+                                                         <?php
+                                                             // Fetch staff members with designation 'Staff'
+                                                             $queryStaff = "SELECT id, office FROM staff WHERE designation = 'Board of Trustee'";
+                                                             $resultStaff = $conn->query($queryStaff);
+
+                                                             // Generate menu items dynamically
+                                                             while ($row = $resultStaff->fetch_assoc()) {
+                                                                 $staffName = htmlspecialchars($row['office']);
+                                                                 $staffUrl = "staff_profile.php?id=" . $row['id']; // Link to profile page
+
+                                                                 echo '<li class="menu-item"><a href="' . $staffUrl . '">' . $staffName . '</a></li>';
+                                                             }
+                                                             ?>
                                                     </ul>
                                                 </li>
-                                                <li class="menu-item menu-item-has-children" data-size="15"><a href="units.php" class="sf-with-ul-pre">Executive Members</a>
+                                                <li class="menu-item menu-item-has-children" data-size="15"><a href="excos.php" class="sf-with-ul-pre">Executive Members</a>
                                                     <ul class="sub-menu">
-                                                    <li class="menu-item"><a href="registry.php">Registry</a></li>
-                                                        
-                                                     
-                                                        
+                                                    <?php
+                                                             // Fetch staff members with designation 'Staff'
+                                                             $queryStaff = "SELECT id, office FROM staff WHERE designation = 'Executive Committee'";
+                                                             $resultStaff = $conn->query($queryStaff);
+
+                                                             // Generate menu items dynamically
+                                                             while ($row = $resultStaff->fetch_assoc()) {
+                                                                 $staffName = htmlspecialchars($row['office']);
+                                                                 $staffUrl = "staff_profile.php?id=" . $row['id']; // Link to profile page
+
+                                                                 echo '<li class="menu-item"><a href="' . $staffUrl . '">' . $staffName . '</a></li>';
+                                                             }
+                                                             ?>
                                                     </ul>
                                                 </li>
                                                
                                                 
-                                                <li class="menu-item menu-item-has-children" data-size="15"><a href="schools.php" class="sf-with-ul-pre">Staff</a>
+                                                <li class="menu-item menu-item-has-children" data-size="15"><a href="staff.php" class="sf-with-ul-pre">Staff</a>
                                                 <ul class="sub-menu">
-                                                        
+                                                                    <?php
+                                                                      // Fetch staff members with designation 'Staff'
+                                                                      $queryStaff = "SELECT id, office FROM staff WHERE designation = 'Staff'";
+                                                                      $resultStaff = $conn->query($queryStaff);
+
+                                                                      // Generate menu items dynamically
+                                                                      while ($row = $resultStaff->fetch_assoc()) {
+                                                                          $staffName = htmlspecialchars($row['office']);
+                                                                          $staffUrl = "staff_profile.php?id=" . $row['id']; // Link to profile page
+
+                                                                          echo '<li class="menu-item"><a href="' . $staffUrl . '">' . $staffName . '</a></li>';
+                                                                         }                                                                      
+                                                                      ?>
                                                         
                                                     </ul>
                                                 </li> 
-                                                <li class="menu-item menu-item-has-children" data-size="15"><a href="directorate.php" class="sf-with-ul-pre">Comunity Leaders & Club leaders</a>
+                                                <li class="menu-item menu-item-has-children" data-size="15"><a href="communitylead.php" class="sf-with-ul-pre">Comunity Leaders & Club leaders</a>
                                                     <ul class="sub-menu">
                                                     
                                                     </ul>
-                                                </li>  
+                                                </li> 
                                             </ul>
                                         </div>
                                     </li>
@@ -65,8 +92,6 @@
                                         <ul class="sub-menu">
                                             <li class="menu-item" data-size="60"><a href="blog.php">Update</a></li>
                                             <li class="menu-item" data-size="60"><a href="events.php">Events</a></li>
-                                            <li class="menu-item" data-size="60"><a href="researchs.php">Researches</a></li>
-
 
                                         </ul>
                                     </li>

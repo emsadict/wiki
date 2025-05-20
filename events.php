@@ -75,7 +75,7 @@ $past_result = mysqli_query($conn, $past_query);
                         <p><strong>Date:</strong> <?php echo $event['event_date']; ?></p>
                         <p><strong>Time:</strong> <?php echo $event['event_time']; ?></p>
                         <p><strong>Venue:</strong> <?php echo $event['event_venue']; ?></p>
-                        <img src="uploads/<?php echo $event['event_thumbnail']; ?>" width="150">
+                        <img src="./admin/uploads/<?php echo $event['event_thumbnail']; ?>" width="150">
                         <br>
                         <div class="pagination">
                         <a href="mainevent.php?id=<?php echo $event['id']; ?>" class="btn btn-primary">View Event</a>

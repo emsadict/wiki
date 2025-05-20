@@ -42,7 +42,7 @@ $result = $conn->query($sql);
                                     <div class="gdlr-core-item-list gdlr-core-blog-full gdlr-core-item-mglr gdlr-core-style-left">
                                         <div class="gdlr-core-blog-thumbnail gdlr-core-media-image gdlr-core-opacity-on-hover gdlr-core-zoom-on-hover">
                                             <a href="post.php?id=<?= $row['id']; ?>">
-                                                <img src="upload/<?= $row['image']; ?>" width="1280" height="919" alt="<?= $row['title']; ?>" />
+                                                <img src="./admin/uploads/<?= $row['image']; ?>" width="1280" height="919" alt="<?= $row['title']; ?>" />
                                             </a>
                                         </div>
                                         <div class="gdlr-core-blog-full-frame gdlr-core-skin-e-background">

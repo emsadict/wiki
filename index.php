@@ -194,8 +194,8 @@ $slides_json1 = json_encode($slides8);
                                                         <div class="gdlr-core-column-service-media gdlr-core-media-image"><img src="upload/icon-1.png" alt="" width="40" height="40" title="icon-1" /></div>
                                                         <div class="gdlr-core-column-service-content-wrapper">
                                                             <div class="gdlr-core-column-service-title-wrap">
-                                                                <h3 class="gdlr-core-column-service-title gdlr-core-skin-title" id="h3_1dd7_0">University Life</h3>
-                                                                <div class="gdlr-core-column-service-caption gdlr-core-info-font gdlr-core-skin-caption" id="div_1dd7_3">Overall in here</div>
+                                                                <h3 class="gdlr-core-column-service-title gdlr-core-skin-title" id="h3_1dd7_0">GLAM</h3>
+                                                                <div class="gdlr-core-column-service-caption gdlr-core-info-font gdlr-core-skin-caption" id="div_1dd7_3"></div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -211,8 +211,8 @@ $slides_json1 = json_encode($slides8);
                                                         <div class="gdlr-core-column-service-media gdlr-core-media-image"><img src="upload/icon-2.png" alt="" width="44" height="40" title="icon-2" /></div>
                                                         <div class="gdlr-core-column-service-content-wrapper">
                                                             <div class="gdlr-core-column-service-title-wrap">
-                                                                <h3 class="gdlr-core-column-service-title gdlr-core-skin-title" id="h3_1dd7_1">Graduation</h3>
-                                                                <div class="gdlr-core-column-service-caption gdlr-core-info-font gdlr-core-skin-caption" id="div_1dd7_6">Getting Diploma</div>
+                                                                <h3 class="gdlr-core-column-service-title gdlr-core-skin-title" id="h3_1dd7_1">Education</h3>
+                                                                <div class="gdlr-core-column-service-caption gdlr-core-info-font gdlr-core-skin-caption" id="div_1dd7_6"></div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -228,8 +228,8 @@ $slides_json1 = json_encode($slides8);
                                                         <div class="gdlr-core-column-service-media gdlr-core-media-image"><img src="upload/icon-3.png" alt="" width="44" height="39" title="icon-3" /></div>
                                                         <div class="gdlr-core-column-service-content-wrapper">
                                                             <div class="gdlr-core-column-service-title-wrap">
-                                                                <h3 class="gdlr-core-column-service-title gdlr-core-skin-title" id="h3_1dd7_2">Athletics</h3>
-                                                                <div class="gdlr-core-column-service-caption gdlr-core-info-font gdlr-core-skin-caption" id="div_1dd7_9">Sport Clubs</div>
+                                                                <h3 class="gdlr-core-column-service-title gdlr-core-skin-title" id="h3_1dd7_2">Advocacy</h3>
+                                                                <div class="gdlr-core-column-service-caption gdlr-core-info-font gdlr-core-skin-caption" id="div_1dd7_9"></div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -245,8 +245,8 @@ $slides_json1 = json_encode($slides8);
                                                         <div class="gdlr-core-column-service-media gdlr-core-media-image"><img src="upload/icon-4.png" alt="" width="41" height="41" title="icon-4" /></div>
                                                         <div class="gdlr-core-column-service-content-wrapper">
                                                             <div class="gdlr-core-column-service-title-wrap">
-                                                                <h3 class="gdlr-core-column-service-title gdlr-core-skin-title" id="h3_1dd7_3">Social</h3>
-                                                                <div class="gdlr-core-column-service-caption gdlr-core-info-font gdlr-core-skin-caption" id="div_1dd7_12">Overall in here</div>
+                                                                <h3 class="gdlr-core-column-service-title gdlr-core-skin-title" id="h3_1dd7_3">Gender-gap</h3>
+                                                                <div class="gdlr-core-column-service-caption gdlr-core-info-font gdlr-core-skin-caption" id="div_1dd7_12"></div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -316,7 +316,7 @@ $slides_json1 = json_encode($slides8);
                                             <div class="gdlr-core-pbf-element">
                                                 <div class="gdlr-core-title-item gdlr-core-item-pdb clearfix  gdlr-core-left-align gdlr-core-title-item-caption-bottom gdlr-core-item-pdlr" id="div_1dd7_25">
                                                     <div class="gdlr-core-title-item-title-wrap clearfix">
-                                                        <h3 class="gdlr-core-title-item-title gdlr-core-skin-title " id="h3_1dd7_5">About Adeyemi Federal University of Education, AFUED, ONDO</h3></div>
+                                                        <h3 class="gdlr-core-title-item-title gdlr-core-skin-title " id="h3_1dd7_5">Mission & Vision Statement</h3></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -351,7 +351,7 @@ $slides_json1 = json_encode($slides8);
     <div class="gdlr-core-pbf-background-wrap">
 
     </div>
-     <h3 style="text-align: center; color: white;">We have a variety of Programmes for you to enroll</h3> 
+     <h3 style="text-align: center; color: white;">Overview of Wikimedia</h3> 
 
     <div class="gdlr-core-pbf-wrapper-content gdlr-core-js " >
         <div class="gdlr-core-pbf-wrapper-container clearfix gdlr-core-container-custom" id="div_1dd7_81">
@@ -371,7 +371,7 @@ $slides_json1 = json_encode($slides8);
                 <div class="gdlr-core-title-item gdlr-core-item-pdb clearfix gdlr-core-center-align gdlr-core-title-item-caption-bottom gdlr-core-item-pdlr" id="div_1dd7_90">
                     <div class="gdlr-core-title-item-title-wrap clearfix">
                         <h3 class="gdlr-core-title-item-title gdlr-core-skin-title" id="h3_1dd7_30" style="color: white; font-size: 17px;">
-                            UNDERGRADUATE
+                            ADVOCACY
                         </h3>
                     </div>
                 </div>
@@ -396,7 +396,7 @@ $slides_json1 = json_encode($slides8);
                             <div class="gdlr-core-title-item gdlr-core-item-pdb clearfix  gdlr-core-center-align gdlr-core-title-item-caption-bottom gdlr-core-item-pdlr" id="div_1dd7_90">
                                 <div class="gdlr-core-title-item-title-wrap clearfix">
 
-                                    <h3 class="gdlr-core-title-item-title gdlr-core-skin-title " id="h3_1dd7_30" style="color: white; font-size: 17px;">POSTGRADUATE</h3>
+                                    <h3 class="gdlr-core-title-item-title gdlr-core-skin-title " id="h3_1dd7_30" style="color: white; font-size: 17px;">EDUCATION</h3>
                                 </div>
                                 <!-- <span class="gdlr-core-title-item-caption gdlr-core-info-font gdlr-core-skin-caption" id="span_1dd7_7" style="color: #1c2e51;">Kingster University was established by John Smith in 1920 for the public benefit and it is recognized globally.</span> -->
                             </div>
@@ -417,7 +417,7 @@ $slides_json1 = json_encode($slides8);
                             <div class="gdlr-core-title-item gdlr-core-item-pdb clearfix  gdlr-core-center-align gdlr-core-title-item-caption-bottom gdlr-core-item-pdlr" id="div_1dd7_90">
                                 <div class="gdlr-core-title-item-title-wrap clearfix">
 
-                                    <h3 class="gdlr-core-title-item-title gdlr-core-skin-title " id="h3_1dd7_30" style="color: white; font-size: 17px;">OAU/COLLEGE STUDENTS</h3>
+                                    <h3 class="gdlr-core-title-item-title gdlr-core-skin-title " id="h3_1dd7_30" style="color: white; font-size: 17px;">GENDER-GAP INITIATIVE</h3>
                                 </div>
                                 <!-- <span class="gdlr-core-title-item-caption gdlr-core-info-font gdlr-core-skin-caption" id="span_1dd7_7" style="color: #1c2e51;">Kingster University was established by John Smith in 1920 for the public benefit and it is recognized globally.</span> -->
                             </div>
@@ -438,7 +438,7 @@ $slides_json1 = json_encode($slides8);
                             <div class="gdlr-core-title-item gdlr-core-item-pdb clearfix  gdlr-core-center-align gdlr-core-title-item-caption-bottom gdlr-core-item-pdlr" id="div_1dd7_90">
                                 <div class="gdlr-core-title-item-title-wrap clearfix">
 
-                                    <h3 class="gdlr-core-title-item-title gdlr-core-skin-title " id="h3_1dd7_30" style="color: white; font-size: 17px;">COLEGE OF TECHNOLOGY</h3>
+                                    <h3 class="gdlr-core-title-item-title gdlr-core-skin-title " id="h3_1dd7_30" style="color: white; font-size: 17px;">MEMBERSHIP</h3>
                                 </div>
                                 <!-- <span class="gdlr-core-title-item-caption gdlr-core-info-font gdlr-core-skin-caption" id="span_1dd7_7" style="color: #1c2e51;">Kingster University was established by John Smith in 1920 for the public benefit and it is recognized globally.</span> -->
                             </div>
