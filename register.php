@@ -8,7 +8,7 @@ if ($row = mysqli_fetch_assoc($years_result)) {
 // Function to generate random membership number like WUG12345
 function generateMembershipNumber() {
     $randomNumber = rand(10000, 99999);
-    return "WUG" . $randomNumber;
+    return "WG" . $randomNumber;
 }
 
 // Generate and store membership number in session
@@ -159,9 +159,9 @@ tinymce.init({
                             <div class="gdlr-core-pbf-sidebar-left gdlr-core-column-extend-left  kingster-sidebar-area gdlr-core-column-15 gdlr-core-pbf-sidebar-padding  gdlr-core-line-height">
                                 
                                 <div class="gdlr-core-sidebar-item gdlr-core-item-pdlr">
-                                    <button class="btn btn-success"> Back to admin</button> <br />
+                                  <!--  <button class="btn btn-success"> Back to admin</button> --> <br />
                                     <div id="recent-posts-3" class="widget widget_recent_entries kingster-widget" style="background-color:rgb(206, 234, 221) ; margin-top:10px;">
-                                    <?php include "adminsidemenu.php"; ?>
+                                    <?php include "regsidemenu.php"; ?>
                                     </div>
                                 </div>
                             </div>

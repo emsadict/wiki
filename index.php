@@ -264,15 +264,42 @@ $slides_json1 = json_encode($slides8);
                         </div>
                         <div class="gdlr-core-pbf-wrapper-content gdlr-core-js ">
                             <div class="gdlr-core-pbf-wrapper-container clearfix gdlr-core-container-custom">
-                                <div class="gdlr-core-pbf-column gdlr-core-column-30 gdlr-core-column-first">
+                                <div class="gdlr-core-pbf-column gdlr-core-column-30 gdlr-core-column-first" style= "background-color:rgb(201, 207, 211);">
                                     <div class="gdlr-core-pbf-column-content-margin gdlr-core-js " id="div_1dd7_14" data-sync-height="height-1">
                                         <div class="gdlr-core-pbf-background-wrap">
                                             <div class="gdlr-core-pbf-background gdlr-core-parallax gdlr-core-js" id="div_1dd7_15" data-parallax-speed="0"></div>
+
                                         </div>
-                                        <div class="gdlr-core-pbf-column-content clearfix gdlr-core-js  gdlr-core-sync-height-content"></div>
+                                        <div class="gdlr-core-pbf-column-content clearfix gdlr-core-js  gdlr-core-sync-height-content">
+                                        <div class="gdlr-core-title-item gdlr-core-item-pdb clearfix  gdlr-core-left-align gdlr-core-title-item-caption-bottom gdlr-core-item-pdlr" id="div_1dd7_18">
+                                                    <div class="gdlr-core-title-item-title-wrap clearfix">
+                                                        <h3 class="gdlr-core-title-item-title gdlr-core-skin-title " id="h3_1dd7_4" style="color: #1781cc; background-color:rgb(201, 207, 211);"></h3></div> <!--<span class="gdlr-core-title-item-caption gdlr-core-info-font gdlr-core-skin-caption" id="span_1dd7_0">Welcome Address</span></div> -->
+                                            </div>
+                                             <div class="gdlr-core-pbf-element">
+                                                <div class="gdlr-core-text-box-item gdlr-core-item-pdlr gdlr-core-item-pdb gdlr-core-left-align" id="div_1dd7_19">
+                                                    <div class="gdlr-core-text-box-item-content" id="div_1dd7_20">
+                                                        <p style="color: #1781cc; text-align: justify;">
+  <img src="./upload/chairaman.jpg" height="300px" width="300px" style="float: left; margin: 0 15px 15px 0;" />
+  This platform is not only a gateway to our activities, projects,                  and impact stories but also an invitation to you, whether you are a new visitor, an experienced Wikipedian, a researcher, an educator, a journalist, or a policymaker, to join us in reimagining how Nigeria is represented on the world's largest free knowledge platforms.
+  Let's continue to make knowledge free, inclusive, and truly reflective of who we are. <br>
+  Thank you for visiting.
+  
+  Warm regards,<br>
+  <strong>Olaniyan Olushola</strong><br>
+   President, Wikimedia User Group Nigeria
+</p>
+                                                    </div>
+                                                    <div class="gdlr-core-pbf-element">
+                                                <div class="gdlr-core-button-item gdlr-core-item-pdlr gdlr-core-item-pdb gdlr-core-left-align"><a class="gdlr-core-button  gdlr-core-button-solid gdlr-core-button-no-border" href="#" id="a_1dd7_0"><span class="gdlr-core-content" >JOIN US </span></a></div>
+                                            </div>
+                                                </div>
+                                            </div>
+                                        <br />
+
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="gdlr-core-pbf-column gdlr-core-column-30" id="gdlr-core-column-4">
+                                <div class="gdlr-core-pbf-column gdlr-core-column-30" id="gdlr-core-column-4"style= "background-color:rgb(201, 207, 211);">
                                     <div class="gdlr-core-pbf-column-content-margin gdlr-core-js " id="div_1dd7_16" data-sync-height="height-1">
                                         <div class="gdlr-core-pbf-background-wrap">
                                             <div class="gdlr-core-pbf-background gdlr-core-parallax gdlr-core-js" id="div_1dd7_17" data-parallax-speed="0.1"></div>
@@ -281,18 +308,23 @@ $slides_json1 = json_encode($slides8);
                                             <div class="gdlr-core-pbf-element">
                                                 <div class="gdlr-core-title-item gdlr-core-item-pdb clearfix  gdlr-core-left-align gdlr-core-title-item-caption-bottom gdlr-core-item-pdlr" id="div_1dd7_18">
                                                     <div class="gdlr-core-title-item-title-wrap clearfix">
-                                                        <h3 class="gdlr-core-title-item-title gdlr-core-skin-title " id="h3_1dd7_4">THE CHAIRMAN'S WELCOME ADDRESS</h3></div><span class="gdlr-core-title-item-caption gdlr-core-info-font gdlr-core-skin-caption" id="span_1dd7_0">Welcome Address</span></div>
+                                                        <h3 class="gdlr-core-title-item-title gdlr-core-skin-title " id="h3_1dd7_4" style="color: #1781cc; background-color:rgb(201, 207, 211);">THE CHAIRMAN'S WELCOME ADDRESS</h3></div> <!--<span class="gdlr-core-title-item-caption gdlr-core-info-font gdlr-core-skin-caption" id="span_1dd7_0">Welcome Address</span></div> -->
                                             </div>
                                             <div class="gdlr-core-pbf-element">
                                                 <div class="gdlr-core-text-box-item gdlr-core-item-pdlr gdlr-core-item-pdb gdlr-core-left-align" id="div_1dd7_19">
                                                     <div class="gdlr-core-text-box-item-content" id="div_1dd7_20">
-                                                        <p>We don’t just give students an education and experiences that set them up for success in a career. We help them succeed in their career—to discover a field they’re passionate about and dare to lead it.</p>
+                                                        <p style="color: #1781cc; text-align:justify">Welcome to the official website of Wikimedia 
+                                                            User Group Nigeria (registered as Wikimedia Nigeria Foundation), the recognised affiliate of the Wikimedia Foundation (owner of Wikipedia), committed to promoting free knowledge and open access in Nigeria.
+                                                           Since our inception in 2015, we have worked tirelessly to bridge the knowledge gap about Nigeria and Africa on Wikipedia and its sister projects. 
+                                                            Through dynamic partnerships, capacity-building programs, and community-driven initiatives, we empower Nigerians to contribute to and benefit from the sum of all human knowledge.
+                                                              As President, I am proud of our collective achievements, from pioneering Wikipedia-in-residence programs with government institutions to documenting our rich cultural heritage, languages, and oral histories to building one of Africa's most vibrant and diverse Wikimedia communities.
+
+
+                                                        </p>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="gdlr-core-pbf-element">
-                                                <div class="gdlr-core-button-item gdlr-core-item-pdlr gdlr-core-item-pdb gdlr-core-left-align"><a class="gdlr-core-button  gdlr-core-button-solid gdlr-core-button-no-border" href="#" id="a_1dd7_0"><span class="gdlr-core-content" >Apply Now</span></a></div>
-                                            </div>
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -308,15 +340,20 @@ $slides_json1 = json_encode($slides8);
                                 <div class="gdlr-core-pbf-column gdlr-core-column-20 gdlr-core-column-first">
                                     <div class="gdlr-core-pbf-column-content-margin gdlr-core-js ">
                                         <div class="gdlr-core-pbf-column-content clearfix gdlr-core-js ">
-                                            <div class="gdlr-core-pbf-element">
-                                                <div class="gdlr-core-image-item gdlr-core-item-pdlr gdlr-core-item-pdb  gdlr-core-left-align" id="div_1dd7_23">
-                                                    <div class="gdlr-core-image-item-wrap gdlr-core-media-image  gdlr-core-image-item-style-rectangle" id="div_1dd7_24"><img src="images/logo.png" alt="" width="262" height="35" title="logo-white" /></div>
-                                                </div>
-                                            </div>
+                                            
                                             <div class="gdlr-core-pbf-element">
                                                 <div class="gdlr-core-title-item gdlr-core-item-pdb clearfix  gdlr-core-left-align gdlr-core-title-item-caption-bottom gdlr-core-item-pdlr" id="div_1dd7_25">
                                                     <div class="gdlr-core-title-item-title-wrap clearfix">
-                                                        <h3 class="gdlr-core-title-item-title gdlr-core-skin-title " id="h3_1dd7_5">Mission & Vision Statement</h3></div>
+                                                        <h5 class="gdlr-core-title-item-title gdlr-core-skin-title " id="h3_1dd7_5">Vision and Mission Statement</h5>
+                                                    </div>
+                                                        <p style="color: #1781cc; background-color:rgb(229, 234, 237); text-align:justify; padding: 5px;"><strong>VISION:</strong> Wikimedia Nigeria is committed to the 
+                                                            ideal of a world in which every single human
+                                                        being can freely share in the sum of all knowledge and we believe that free access 
+                                                        to knowledge is a fundamental right.</p>
+                                                        
+                                                         <p style="color: #1781cc; background-color:rgb(229, 234, 237); text-align:justify;padding: 5px;">Our mission is to support and promote free access
+                                                             to knowledge, work with volunteers across the country, partner with governmental and non-governmental 
+                                                            organizations, cultural and educational sectors and other mission-aligned groups to make knowledge available for free access.</p>
                                                 </div>
                                             </div>
                                         </div>

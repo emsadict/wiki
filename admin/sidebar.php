@@ -96,8 +96,8 @@
         </a>
         <ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="addstaff.php">
-              <i class="bi bi-circle"></i><span>Add A Staff</span>
+            <a href="addexco.php">
+              <i class="bi bi-circle"></i><span>Add A Staff/exco</span>
             </a>
           </li>
           <li>

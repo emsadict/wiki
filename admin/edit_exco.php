@@ -23,48 +23,63 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
 
 $success = "";
 $error = "";
-// Handle form submission
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $name = $_POST['name'];
-    $title = $_POST['title'];
-    $profile = $_POST['profile'];
-    $membership_category_id = $_POST['membership_category'];
-    $community_id = isset($_POST['community_id']) ? $_POST['community_id'] : null;
-    $campus=$_POST['campus'];
-    $board=$_POST['board'];
-    $exco=$_POST['exco'];
-    $office = isset($_POST['office']) ? $_POST['office'] : null;
-    $created_at = date('Y-m-d H:i:s');
+$alert = "";
+$id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
-    // Fetch category name to set designation
-    $catQuery = $conn->query("SELECT name FROM staff_categories WHERE id = $membership_category_id");
-    $designation = ($catQuery && $catQuery->num_rows > 0) ? $catQuery->fetch_assoc()['name'] : '';
-
-    // Handle file upload
-    $passport_name = '';
-    if (!empty($_FILES['passport']['name'])) {
-    $passport_filename = time() . '_' . basename($_FILES['passport']['name']); // just the filename
-    $passport_path = 'uploads/' . $passport_filename; // actual location to save
-    move_uploaded_file($_FILES['passport']['tmp_name'], $passport_path);
-
-    $passport_name = $passport_filename; // save only filename in DB
+if ($id <= 0) {
+    die("Invalid ID.");
 }
 
-
-    // Insert into DB
-    $stmt = $conn->prepare("INSERT INTO staff (name, title, designation, profile, passport, membership_category_id, community_id, office, created_at, campus, board, exco) VALUES (?, ?, ?, ?,?, ?, ?, ?, ?,?,?, ?)");
-    $stmt->bind_param("sssssiisssss", $name, $title, $designation, $profile, $passport_name, $membership_category_id, $community_id, $office, $created_at,$campus,$board,$exco);
-
-    if ($stmt->execute()) {
-        $alert = '<div class="alert alert-success">Staff added successfully!</div>';
-    } else {
-        $alert = '<div class="alert alert-danger">Error: ' . $stmt->error . '</div>';
-    }
+// Fetch current staff data
+$staff = $conn->query("SELECT * FROM staff WHERE id = $id")->fetch_assoc();
+if (!$staff) {
+    die("Staff not found.");
 }
 
 // Fetch dropdown values
 $categories = $conn->query("SELECT * FROM staff_categories");
 $communities = $conn->query("SELECT * FROM communities");
+
+// Update logic
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $name = $_POST['name'];
+    $title = $_POST['title'];
+    $profile = $_POST['profile'];
+    $membership_category_id = $_POST['membership_category'];
+    $campus = $_POST['campus'];
+    $board = $_POST['board'];
+    $exco = $_POST['exco'];
+    $office = isset($_POST['office']) ? $_POST['office'] : null;
+    $community_id = isset($_POST['community_id']) ? $_POST['community_id'] : null;
+
+    // Get designation from membership category
+    $catQuery = $conn->query("SELECT name FROM staff_categories WHERE id = $membership_category_id");
+    $designation = ($catQuery && $catQuery->num_rows > 0) ? $catQuery->fetch_assoc()['name'] : '';
+
+    // Handle passport upload
+    $passport_name = $staff['passport']; // default to old passport
+    if (!empty($_FILES['passport']['name'])) {
+        $passport_filename = time() . '_' . basename($_FILES['passport']['name']);
+        $passport_path = 'uploads/' . $passport_filename;
+        if (move_uploaded_file($_FILES['passport']['tmp_name'], $passport_path)) {
+            $passport_name = $passport_filename;
+        }
+    }
+
+    // Update statement
+    $stmt = $conn->prepare("UPDATE staff SET name=?, title=?, designation=?, profile=?, passport=?, membership_category_id=?, community_id=?, office=?, campus=?, board=?, exco=? WHERE id=?");
+    $stmt->bind_param("sssssiissssi", $name, $title, $designation, $profile, $passport_name, $membership_category_id, $community_id, $office, $campus, $board, $exco, $id);
+
+    if ($stmt->execute()) {
+        $alert = '<div class="alert alert-success">Executive member updated successfully!</div>';
+        header( "Location:manaexco.php");
+        // Refresh staff data
+        $staff = $conn->query("SELECT * FROM staff WHERE id = $id")->fetch_assoc();
+    } else {
+        $alert = '<div class="alert alert-danger">Error: ' . $stmt->error . '</div>';
+    }
+}
+
 ?>
 
 
@@ -145,78 +160,65 @@ $communities = $conn->query("SELECT * FROM communities");
             <div class="col-12">
               <div class="card recent-sales overflow-auto">
                 <div class="card-body">
-      <h5 class="card-title">Add a Executive Member</h5>
+      <h5 class="card-title">Edit Staff/Executive Member</h5>
        <div class="form-container">
-<form action="addexco.php" method="POST" enctype="multipart/form-data">
- <?= $alert ?>
+            <?= $alert ?>
+            <form action="edit_exco.php?id=<?= $id ?>" method="POST" enctype="multipart/form-data">
+                <label>Title</label>
+                <select name="title" class="form-control" required>
+                    <option value="">Select</option>
+                    <?php foreach (['Mr', 'Mrs', 'Miss', 'Dr', 'Amb'] as $t): ?>
+                        <option value="<?= $t ?>" <?= ($staff['title'] == $t) ? 'selected' : '' ?>><?= $t ?></option>
+                    <?php endforeach; ?>
+                </select>
 
-        <div class="mb-3">
-            <label class="form-label">Title</label>
-            <select name="title" class="form-select" required>
-                <option value="">Select title</option>
-                <option>Mr</option>
-                <option>Mrs</option>
-                <option>Miss</option>
-                <option>Dr</option>
-                <option>Amb</option>
-            </select>
-        </div>
+                <label>Full Name</label>
+                <input type="text" name="name" value="<?= htmlspecialchars($staff['name']) ?>" class="form-control" required>
 
-        <div class="mb-3">
-            <label class="form-label">Full Name</label>
-            <input type="text" name="name" class="form-control" required>
-        </div>
+                <label>Profile / Citation</label>
+                <textarea name="profile" class="form-control" required><?= htmlspecialchars($staff['profile']) ?></textarea>
 
-        <div class="mb-3">
-            <label class="form-label">Profile / Citation</label>
-            <textarea name="profile" class="form-control" required></textarea>
-        </div>
+                <label>Passport (Leave blank to keep current)</label>
+                <input type="file" name="passport" class="form-control">
+                <?php if (!empty($staff['passport'])): ?>
+                    <img src="uploads/<?= $staff['passport'] ?>" height="80" style="margin-top:10px;">
+                <?php endif; ?>
 
-        <div class="mb-3">
-            <label class="form-label">Passport Photograph</label>
-            <input type="file" name="passport" class="form-control" required>
-        </div>
+                <label>Membership Category</label>
+                <select name="membership_category" class="form-control" required>
+                    <option value="">Select</option>
+                    <?php while ($row = $categories->fetch_assoc()): ?>
+                        <option value="<?= $row['id'] ?>" <?= ($staff['membership_category_id'] == $row['id']) ? 'selected' : '' ?>>
+                            <?= htmlspecialchars($row['name']) ?>
+                        </option>
+                    <?php endwhile; ?>
+                </select>
 
-        <div class="mb-3">
-            <label class="form-label">Membership Category</label>
-            <select name="membership_category" id="membershipCategory" class="form-select" required>
-                <option value="">Select category</option>
-                <?php while($row = $categories->fetch_assoc()): ?>
-                    <option value="<?= $row['id'] ?>" data-name="<?= $row['name'] ?>"><?= $row['name'] ?></option>
-                <?php endwhile; ?>
-            </select>
-        </div>
+                <label>Office (e.g. Secretary)</label>
+                <input type="text" name="office" value="<?= htmlspecialchars($staff['office']) ?>" class="form-control">
 
-        <div class="mb-3" id="officeField" style="display:none;">
-            <label class="form-label">Office (e.g. Secretary, P.R.O)</label>
-            <input type="text" name="office" class="form-control">
-        </div>
+                <label>Campus Name</label>
+                <input type="text" name="campus" value="<?= htmlspecialchars($staff['campus']) ?>" class="form-control">
 
-        <div class="mb-3" id="campusField" style="display:none;">
-            <label class="form-label">Campus Name (e.g. University of Benin)</label>
-            <input type="text" name="campus" class="form-control">
-        </div>
+                <label>Executive Office</label>
+                <input type="text" name="exco" value="<?= htmlspecialchars($staff['exco']) ?>" class="form-control">
 
-         <div class="mb-3" id="excoField" style="display:none;">
-            <label class="form-label">Office (e.g. Secretary)</label>
-            <input type="text" name="exco" class="form-control">
-        </div>
-        <div class="mb-3" id="boardField" style="display:none;">
-            <label class="form-label">Office (Chairman)</label>
-            <input type="text" name="board" class="form-control">
-        </div>
+                <label>Board Office</label>
+                <input type="text" name="board" value="<?= htmlspecialchars($staff['board']) ?>" class="form-control">
 
-        <div class="mb-3" id="communityField" style="display:none;">
-            <label class="form-label">Community</label>
-            <select name="community_id" class="form-select">
-                <option value="">Select community</option>
-                <?php while($row = $communities->fetch_assoc()): ?>
-                    <option value="<?= $row['id'] ?>"><?= htmlspecialchars($row['name']) ?></option>
-                <?php endwhile; ?>
-            </select>
-        </div>
+                <label>Community</label>
+                <select name="community_id" class="form-control">
+                    <option value="">Select</option>
+                    <?php while ($row = $communities->fetch_assoc()): ?>
+                        <option value="<?= $row['id'] ?>" <?= ($staff['community_id'] == $row['id']) ? 'selected' : '' ?>>
+                            <?= htmlspecialchars($row['name']) ?>
+                        </option>
+                    <?php endwhile; ?>
+                </select>
 
-        <button type="submit" class="btn btn-primary">Add Staff</button>
+                <br>
+                <button type="submit" class="btn btn-success">Update Executive Member</button>
+                   
 
 </form>
        </div>

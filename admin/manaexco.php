@@ -21,7 +21,9 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
     exit();
 }
 
-
+//Fetch all news posts
+$sql = "SELECT * FROM staff ORDER BY created_at DESC";
+$result = $conn->query($sql);
 $conn->close();
 ?>
 
@@ -51,22 +53,75 @@ $conn->close();
     <section class="section dashboard">
       <div class="row">
 
-        <!-- Left side columns -->
-            
-              <!-- Customers Card -->
-            
-            <!-- End Customers Card -->
-
-            <!-- Reports -->
             <div class="col-12">
               <div class="card recent-sales overflow-auto">
-
-                
-
                 <div class="card-body">
-      <h5 class="card-title">Add a Staff Member</h5>
-      
-    </div>
+                <h5 class="card-title">Manage EXCO/Staff Member</h5>
+                        
+
+<table border="1" class="table table-bordered table-striped">
+<thead class="table-success">   
+<tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Designation</th>
+        <th>Image</th>
+        <th>Office</th>
+        
+        <th>Action</th>
+    </tr>
+</thead>
+    <?php 
+    
+    $counter = 1; // Start ID from 1
+    while ($row = $result->fetch_assoc()) { ?>
+        <tr>
+        <td><?php echo $counter++; ?></td> <!-- Increment ID manually -->
+        <td><?php echo htmlspecialchars($row['name']); ?></td>
+            
+        <td>
+                       <?php
+                           echo htmlspecialchars($row['designation']);
+
+                           if ($row['designation'] === 'Campus Director' && !empty($row['campus'])) {
+                               echo ' - ' . htmlspecialchars($row['campus']);
+                           }
+
+                           if ($row['designation'] === 'Community Leader' && !empty($row['community_name'])) {
+                               echo ' - ' . htmlspecialchars($row['community_name']);
+                           }
+                       ?>
+        </td>
+            <td><img src="uploads/<?php echo $row['passport']; ?>" width="50"></td>
+            <td>
+                <?php
+                    $output = [];
+
+                    if (!empty($row['office'])) {
+                        $output[] = substr(htmlspecialchars($row['office']), 0, 50);
+                    }
+
+                    if (!empty($row['exco'])) {
+                        $output[] = htmlspecialchars($row['exco']);
+                    }
+
+                    if (!empty($row['board'])) {
+                        $output[] = htmlspecialchars($row['board']);
+                    }
+
+                    echo implode(' | ', $output);
+                ?>
+            </td>
+            <td>
+            <button class="btn btn-success"><a style="color: #f7f7f7;" href="edit_exco.php?id=<?php echo $row['id']; ?>">Edit</a></button> |
+            <button class="btn btn-danger"><a  style="color: #f7f7f7;" href="delete_exco.php?id=<?php echo $row['id']; ?>" onclick="return confirm('Are you sure?')">Delete</a></button>
+            </td>
+        </tr>
+    <?php } ?>
+
+</table>
+
+              </div>
 
               </div>
             </div><!-- End Recent Sales -->

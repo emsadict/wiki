@@ -8,7 +8,7 @@ if ($row = mysqli_fetch_assoc($years_result)) {
 // Function to generate random membership number like WUG12345
 function generateMembershipNumber() {
     $randomNumber = rand(10000, 99999);
-    return "WUG" . $randomNumber;
+    return "WG" . $randomNumber;
 }
 
 // Generate and store membership number in session

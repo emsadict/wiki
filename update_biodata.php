@@ -1,15 +1,28 @@
 <?php
 session_start();
 include 'db.php';
+
 if (!isset($_SESSION['membership_num'])) {
     header('Location: login.php');
     exit();
 }
 
 $membership_num = $_SESSION['membership_num'];
+$lockFields = false;
 
-// Handle biodata update
-if (isset($_POST['update'])) {
+// Check if regno exists in updated_bio (lock fields if update_status = 1)
+$updateCheck = mysqli_query($conn, "SELECT update_status FROM updated_bio WHERE regno='$membership_num'");
+if ($updateCheck && mysqli_num_rows($updateCheck) > 0) {
+    $updateRow = mysqli_fetch_assoc($updateCheck);
+    if ($updateRow['update_status'] == 1) {
+        $lockFields = true;
+    }
+}
+
+// Fetch biodata
+$biodata = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM biodata WHERE regno='$membership_num'"));
+
+if (isset($_POST['update']) && !$lockFields) {
     $firstname = mysqli_real_escape_string($conn, $_POST['firstname']);
     $lastname = mysqli_real_escape_string($conn, $_POST['lastname']);
     $email = mysqli_real_escape_string($conn, $_POST['email']);
@@ -17,7 +30,7 @@ if (isset($_POST['update'])) {
     $phone = mysqli_real_escape_string($conn, $_POST['phone']);
     $address = mysqli_real_escape_string($conn, $_POST['address']);
     $city = mysqli_real_escape_string($conn, $_POST['city']);
-    $state = mysqli_real_escape_string($conn, $_POST['state']);
+    $state = mysqli_real_escape_string($conn, $_POST['state']); // State is now available after update
     $country = mysqli_real_escape_string($conn, $_POST['country']);
     $wikipedia_projects = mysqli_real_escape_string($conn, $_POST['wikipedia_projects']);
     $wikipedia_account = mysqli_real_escape_string($conn, $_POST['wikipedia_account']);
@@ -27,17 +40,35 @@ if (isset($_POST['update'])) {
     $other_usergroups = mysqli_real_escape_string($conn, $_POST['other_usergroups']);
     $declaration = mysqli_real_escape_string($conn, $_POST['declaration']);
 
-    $query = mysqli_query($conn, "UPDATE biodata SET 
-        firstname='$firstname', lastname='$lastname', email='$email', gender='$gender',
-        phone='$phone', address='$address', city='$city', state='$state', country='$country',
-        wikipedia_projects='$wikipedia_projects', wikipedia_account='$wikipedia_account',
-        open_movement='$open_movement', wugn_activities='$wugn_activities',
-        fan_club='$fan_club', other_usergroups='$other_usergroups', declaration='$declaration'
+    // Update biodata (store state first)
+    $updateBiodata = mysqli_query($conn, "UPDATE biodata SET 
+        first_name='$firstname', last_name='$lastname', email='$email', gender='$gender',
+        phone='$phone', street_address='$address', city='$city', state='$state', country='$country',
+        wikimedia_projects='$wikipedia_projects',
+        involvement_open_movement='$open_movement', involvement_wugn_activities='$wugn_activities',
+        fan_club_network='$fan_club', other_usergroups='$other_usergroups', agreement='$declaration'
         WHERE regno='$membership_num'
     ");
 
-    if ($query) {
-        $success = "Biodata Updated Successfully!";
+    if ($updateBiodata) {
+        // Now that biodata is updated, generate membership number WG/state/4-digit
+        do {
+            $random_number = str_pad(rand(0, 9999), 4, '0', STR_PAD_LEFT);
+           $new_membership_num = "WG/" . strtoupper($state) . "/{$random_number}";
+            $exists = mysqli_query($conn, "SELECT username  FROM biodata WHERE username='$new_membership_num' 
+                UNION SELECT username FROM updated_bio WHERE username='$new_membership_num'")->num_rows;
+        } while ($exists > 0);
+
+        // Update biodata with generated membership number
+        $updateMembership = mysqli_query($conn, "UPDATE biodata SET username='$new_membership_num' WHERE regno='$membership_num'");
+
+        // Insert into updated_bio
+        $updateBioQuery = mysqli_query($conn, "INSERT INTO updated_bio (regno, username,  update_status) 
+            VALUES ('$membership_num',  '$new_membership_num', 1) 
+            ON DUPLICATE KEY UPDATE update_status=1");
+
+        $success = "Biodata Updated Successfully! Your Membership Number: $new_membership_num";
+        $lockFields = true;
     } else {
         $error = "Failed to Update Biodata!";
     }
@@ -46,10 +77,6 @@ if (isset($_POST['update'])) {
 // Fetch existing biodata
 $biodata = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM biodata WHERE regno='$membership_num'"));
 ?>
-
-
-
-
 <?php 
 include 'db_connect.php';
 ?>
@@ -88,29 +115,41 @@ include 'db_connect.php';
             <!-- Upcoming Events -->
             <?php if (isset($success)) { echo '<div class="alert alert-success">'.$success.'</div>'; } ?>
             <?php if (isset($error)) { echo '<div class="alert alert-danger">'.$error.'</div>'; } ?>
-            <Center><h3>Update your Biodata</h3></Center>
+           <?php  echo "<h5 style='color:green; align:center;float:center;'><center>Your Membership Number: " . strtoupper(($biodata['username']) ?? 'Not Assigned Yet') . "</center></h5>"; ?>
+
+            <?php
+                $message = "<h3>Update your Biodata</h3>"; // Default message
+
+                // Check if regno exists in updated_bio (update_status = 1)
+                $updateCheck = mysqli_query($conn, "SELECT update_status FROM updated_bio WHERE regno='$membership_num'");
+                if ($updateCheck && mysqli_num_rows($updateCheck) > 0) {
+                $message = "<h3>You have updated your biodata</h3>"; // Change message if already updated
+                }
+
+               echo "<center>{$message}</center>";
+            ?>
             <hr />
             <div class="form-container">
         <form method="POST">
        
             <div class="col">
                 <label>First Name *</label>
-                <input type="text" name="firstname" class="form-control" value="<?php echo $biodata['first_name'] ?? ''; ?>" required>
+                <input type="text" name="firstname" class="form-control" value="<?php echo $biodata['first_name'] ?? ''; ?>" <?php echo $lockFields ? 'disabled' : ''; ?> required>
             </div>
             <div class="col">
                 <label>Last Name *</label>
-                <input type="text" name="lastname" class="form-control" value="<?php echo $biodata['last_name'] ?? ''; ?>" required>
+                <input type="text" name="lastname" class="form-control" value="<?php echo $biodata['last_name'] ?? ''; ?>" <?php echo $lockFields ? 'disabled' : ''; ?> required>
             </div>
         
 
         
             <label>Email *</label>
-            <input type="email" name="email" class="form-control" value="<?php echo $biodata['email'] ?? ''; ?>" required>
+            <input type="email" name="email" class="form-control" value="<?php echo $biodata['email'] ?? ''; ?>" <?php echo $lockFields ? 'disabled' : ''; ?> required>
         
 
         
             <label>Gender</label>
-            <select name="gender" class="form-control">
+            <select name="gender" class="form-control" <?php echo $lockFields ? 'disabled' : ''; ?>>
                 <option value="Male" <?php if (($biodata['gender'] ?? '') == 'Male') echo 'selected'; ?>>Male</option>
                 <option value="Female" <?php if (($biodata['gender'] ?? '') == 'Female') echo 'selected'; ?>>Female</option>
                 <option value="Prefer not to Say" <?php if (($biodata['gender'] ?? '') == 'Prefer not to Say') echo 'selected'; ?>>Prefer not to Say</option>
@@ -119,48 +158,48 @@ include 'db_connect.php';
 
     
             <label>Phone Number *</label>
-            <input type="text" name="phone" class="form-control" value="<?php echo $biodata['phone'] ?? ''; ?>" required>
+            <input type="text" name="phone" class="form-control" value="<?php echo $biodata['phone'] ?? ''; ?>" <?php echo $lockFields ? 'disabled' : ''; ?> required>
         
 
         
             <label>Street Address *</label>
-            <input type="text" name="address" class="form-control" value="<?php echo $biodata['address'] ?? ''; ?>" required>
+            <input type="text" name="address" class="form-control" value="<?php echo $biodata['street_address'] ?? ''; ?>" <?php echo $lockFields ? 'disabled' : ''; ?> required>
         
 
         
             
                 <label>City *</label>
-                <input type="text" name="city" class="form-control" value="<?php echo $biodata['city'] ?? ''; ?>" required>
+                <input type="text" name="city" class="form-control" value="<?php echo $biodata['city'] ?? ''; ?>" <?php echo $lockFields ? 'disabled' : ''; ?> required>
            
             
                 <label>State *</label>
-                <input type="text" name="state" class="form-control" value="<?php echo $biodata['state'] ?? ''; ?>" required>
+                <input type="text" name="state" class="form-control" value="<?php echo $biodata['state'] ?? ''; ?>" <?php echo $lockFields ? 'disabled' : ''; ?> required>
            
       
 
        
             <label>Country *</label>
-            <input type="text" name="country" class="form-control" value="<?php echo $biodata['country'] ?? ''; ?>" required>
+            <input type="text" name="country" class="form-control" value="<?php echo $biodata['country'] ?? ''; ?>" <?php echo $lockFields ? 'disabled' : ''; ?> required>
         
 
         
             <label>List your first three Wikimedia projects *</label>
-            <input type="text" name="wikipedia_projects" class="form-control" value="<?php echo $biodata['wikipedia_projects'] ?? ''; ?>">
+            <input type="text" name="wikipedia_projects" class="form-control" value="<?php echo $biodata['wikimedia_projects'] ?? ''; ?>"<?php echo $lockFields ? 'disabled' : ''; ?> required>
         
 
-        
+           <!--
             <label>Do you have a Wikipedia account?</label>
-            <input type="text" name="wikipedia_account" class="form-control" value="<?php echo $biodata['wikipedia_account'] ?? ''; ?>">
-        
+            <input type="text" name="wikipedia_account" class="form-control" value="<?php// echo $biodata['wikipedia_account'] ?? ''; ?>"<?php echo $lockFields ? 'disabled' : ''; ?> required>
+            -->
 
         
             <label>Are you involved in the open movement?</label>
-            <textarea name="open_movement" class="form-control"><?php echo $biodata['open_movement'] ?? ''; ?></textarea>
+            <textarea name="open_movement" class="form-control" <?php echo $lockFields ? 'disabled' : ''; ?>><?php echo $biodata['involvement_open_movement'] ?? ''; ?></textarea >
         
 
         
             <label>Are you involved with WUGN Activities?</label>
-            <select name="wugn_activities" class="form-control">
+            <select name="wugn_activities" class="form-control" <?php echo $lockFields ? 'disabled' : ''; ?>>
                 <option value="Yes" <?php if (($biodata['wugn_activities'] ?? '') == 'Yes') echo 'selected'; ?>>Yes</option>
                 <option value="No" <?php if (($biodata['wugn_activities'] ?? '') == 'No') echo 'selected'; ?>>No</option>
             </select>
@@ -168,24 +207,26 @@ include 'db_connect.php';
 
         
             <label>Do you belong to a WUGN Fan Club/Network?</label>
-            <input type="text" name="fan_club" class="form-control" value="<?php echo $biodata['fan_club'] ?? ''; ?>">
+            <input type="text" name="fan_club" class="form-control" value="<?php echo $biodata['fan_club_network'] ?? ''; ?>"<?php echo $lockFields ? 'disabled' : ''; ?>>
         
 
         
             <label>Are you a member of other Usergroups/communities in Nigeria?</label>
-            <input type="text" name="other_usergroups" class="form-control" value="<?php echo $biodata['other_usergroups'] ?? ''; ?>">
+            <input type="text" name="other_usergroups" class="form-control" value="<?php echo $biodata['other_usergroups'] ?? ''; ?>"<?php echo $lockFields ? 'disabled' : ''; ?>>
         
 
         
             <label>Do you agree to the declaration?</label>
-            <select name="declaration" class="form-control" required>
+            <select name="declaration" class="form-control" <?php echo $lockFields ? 'disabled' : ''; ?>>
                 <option value="Yes" <?php if (($biodata['declaration'] ?? '') == 'Yes') echo 'selected'; ?>>Yes</option>
                 <option value="No" <?php if (($biodata['declaration'] ?? '') == 'No') echo 'selected'; ?>>No</option>
             </select>
         
 
-        <button type="submit" name="update" class="btn btn-primary w-100">Update Biodata</button>
+        <button type="submit" name="update" class="btn btn-primary w-100"<?php echo $lockFields ? 'disabled' : ''; ?>>Update Biodata</button>
         <a href="logout.php" class="btn btn-danger w-100 mt-2">Logout</a>
+
+        
     </form>
             </div>            
                 
@@ -231,13 +272,31 @@ include 'db_connect.php';
                 <div class="gdlr-core-pbf-sidebar-left gdlr-core-column-extend-left kingster-sidebar-area gdlr-core-column-15 gdlr-core-pbf-sidebar-padding gdlr-core-line-height">
                     <div class="gdlr-core-sidebar-item gdlr-core-item-pdlr">
                         <div id="recent-posts-3" class="widget widget_recent_entries kingster-widget" style="background-color:rgb(206, 234, 221) ;">
-                            <h3 class="kingster-widget-title">Menu</h3><span class="clear"></span>
-                            <ul>
-                                
+                            <?php include "regsidemenu.php"; ?>
+                            <br>
+                            <?php
+                                      $showPaymentTable = false;
 
+                                      // Check the latest payment date for regno
+                                      $paymentCheck = mysqli_query($conn, "SELECT date FROM payments WHERE membership_num='$membership_num' ORDER BY date DESC LIMIT 1");
 
+                                      if ($paymentCheck && mysqli_num_rows($paymentCheck) > 0) {
+                                          $paymentRow = mysqli_fetch_assoc($paymentCheck);
+                                          $lastPaymentDate = strtotime($paymentRow['date']); // Convert date to timestamp
+                                          $currentDate = time();
 
-                            </ul>
+                                          // Check if 365 days have passed
+                                          if (($currentDate - $lastPaymentDate) >= (365 * 24 * 60 * 60)) {
+                                              $showPaymentTable = true;
+                                          }
+                                      }
+
+                                      if ($showPaymentTable) {
+                                          echo "<center><h3>Pay Your Annual Due</h3></center>";
+                                      } else {
+                                          echo "<center><h3 class='kingster-widget-title'>Annual Due for the year is Paid ✅ </h3></center>";
+                                      }
+                                      ?>
                         </div>
                     </div>
                 </div>

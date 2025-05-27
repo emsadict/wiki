@@ -21,12 +21,12 @@
                                                     <ul class="sub-menu">
                                                          <?php
                                                              // Fetch staff members with designation 'Staff'
-                                                             $queryStaff = "SELECT id, office FROM staff WHERE designation = 'Board of Trustee'";
+                                                             $queryStaff = "SELECT id, office, board FROM staff WHERE designation = 'Board of Trustee'";
                                                              $resultStaff = $conn->query($queryStaff);
 
                                                              // Generate menu items dynamically
                                                              while ($row = $resultStaff->fetch_assoc()) {
-                                                                 $staffName = htmlspecialchars($row['office']);
+                                                                 $staffName = htmlspecialchars($row['board']);
                                                                  $staffUrl = "staff_profile.php?id=" . $row['id']; // Link to profile page
 
                                                                  echo '<li class="menu-item"><a href="' . $staffUrl . '">' . $staffName . '</a></li>';
@@ -38,12 +38,12 @@
                                                     <ul class="sub-menu">
                                                     <?php
                                                              // Fetch staff members with designation 'Staff'
-                                                             $queryStaff = "SELECT id, office FROM staff WHERE designation = 'Executive Committee'";
+                                                             $queryStaff = "SELECT id, office, exco FROM staff WHERE designation = 'Executive Committee'";
                                                              $resultStaff = $conn->query($queryStaff);
 
                                                              // Generate menu items dynamically
                                                              while ($row = $resultStaff->fetch_assoc()) {
-                                                                 $staffName = htmlspecialchars($row['office']);
+                                                                 $staffName = htmlspecialchars($row['exco']);
                                                                  $staffUrl = "staff_profile.php?id=" . $row['id']; // Link to profile page
 
                                                                  echo '<li class="menu-item"><a href="' . $staffUrl . '">' . $staffName . '</a></li>';
