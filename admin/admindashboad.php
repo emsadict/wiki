@@ -2,9 +2,9 @@
 session_start();
 // Database connection
 $host = "localhost";
-$user = "root"; // Change to your DB username
-$password = ""; // Change to your DB password
-$database = "membership_management"; // Change to your DB name
+$user = "zlyclnqu_wikimedia"; // Change to your DB username
+$password = "wikimedia2025"; // Change to your DB password
+$database = "zlyclnqu_membership_management"; // Change to your DB name
 
 $conn = new mysqli($host, $user, $password, $database);
 
