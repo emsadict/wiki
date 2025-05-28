@@ -83,38 +83,38 @@
                                      <li class="menu-item menu-item-has-children kingster-normal-menu"><a href="#" class="sf-with-ul-pre">Events/Programmes</a>
                                         <ul class="sub-menu">
                                             
-                                            <li class="menu-item menu-item-has-children" data-size="60"><a href="blog-full-right-sidebar-with-frame.html" class="sf-with-ul-pre">Advocacy</a>
+                                            <li class="menu-item menu-item-has-children" data-size="60"><a href="#" class="sf-with-ul-pre">Advocacy</a>
                                                 <ul class="sub-menu">
-                                                    <li class="menu-item"><a href="standard-post-type.html">Wiki for Human Right</a></li>
-                                                    <li class="menu-item"><a href="standard-post-type.html">My Beautiful Africa</a></li>
-                                                    <li class="menu-item"><a href="standard-post-type.html">New reader Awareness Campaign</a></li>
+                                                    <li class="menu-item"><a href="#">Wiki for Human Right</a></li>
+                                                    <li class="menu-item"><a href="#">My Beautiful Africa</a></li>
+                                                    <li class="menu-item"><a href="#">New reader Awareness Campaign</a></li>
                                                 </ul>
                                             </li>
                                             <li class="menu-item menu-item-has-children" data-size="60"><a href="#" class="sf-with-ul-pre">Gender-gap initiative</a>
                                                 <ul class="sub-menu">
-                                                    <li class="menu-item"><a href="contact.html">Decolonize the Internet</a></li>
-                                                    <li class="menu-item"><a href="contact-2.html">Wiki-GAP</a></li>
-                                                    <li class="menu-item"><a href="contact-3.html">Wiki for Naija  Women</a></li>
-                                                    <li class="menu-item"><a href="contact-3.html">visibility Project</a></li>
+                                                    <li class="menu-item"><a href="#">Decolonize the Internet</a></li>
+                                                    <li class="menu-item"><a href="#">Wiki-GAP</a></li>
+                                                    <li class="menu-item"><a href="#">Wiki for Naija  Women</a></li>
+                                                    <li class="menu-item"><a href="#">visibility Project</a></li>
                                                 </ul>
                                             </li>
                                             <li class="menu-item menu-item-has-children" data-size="60"><a href="education.php" class="sf-with-ul-pre">Education</a>
                                                 <ul class="sub-menu">
-                                                 <li class="menu-item"><a href="singleportfolio.html">Wiki in School</a></li>
-                                                 <li class="menu-item"><a href="singleportfolio.html">Wiki Fans Club</a></li>
+                                                 <li class="menu-item"><a href="#">Wiki in School</a></li>
+                                                 <li class="menu-item"><a href="#">Wiki Fans Club</a></li>
                                                  
                                                 </ul>
                                             </li>
                                             <li class="menu-item menu-item-has-children" data-size="60"><a href="glamini.php" class="sf-with-ul-pre">GLAM initiative</a>
                                                 <ul class="sub-menu">
-                                                 <li class="menu-item"><a href="singleportfolio.html">Oral History Documentation</a></li>
-                                                 <li class="menu-item"><a href="singleportfolio.html">Finding GLAM</a></li>
+                                                 <li class="menu-item"><a href="#">Oral History Documentation</a></li>
+                                                 <li class="menu-item"><a href="#">Finding GLAM</a></li>
                                                  
                                                 </ul>
                                             </li>
                                             <li class="menu-item menu-item-has-children" data-size="60"><a href="capacity.php" class="sf-with-ul-pre">Capacity Training</a>
                                                 <ul class="sub-menu">
-                                                 <li class="menu-item"><a href="singleportfolio.html">Training</a></li>
+                                                 <li class="menu-item"><a href="#">Training</a></li>
                                                  
                                                 </ul>
                                             </li>

@@ -39,14 +39,14 @@ include 'db_connect.php';
         <div class="gdlr-core-blog-item-holder gdlr-core-js-2 clearfix" data-layout="fitrows">
 
             <!-- Upcoming Events -->
-            <Center><h3>THE BOARD</h3></Center>
+            <Center><h3>THE EXECUTIVE MEMBERS</h3></Center>
             <hr />                                        <?php 
                                                             $queryStaff = "SELECT * FROM staff WHERE designation = 'Executive Committee'";
                                                              $resultStaff = $conn->query($queryStaff);
 
             // Generate menu items dynamically
                                                              while ($row = $resultStaff->fetch_assoc()) {
-                                                                 $stafftitle = htmlspecialchars($row['board']);
+                                                                 $stafftitle = htmlspecialchars($row['exco']);
                                                                   $stafftitle2 = htmlspecialchars($row['title']);
                                                                  $staffName = htmlspecialchars($row['name']);
                                                                  $staffdesign = htmlspecialchars($row['profile']);
