@@ -98,32 +98,32 @@
                                                     <li class="menu-item"><a href="contact-3.html">visibility Project</a></li>
                                                 </ul>
                                             </li>
-                                            <li class="menu-item menu-item-has-children" data-size="60"><a href="portfolio-3-columns.html" class="sf-with-ul-pre">Education</a>
+                                            <li class="menu-item menu-item-has-children" data-size="60"><a href="education.php" class="sf-with-ul-pre">Education</a>
                                                 <ul class="sub-menu">
                                                  <li class="menu-item"><a href="singleportfolio.html">Wiki in School</a></li>
                                                  <li class="menu-item"><a href="singleportfolio.html">Wiki Fans Club</a></li>
                                                  
                                                 </ul>
                                             </li>
-                                            <li class="menu-item menu-item-has-children" data-size="60"><a href="portfolio-3-columns.html" class="sf-with-ul-pre">GLAM initiative</a>
+                                            <li class="menu-item menu-item-has-children" data-size="60"><a href="glamini.php" class="sf-with-ul-pre">GLAM initiative</a>
                                                 <ul class="sub-menu">
                                                  <li class="menu-item"><a href="singleportfolio.html">Oral History Documentation</a></li>
                                                  <li class="menu-item"><a href="singleportfolio.html">Finding GLAM</a></li>
                                                  
                                                 </ul>
                                             </li>
-                                            <li class="menu-item menu-item-has-children" data-size="60"><a href="portfolio-3-columns.html" class="sf-with-ul-pre">Capacity Training</a>
+                                            <li class="menu-item menu-item-has-children" data-size="60"><a href="capacity.php" class="sf-with-ul-pre">Capacity Training</a>
                                                 <ul class="sub-menu">
                                                  <li class="menu-item"><a href="singleportfolio.html">Training</a></li>
                                                  
                                                 </ul>
                                             </li>
-                                            <li class="menu-item menu-item-has-children" data-size="60"><a href="portfolio-3-columns.html" class="sf-with-ul-pre">Conferences</a>
+                                            <li class="menu-item menu-item-has-children" data-size="60"><a href="allconferences.php" class="sf-with-ul-pre">Conferences</a>
                                                 <ul class="sub-menu">
-                                                 <li class="menu-item"><a href="singleportfolio.html">Wiki in Daba 2019</a></li>
-                                                 <li class="menu-item"><a href="singleportfolio.html">Wiki Master Conference 2018</a></li>
-                                                 <li class="menu-item"><a href="singleportfolio.html">Wikimania</a></li>
-                                                 <li class="menu-item"><a href="singleportfolio.html">Upcoming Conferences</a></li>
+                                                 <li class="menu-item"><a href="wikiindaba.php">Wiki in Daba 2019</a></li>
+                                                 <li class="menu-item"><a href="wikimaster.php">Wiki Master Conference 2018</a></li>
+                                                 <li class="menu-item"><a href="wikimania.php">Wikimania</a></li>
+                                                 <li class="menu-item"><a href="conference.php">Upcoming Conferences</a></li>
                                                 </ul>
                                             </li>
                                         </ul>
