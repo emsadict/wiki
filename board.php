@@ -1,5 +1,10 @@
 <?php 
 include 'db_connect.php';
+
+
+// Fetch staff members with designation 'Staff'
+                                                            
+                                                             
 ?>
 <!DOCTYPE html>
 <html lang="en-US" class="no-js">
@@ -35,12 +40,58 @@ include 'db_connect.php';
 
             <!-- Upcoming Events -->
             <Center><h3>THE BOARD</h3></Center>
-            <hr />
+            <hr />                                        <?php 
+                                                            $queryStaff = "SELECT * FROM staff WHERE designation = 'Board of Trustee'";
+                                                             $resultStaff = $conn->query($queryStaff);
+
+            // Generate menu items dynamically
+                                                             while ($row = $resultStaff->fetch_assoc()) {
+                                                                 $stafftitle = htmlspecialchars($row['board']);
+                                                                  $stafftitle2 = htmlspecialchars($row['title']);
+                                                                 $staffName = htmlspecialchars($row['name']);
+                                                                 $staffdesign = htmlspecialchars($row['profile']);
+                                                                 $staffdesign2 = htmlspecialchars($row['designation']);
+                                                                 $staffpassprot = htmlspecialchars($row['passport']);
+                                                                 $staffUrl = "staff_profile.php?id=" . $row['id']; // Link to profile page
+                                                                 
+                                                                 //echo '<li class="menu-item"><a href="' . $staffUrl . '">' . $staffName . '</a></li>';
+                                                             }
             
-                
-                
-                
-          
+                                                               ?>
+                                                <div class="gdlr-core-tab-item-content " data-tab-id="4" >
+                                                    
+                                                    <div class="gdlr-core-personnel-item gdlr-core-item-pdb clearfix  gdlr-core-left-align gdlr-core-personnel-item-style-medium gdlr-core-personnel-style-medium" style="height: 600px; overflow-y: auto; border: 1px solid #ccc; padding: 10px;">
+                                                    
+
+                                                     <div class="gdlr-core-personnel-list-column gdlr-core-column-60 gdlr-core-column-first gdlr-core-item-pdlr">
+                                                                       <div class="gdlr-core-personnel-list clearfix">
+                                                                           <div class="gdlr-core-personnel-list-image gdlr-core-media-image gdlr-core-opacity-on-hover gdlr-core-zoom-on-hover">
+                                                                               <a href="#"><img src="./admin/uploads/<?php echo $staffpassprot; ?>" alt="" width="500" height="500" title="personnel-1" /></a>
+                                                                           </div>
+                                                                           <div class="gdlr-core-personnel-list-content-wrap">
+                                                                               <h3 class="gdlr-core-personnel-list-title" style="font-size: 23px; font-weight: 700;">
+
+                                                                                   <a href="#"><?php  echo '<li class="menu-item" style="list-style-type: none;><a href="' . $staffUrl . '">'. $stafftitle2 .' '. $staffName . '</a></li>';  ?></a>
+
+                                                                                   <a href="#"></a>
+
+                                                                               </h3>
+                                                                               <div class="gdlr-core-personnel-list-position gdlr-core-info-font gdlr-core-skin-caption" style="font-size: 16px;"><?php  echo '<li class="menu-item" style="list-style-type: none;><a href="' . $staffUrl . '">' . $staffdesign . '</a></li>';  ?></div>
+                                                                               <div class="gdlr-core-personnel-list-position gdlr-core-info-font gdlr-core-skin-caption" style="font-size: 16px;"><?php  echo '<li class="menu-item" style="list-style-type: none;><a href="' . $staffUrl . '">' . $staffdesign2. '</a></li>';  ?></div>
+                                                                               <div class="gdlr-core-personnel-info">
+                                                                                <!--
+                                                                                   <div class="kingster-personnel-info-list kingster-type-email">
+                                                                                       <i class="kingster-personnel-info-list-icon fa fa-envelope-open"></i>
+                                                                                   </div>
+                                                            -->
+                                                                               </div>
+
+                                                                               <a class="gdlr-core-personnel-list-button gdlr-core-button"  href="" style="background: linear-gradient(#091E3E, #091E3E);">More Detail</a>
+                                                                           </div>
+                                                                       </div>
+                                                                   </div>
+                                                    </div>
+                                                </div>
 
         </div>
     </div>
