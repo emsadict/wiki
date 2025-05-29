@@ -16,7 +16,7 @@ if (isset($id)) {
           $id=$retrieve['regno'];
           $name=$retrieve['first_name'];
           $last=$retrieve['last_name'];
-          $sex=$retrieve['sex'];
+          $sex=$retrieve['gender'];
          // $dob=$retrieve['dob'];
          // $maritalstatus=$retrieve['maritalstatus'];
           $nationality=$retrieve['country'];
@@ -27,8 +27,8 @@ if (isset($id)) {
           $address=$retrieve['street_address'];
           $image=$retrieve['passport'];
           $category=$retrieve['mem_category'];
-          //$dept=$retrieve['dept'];
-          //$programme=$retrieve['programme'];
+          $nysc1=$retrieve['regno'];
+          $nysc2=ucwords($retrieve['username']);
           //$title=$retrieve['title'];
           //$noksurname=$retrieve['noksurname'];
           //$nokoname=$retrieve['nokoname'];
@@ -144,10 +144,7 @@ img{
                 
          </tr>
          <tr>
-          <td>Marital: <b></b></td>
-            <td style="text-align: left;"><b> <?php echo "$maritalstatus"; ?></b></td>
-     
-         </tr>
+         
 
           <tr>
             <td>Nationality:  <b></b></td>
@@ -190,15 +187,15 @@ img{
 
 
 <table class="table-bordered center" style="border:1px solid black; margin-top:1px; width: 400px;">
-  <th style="text-align:center;" colspan="2">NYSC</th>
+  <th style="text-align:center;" colspan="2">MEMBERSHIP DETAILS</th>
             
             <tr>
-              <td> NYSC Year</td>
+              <td> Registartion </td>
               <td style="text-align: left;"> <?php echo "$nysc1"; ?></td>:
             </tr>
 
             <tr>
-              <td> CERT.  NO</td>
+              <td> Membership  No:</td>
               <td style="text-align: left;"> <?php echo "$nysc2"; ?></td>:
             </tr>    
 </table>
