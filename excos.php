@@ -76,7 +76,7 @@ include 'db_connect.php';
                                                                                    <a href="#"></a>
 
                                                                                </h3>
-                                                                               <div class="gdlr-core-personnel-list-position gdlr-core-info-font gdlr-core-skin-caption" style="font-size: 16px;"><?php  echo '<li class="menu-item" style="list-style-type: none;><a href="' . $staffUrl . '">' . $staffdesign . '</a></li>';  ?></div>
+                                                                               <div class="gdlr-core-personnel-list-position gdlr-core-info-font gdlr-core-skin-caption" style="font-size: 16px;"><?php  echo '<li class="menu-item" style="list-style-type: none;><a href="' . $staffUrl . '">' . $stafftitle . '</a></li>';  ?></div>
                                                                                <div class="gdlr-core-personnel-list-position gdlr-core-info-font gdlr-core-skin-caption" style="font-size: 16px;"><?php  echo '<li class="menu-item" style="list-style-type: none;><a href="' . $staffUrl . '">' . $staffdesign2. '</a></li>';  ?></div>
                                                                                <div class="gdlr-core-personnel-info">
                                                                                 <!--

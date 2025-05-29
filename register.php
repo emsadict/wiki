@@ -1,4 +1,5 @@
 <?php
+session_start();
 include 'db.php';
 $years_query = "SELECT DISTINCT year FROM calendar ORDER BY year DESC";
 $years_result = mysqli_query($conn, $years_query);
@@ -12,7 +13,7 @@ function generateMembershipNumber() {
 }
 
 // Generate and store membership number in session
-session_start();
+
 if (!isset($_SESSION['membership_num'])) {
     $_SESSION['membership_num'] = generateMembershipNumber();
 }
