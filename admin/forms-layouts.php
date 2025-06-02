@@ -55,68 +55,69 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
 
               <div class="table-responsive mt-4">
                 <?php
+                
                 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['regno'])) {
-                    $regno = trim($_POST['regno']);
-                    $conn = new mysqli("localhost", "root", "", "membership_management");
-                    
-                    if ($conn->connect_error) {
-                        die("Connection failed: " . $conn->connect_error);
-                    }
+    $regno = trim($_POST['regno']);
+    $conn = new mysqli("localhost", "root", "", "membership_management");
 
-                    $sql = "SELECT membership_num, membership_category, surname, othernames, payment_type, amount, year, email, phone, payment_status, date, transaction_id 
-                            FROM payments 
-                            WHERE membership_num = ? AND payment_status = 'PAID'";
-                    $stmt = $conn->prepare($sql);
-                    $stmt->bind_param("s", $regno);
-                    $stmt->execute();
-                    $result = $stmt->get_result();
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
 
-                    if ($result->num_rows > 0) {
-                        echo "<table class='table'>
-                                <thead>
-                                    <tr>
-                                        <th>S/N</th>
-                                        <th>Reg No</th>
-                                        <th>Surname</th>
-                                        <th>Other Names</th>
-                                        <th>Fee Type</th>
-                                        <th>Amount</th>
-                                        <th>Year</th>
-                                        <th>Category</th>
-                                        
-                                        <th>Date</th>
-                                        <th>Transaction ID</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>";
-                        $sn = 1;
-                        while ($row = $result->fetch_assoc()) {
-                            echo "<tr>
-                                    <td>{$sn}</td>
-                                    <td>{$row['membership_num']}</td>
-                                    <td>{$row['surname']}</td>
-                                    <td>{$row['othernames']}</td>
-                                    <td>{$row['payment_type']}</td>
-                                    <td>{$row['amount']}</td>
-                                    <td>{$row['year']}</td>
-                                    <td>{$row['membership_category']}</td>
-                                    
-                                    <td>{$row['date']}</td>
-                                    <td>{$row['transaction_id']}</td>
-                                    <td>
-                                        <a href='receiptadminprint.php?membership_num={$regno}&tid={$row['transaction_id']}' class='btn btn-success btn-sm' target='_blank'>Print Receipt</a>
-                                    </td>
-                                  </tr>";
-                            $sn++;
-                        }
-                        echo "</tbody></table>";
-                    } else {
-                        echo "<div class='alert alert-warning'>No paid invoices found for this  user.</div>";
-                    }
-                    $stmt->close();
-                    $conn->close();
-                }
+    $sql = "SELECT membership_num, membership_category, surname, othernames, payment_type, amount, year, email, phone, payment_status, date, transaction_id 
+            FROM payments 
+            WHERE membership_num = ? AND payment_status = 'PAID'";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $regno);
+    $stmt->execute();
+
+    // Manually bind result variables
+    $stmt->bind_result($membership_num, $membership_category, $surname, $othernames, $payment_type, $amount, $year, $email, $phone, $payment_status, $date, $transaction_id);
+
+    echo "<table class='table'>
+            <thead>
+                <tr>
+                    <th>S/N</th>
+                    <th>Reg No</th>
+                    <th>Surname</th>
+                    <th>Other Names</th>
+                    <th>Fee Type</th>
+                    <th>Amount</th>
+                    <th>Year</th>
+                    <th>Category</th>
+                    <th>Date</th>
+                    <th>Transaction ID</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>";
+
+    $sn = 1;
+    while ($stmt->fetch()) {
+        echo "<tr>
+                <td>{$sn}</td>
+                <td>{$membership_num}</td>
+                <td>{$surname}</td>
+                <td>{$othernames}</td>
+                <td>{$payment_type}</td>
+                <td>{$amount}</td>
+                <td>{$year}</td>
+                <td>{$membership_category}</td>
+                <td>{$date}</td>
+                <td>{$transaction_id}</td>
+                <td>
+                    <a href='receiptadminprint.php?membership_num={$regno}&tid={$transaction_id}' class='btn btn-success btn-sm' target='_blank'>Print Receipt</a>
+                </td>
+              </tr>";
+        $sn++;
+    }
+
+    echo "</tbody></table>";
+
+    $stmt->close();
+    $conn->close();
+}
+
                 ?>
               </div>
 

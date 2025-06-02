@@ -2,7 +2,6 @@
 	if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $regno = $_GET['membership_num'];
     $transaction_id = $_GET['tid'];
-  
 
     // Database connection
     $servername = "localhost";
@@ -17,17 +16,25 @@
     }
 
     // Fetch payment details
-    $sql = "SELECT * FROM payments WHERE membership_num = ? AND transaction_id = ? AND payment_status = 'PAID'";
+    $sql = "SELECT membership_num, membership_category, surname, othernames, payment_type, amount, year, email, phone, payment_status, date, transaction_id 
+            FROM payments WHERE membership_num = ? AND transaction_id = ? AND payment_status = 'PAID'";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("ss", $regno, $transaction_id);
     $stmt->execute();
-    $result = $stmt->get_result();
 
-    if ($result->num_rows > 0) {
-        $payment = $result->fetch_assoc();
+    // Bind result variables
+    $membership_num = $membership_category = $surname = $othernames = $payment_type = "";
+    $amount = $year = $email = $phone = $payment_status = $date = $transaction_id = "";
+
+    $stmt->bind_result($membership_num, $membership_category, $surname, $othernames, 
+                       $payment_type, $amount, $year, $email, $phone, $payment_status, 
+                       $date, $transaction_id);
+
+    if ($stmt->fetch()) {
+        // Payment record found, proceed with displaying receipt
     } else {
         echo "<script>alert('Payment does not exist or is not yet paid.');</script>";
-        header("Location: fetch_receipt.php ");
+        header("Location: fetch_receipt.php");
         exit();
     }
 
@@ -37,6 +44,7 @@
     header("Location: display_receipt.php");
     exit();
 }
+
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -131,7 +139,7 @@
 				<span style="font-size:17px;font-weight:bold;"> NIGERIA </span><br /><br />
 					<img src="../images/200px-Wikimedia_Nigeria_User_Group.svg.png" width="100" align="bottom"/><br />
 					<br />
-						<p style="font-size:14px;font-weight:bold; padding-top:10px;">'.htmlspecialchars(strtoupper($payment["payment_type"])). " ". "e-Payment Receipt" .'</p><br />
+						<p style="font-size:14px;font-weight:bold; padding-top:10px;">'.htmlspecialchars(strtoupper($payment_type)). " ". "e-Payment Receipt" .'</p><br />
 			</td>
 		</tr>';?>
 <table class="table table-bordered receipt-table width="100%" >
@@ -141,62 +149,62 @@
 		echo 
 			'<tr>
             <th>Registration Number.:</th>
-            <td>'.htmlspecialchars($payment["membership_num"]).'</td>
+            <td>'.htmlspecialchars($membership_num).'</td>
         </tr> ';
         echo 
 			'<tr>
             <th>Surname.:</th>
-            <td>'.htmlspecialchars($payment["surname"]).'</td>
+            <td>'.htmlspecialchars($surname).'</td>
         </tr> ';
         echo 
 			'<tr>
             <th>Other Names.:</th>
-            <td>'.htmlspecialchars($payment["othernames"]).'</td>
+            <td>'.htmlspecialchars($othernames).'</td>
         </tr> ';
 
         echo '<tr>
             <th>Transaction ID.:</th>
-            <td>'.htmlspecialchars($payment["transaction_id"]).'</td>
+            <td>'.htmlspecialchars($transaction_id).'</td>
         </tr>';
 
         echo '<tr>
             <th>Year.:</th>
-            <td>'.htmlspecialchars($payment["year"]).'</td>
+            <td>'.htmlspecialchars($year).'</td>
         </tr>';
 
         echo ' <tr>
             <th>Email.:</th>
-            <td>'.htmlspecialchars($payment["email"]).'</td>
+            <td>'.htmlspecialchars($email).'</td>
         </tr>';
 
  		echo '<tr>
             <th>Phone.:</th>
-            <td>'.htmlspecialchars($payment["phone"]).'</td>
+            <td>'.htmlspecialchars($phone).'</td>
         
         </tr>';
 
         echo '
         <tr>
             <th>Category.:</th>
-            <td>'. htmlspecialchars($payment["membership_category"]).'</td>
+            <td>'. htmlspecialchars($membership_category).'</td>
         </tr>';
 
         echo '
         <tr>
             <th>Payment Type.:</th>
-            <td>'.htmlspecialchars($payment["payment_type"]).'</td>
+            <td>'.htmlspecialchars($payment_type).'</td>
         </tr>
         ';
        
        echo '<tr>
             <th>Amount Paid.:</th>
-            <td>'.number_format($payment["amount"], 2).' NGN</td>
+            <td>'.number_format($amount, 2).' NGN</td>
         </tr> ';
        
         echo'
         <tr>
             <th>Status.:</th>
-            <td>'.htmlspecialchars($payment["payment_status"]).'</td>
+            <td>'.htmlspecialchars($payment_status).'</td>
         </tr>
         ';
 
