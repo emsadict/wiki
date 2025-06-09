@@ -55,10 +55,10 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
 
               <div class="table-responsive mt-4">
                 <?php
-                
+                ini_set('display_errors', 1);
                 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['regno'])) {
     $regno = trim($_POST['regno']);
-    $conn = new mysqli("localhost", "root", "", "membership_management");
+    $conn = new mysqli("localhost", "hikrzcom_wikimedia", "wikimedia2025@@", "hikrzcom_membership_management");
 
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
