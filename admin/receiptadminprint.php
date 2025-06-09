@@ -5,9 +5,9 @@
 
     // Database connection
     $servername = "localhost";
-    $username = "hikrzcom_wikimedia";
-    $password = "wikimedia2025@@";
-    $dbname = "hikrzcom_membership_management";
+    $username = "root";
+    $password = "";
+    $dbname = "membership_management";
 
     $conn = new mysqli($servername, $username, $password, $dbname);
 
