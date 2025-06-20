@@ -142,7 +142,7 @@
                                            
                                         </ul>
                                     </li>
-                                    <li class="menu-item menu-item-has-children kingster-normal-menu"><a href="#" class="sf-with-ul-pre">Donate to us</a>
+                                    <li class="menu-item menu-item-has-children kingster-normal-menu"><a href="donate.php" class="sf-with-ul-pre">Donate to us</a>
                                         
                                     </li>
                                    

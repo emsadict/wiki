@@ -279,18 +279,21 @@ $slides_json1 = json_encode($slides8);
                                                 <div class="gdlr-core-text-box-item gdlr-core-item-pdlr gdlr-core-item-pdb gdlr-core-left-align" id="div_1dd7_19">
                                                     <div class="gdlr-core-text-box-item-content" id="div_1dd7_20">
                                                         <p style="color: #1781cc; text-align: justify;">
-  <img src="./upload/chairaman.jpg" height="300px" width="300px" style="float: left; margin: 0 15px 15px 0;" />
-  This platform is not only a gateway to our activities, projects,                  and impact stories but also an invitation to you, whether you are a new visitor, an experienced Wikipedian, a researcher, an educator, a journalist, or a policymaker, to join us in reimagining how Nigeria is represented on the world's largest free knowledge platforms.
-  Let's continue to make knowledge free, inclusive, and truly reflective of who we are. <br>
-  Thank you for visiting.
-  
-  Warm regards,<br>
-  <strong>Olaniyan Olushola</strong><br>
-   President, Wikimedia User Group Nigeria
-</p>
+                                                            As President, I am proud of our collective achievements, from pioneering Wikipedia-in-residence programs with government 
+                                                            institutions to documenting our rich cultural heritage,
+                                                             languages, and oral histories to building one of Africa's most vibrant and diverse Wikimedia communities.
+                                                           This platform is not only a gateway to our activities, projects,    and impact stories but also an invitation to you, 
+                                                           whether you are a new visitor, an experienced Wikipedian, a researcher, an educator, a journalist, or a policymaker, 
+                                                           to join us in reimagining how Nigeria is represented on the world's largest free knowledge platforms.
+                                                           Let's continue to make knowledge free, inclusive, and truly reflective of who we are. <br>
+                                                           Thank you for visiting.
+                                                           Warm regards,<br>
+                                                           <strong>Olaniyan Olushola</strong><br>
+                                                            President, Wikimedia User Group Nigeria
+                                                         </p>
                                                     </div>
                                                     <div class="gdlr-core-pbf-element">
-                                                <div class="gdlr-core-button-item gdlr-core-item-pdlr gdlr-core-item-pdb gdlr-core-left-align"><a class="gdlr-core-button  gdlr-core-button-solid gdlr-core-button-no-border" href="#" id="a_1dd7_0"><span class="gdlr-core-content" >JOIN US </span></a></div>
+                                                <div class="gdlr-core-button-item gdlr-core-item-pdlr gdlr-core-item-pdb gdlr-core-left-align"><a class="gdlr-core-button  gdlr-core-button-solid gdlr-core-button-no-border" href="membership.php" id="a_1dd7_0"><span class="gdlr-core-content" >JOIN US </span></a></div>
                                             </div>
                                                 </div>
                                             </div>
@@ -313,12 +316,13 @@ $slides_json1 = json_encode($slides8);
                                             <div class="gdlr-core-pbf-element">
                                                 <div class="gdlr-core-text-box-item gdlr-core-item-pdlr gdlr-core-item-pdb gdlr-core-left-align" id="div_1dd7_19">
                                                     <div class="gdlr-core-text-box-item-content" id="div_1dd7_20">
-                                                        <p style="color: #1781cc; text-align:justify">Welcome to the official website of Wikimedia 
+                                                        <p style="color: #1781cc; text-align:justify">
+                                                            <img src="./upload/chairaman.jpg" height="300px" width="300px" style="float: left; margin: 0 15px 15px 0;" />
+                                                            Welcome to the official website of Wikimedia 
                                                             User Group Nigeria (registered as Wikimedia Nigeria Foundation), the recognised affiliate of the Wikimedia Foundation (owners of Wikipedia), committed to promoting free knowledge and open access in Nigeria.
                                                            Since our inception in 2015, we have worked tirelessly to bridge the knowledge gap about Nigeria and Africa on Wikipedia and its sister projects. 
                                                             Through dynamic partnerships, capacity-building programs, and community-driven initiatives, we empower Nigerians to contribute to and benefit from the sum of all human knowledge.
-                                                              As President, I am proud of our collective achievements, from pioneering Wikipedia-in-residence programs with government institutions to documenting our rich cultural heritage, languages, and oral histories to building one of Africa's most vibrant and diverse Wikimedia communities.
-
+                                                              
 
                                                         </p>
                                                     </div>
@@ -363,7 +367,7 @@ $slides_json1 = json_encode($slides8);
                                     <div class="gdlr-core-pbf-column-content-margin gdlr-core-js ">
                                         <div class="gdlr-core-pbf-column-content clearfix gdlr-core-js ">
                                           
-                                            <div class="swiper-container" style="max-width: 100%; height: 600px;">
+                                                <div class="swiper-container" style="max-width: 100%; height: auto;">
                                                     <div class="swiper-wrapper" id="sliderContainer1"></div>
                                                     <!-- Navigation Arrows -->
                                                     <div class="swiper-button-next"></div>
@@ -847,7 +851,7 @@ $conn->close();
                                                     </div>
                                        <div class="gdlr-core-pbf-column-content-margin gdlr-core-js">
                                            <div class="gdlr-core-pbf-column-content clearfix gdlr-core-js">
-                                               <div class="swiper-container">
+                                               <div class="swiper-container" style="max-width: 100%; height: auto;">
                                                    <div class="swiper-wrapper" id="sliderContainer">
                                                        <!-- Images will load here dynamically -->
                                                    </div>

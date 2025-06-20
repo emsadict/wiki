@@ -1,51 +1,13 @@
-<?php
-session_start();
-include 'db.php';
-
-
-
-if (isset($_POST['login'])) {
-    $membership_num = mysqli_real_escape_string($conn, $_POST['membership_num']);
-    $password = $_POST['password']; // Don't escape the password - we'll hash it directly
-
-    // Query the database for the user
-    $query = mysqli_query($conn, "SELECT * FROM membership_accounts WHERE membership_num='$membership_num'");
-    
-    if (mysqli_num_rows($query) == 1) {
-        $user = mysqli_fetch_assoc($query);
-        
-        // Verify the hashed password
-        if (password_verify($password, $user['password'])) {
-            // Password is correct, start session
-            $_SESSION['membership_num'] = $membership_num;
-            $_SESSION['user_id'] = $user['id']; // Store more user data if needed
-            
-            // Regenerate session ID to prevent session fixation
-            session_regenerate_id(true);
-            
-            header("Location: update_biodata.php");
-            exit();
-        } else {
-            // Password is incorrect
-            $error = "Invalid Membership Number or Password!";
-        }
-    } else {
-        // User not found
-        $error = "Invalid Membership Number or Password!";
-    }
-}
-?>
-
-
 <?php 
+session_start();
 include 'db_connect.php';
 ?>
 <!DOCTYPE html>
 <html lang="en-US" class="no-js">
 <head>
    <?php include "head.php"; ?>
-   <script src="https://cdn.tiny.cloud/1/t9taiaqmm14eridxhtuvgduaf2quietkuuzlox6uilkap6t7/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
-
+   <script src="https://js.paystack.co/v1/inline.js"></script>
+       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 
 <body class="home page-template-default page page-id-2039 gdlr-core-body woocommerce-no-js tribe-no-js kingster-body kingster-body-front kingster-full  kingster-with-sticky-navigation  kingster-blockquote-style-1 gdlr-core-link-to-lightbox">
@@ -57,14 +19,12 @@ include 'db_connect.php';
             <div class="kingster-page-title-wrap  kingster-style-medium kingster-center-align">
                 <div class="kingster-header-transparent-substitute"></div>
                 <div class="kingster-page-title-overlay"></div>
-                
                 <div class="kingster-page-title-container kingster-container">
                     <div class="kingster-page-title-content kingster-item-pdlr">
-                        <h1 class="kingster-page-title">MEMBERHSIP LOGIN PAGE</h1></div>
+                        <h1 class="kingster-page-title">DONATION PAGE</h1></div>
                 </div>
             </div>
-    
-    <div class="kingster-page-wrapper" id="kingster-page-wrapper">
+            <div class="kingster-page-wrapper" id="kingster-page-wrapper">
     <div class="gdlr-core-page-builder-body">
         <div class="gdlr-core-pbf-sidebar-wrapper">
             <div class="gdlr-core-pbf-sidebar-container gdlr-core-line-height-0 clearfix gdlr-core-js gdlr-core-container">
@@ -76,26 +36,90 @@ include 'db_connect.php';
         <div class="gdlr-core-blog-item-holder gdlr-core-js-2 clearfix" data-layout="fitrows">
 
             <!-- Upcoming Events -->
-            <Center><h3>LOGIN HERE</h3></Center>
-            <?php if (isset($_GET['success'])) { echo '<div class="alert alert-success">Registration Successful! Please login.</div>'; } ?>
-           <?php if (isset($error)) { echo '<div class="alert alert-danger">'.$error.'</div>'; } ?>
+            <Center><h3>Donate to us</h3></Center>
             <hr />
-            <div class="form-container">
-            <form method="POST" action="">
-        
-            <label>Membership Number</label>
-            <input type="text" name="membership_num" class="form-control" required>
-       
-        
-            <label>Password (Transaction ID)</label>
-            <input type="password" name="password" class="form-control" required>
-        
-        <button type="submit" name="login" >Login</button>
-           </br>
-           </br>
-             <center><h6>NOT REGISTERED? CREATE ACCOUNT <a href="register.php">HERE </a></h6></center>
-             </form>
-            </div>
+            <!-- Display Success Message -->
+    <div class="container mt-4">
+    <!-- Check for Recent PAID Transactions -->
+    <?php
+    if (isset($_SESSION['transaction_id'])) {
+        $transaction_id = $_SESSION['transaction_id'];
+        $sql = "SELECT * FROM payments WHERE transaction_id = '$transaction_id' AND payment_status = 'PAID'";
+        $result = $conn->query($sql);
+
+        if ($result->num_rows > 0) {
+            echo "<div class='alert alert-success'>
+                    <strong>Success!</strong> Your donation was processed. this is your transaction id $transaction_id
+                    <br><br>
+                    <a href='receipt.php?transaction_id=$transaction_id' target='_blank' class='btn btn-warning' color='white'>
+                        Print Your Receipt using the email you used to make the payment
+                    </a>
+                  </div>";
+        }
+    }
+    ?>
+</div>
+
+                        <div class="form-container">
+                            <form id="donationForm">
+                                <label>Surname:</label>
+                                <input type="text" id="surname" required><br>
+
+                                <label>Other Names:</label>
+                                <input type="text" id="othernames" required><br>
+
+                                <label>Email:</label>
+                                <input type="email" id="email" required><br>
+
+                                <label>Phone:</label>
+                                <input type="text" id="phone"><br>
+
+                                <label>Amount (NGN):</label>
+                                <input type="number" id="amount" required><br>
+
+                                <button type="button" onclick="payWithPaystack()">Donate</button>
+                            </form>
+                        </div>
+  
+
+    <script>
+function payWithPaystack() {
+    var handler = PaystackPop.setup({
+        key: 'pk_test_1d2af7bafefdf00bf8abbb18740392a67a7530ed', 
+        email: document.getElementById("email").value,
+        amount: document.getElementById("amount").value * 100, 
+        currency: "NGN",
+        callback: function(response) {
+            saveTransaction(response.reference);
+        },
+        onClose: function() {
+            alert("Transaction was not completed.");
+        }
+    });
+    handler.openIframe();
+}
+
+function saveTransaction(transactionId) {
+    var surname = document.getElementById("surname").value;
+    var othernames = document.getElementById("othernames").value;
+    var email = document.getElementById("email").value;
+    var phone = document.getElementById("phone").value;
+    var amount = document.getElementById("amount").value;
+
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "save_payment.php", true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            window.location.href = "donate.php";
+        }
+    };
+    xhr.send("surname=" + surname + "&othernames=" + othernames + "&email=" + email +
+             "&phone=" + phone + "&amount=" + amount + "&transaction_id=" + transactionId);
+}
+</script>          
+          
+  <!-- end -->
         </div>
     </div>
 </div>
@@ -136,8 +160,13 @@ include 'db_connect.php';
                 <div class="gdlr-core-pbf-sidebar-left gdlr-core-column-extend-left kingster-sidebar-area gdlr-core-column-15 gdlr-core-pbf-sidebar-padding gdlr-core-line-height">
                     <div class="gdlr-core-sidebar-item gdlr-core-item-pdlr">
                         <div id="recent-posts-3" class="widget widget_recent_entries kingster-widget" style="background-color:rgb(206, 234, 221) ;">
-                        
-                            <?php include "regsidemenu.php"; ?>
+                            <h3 class="kingster-widget-title">Menu</h3><span class="clear"></span>
+                            <ul>
+                                
+
+
+
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -155,13 +184,6 @@ include 'db_connect.php';
             </footer>
         </div>
     </div>
- <!-- Bootstrap CSS -->
- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
-<!-- Bootstrap JavaScript (for interactive components like modals, dropdowns, etc.) -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-
 
 
 	<script type='text/javascript' src='js/jquery/jquery.js'></script>
@@ -185,5 +207,9 @@ include 'db_connect.php';
         };
     </script>
     <script type='text/javascript' src='js/plugins.min.js'></script>
+    <!-- Include Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>

@@ -9,7 +9,7 @@
                                 <li class="menu-item kingster-normal-menu"><a href="register.php">Register</a></li>
                                 <li class="menu-item kingster-normal-menu"><a href="login.php">Login</a></li>
                             </ul>
-                            <div class="kingster-top-bar-right-social"></div><a class="kingster-top-bar-right-button" href="#" target="_blank">DONATE</a></div>
+                            <div class="kingster-top-bar-right-social"></div><a class="kingster-top-bar-right-button" href="donate.php" target="_blank">DONATE</a></div>
                     </div>
                 </div>
             </div>

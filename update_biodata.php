@@ -1,7 +1,7 @@
 <?php
 session_start();
 include 'db.php';
-
+/*
 if (!isset($_SESSION['membership_num'])) {
     header('Location: login.php');
     exit();
@@ -73,6 +73,107 @@ if (isset($_POST['update']) && !$lockFields) {
         $error = "Failed to Update Biodata!";
     }
 }
+    */
+
+if (!isset($_SESSION['membership_num'])) {
+    header('Location: login.php');
+    exit();
+}
+
+$membership_num = $_SESSION['membership_num'];
+$lockFields = false;
+
+// Check if regno exists in updated_bio (lock fields if update_status = 1)
+$updateCheck = mysqli_query($conn, "SELECT update_status FROM updated_bio WHERE regno='$membership_num'");
+if ($updateCheck && mysqli_num_rows($updateCheck) > 0) {
+    $updateRow = mysqli_fetch_assoc($updateCheck);
+    if ($updateRow['update_status'] == 1) {
+        $lockFields = true;
+    }
+}
+
+// Fetch current biodata
+$biodata = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM biodata WHERE regno='$membership_num'"));
+$wikipedia_account="";
+if (isset($_POST['update']) && !$lockFields) {
+    $firstname = mysqli_real_escape_string($conn, $_POST['firstname']);
+    $lastname = mysqli_real_escape_string($conn, $_POST['lastname']);
+    $email = mysqli_real_escape_string($conn, $_POST['email']);
+    $gender = mysqli_real_escape_string($conn, $_POST['gender']);
+    $phone = mysqli_real_escape_string($conn, $_POST['phone']);
+    $address = mysqli_real_escape_string($conn, $_POST['address']);
+    $city = mysqli_real_escape_string($conn, $_POST['city']);
+    $state = mysqli_real_escape_string($conn, $_POST['state']);
+    $country = mysqli_real_escape_string($conn, $_POST['country']);
+    $wikipedia_projects = mysqli_real_escape_string($conn, $_POST['wikipedia_projects']);
+    $wikipedia_account = mysqli_real_escape_string($conn, $_POST['wikipedia_account']);
+    $open_movement = mysqli_real_escape_string($conn, $_POST['open_movement']);
+    $wugn_activities = mysqli_real_escape_string($conn, $_POST['wugn_activities']);
+    $fan_club = mysqli_real_escape_string($conn, $_POST['fan_club']);
+    $other_usergroups = mysqli_real_escape_string($conn, $_POST['other_usergroups']);
+    $declaration = mysqli_real_escape_string($conn, $_POST['declaration']);
+
+    // Passport handling
+    $passportFileName = $biodata['passport']; // fallback to current if no new file
+    if (isset($_FILES['passport']) && $_FILES['passport']['error'] === UPLOAD_ERR_OK) {
+        $fileSize = $_FILES['passport']['size'];
+        $ext = strtolower(pathinfo($_FILES['passport']['name'], PATHINFO_EXTENSION));
+
+        if ($fileSize <= 102400 && in_array($ext, ['jpg', 'jpeg', 'png'])) { // 100KB max
+            $uploadDir = 'uploads/passports/';
+            $newFilename = uniqid('passport_', true) . '.' . $ext;
+            $targetPath = $uploadDir . $newFilename;
+
+            if (!is_dir($uploadDir)) {
+                mkdir($uploadDir, 0777, true);
+            }
+
+            if (move_uploaded_file($_FILES['passport']['tmp_name'], $targetPath)) {
+                $passportFileName = $targetPath;
+            }
+        } else {
+            $error = "Passport upload failed: must be JPG/PNG and ≤ 100KB.";
+        }
+    }
+
+    // Update biodata
+    $updateBiodata = mysqli_query($conn, "UPDATE biodata SET 
+        first_name='$firstname', last_name='$lastname', email='$email', gender='$gender',
+        phone='$phone', street_address='$address', city='$city', state='$state', country='$country',
+        wikimedia_projects='$wikipedia_projects', involvement_open_movement='$open_movement',
+        involvement_wugn_activities='$wugn_activities', fan_club_network='$fan_club',
+        other_usergroups='$other_usergroups', agreement='$declaration', passport='$passportFileName'
+        WHERE regno='$membership_num'
+    ");
+
+    if ($updateBiodata) {
+        // Generate username if none exists
+        if (empty($biodata['username'])) {
+            do {
+                $random_number = str_pad(rand(0, 9999), 4, '0', STR_PAD_LEFT);
+                $new_membership_num = "WG/" . strtoupper($state) . "/$random_number";
+                $exists = mysqli_query($conn, "SELECT username FROM biodata WHERE username='$new_membership_num'
+                    UNION SELECT username FROM updated_bio WHERE username='$new_membership_num'")->num_rows;
+            } while ($exists > 0);
+
+            mysqli_query($conn, "UPDATE biodata SET username='$new_membership_num' WHERE regno='$membership_num'");
+            mysqli_query($conn, "INSERT INTO updated_bio (regno, username, update_status) 
+                VALUES ('$membership_num', '$new_membership_num', 1)
+                ON DUPLICATE KEY UPDATE update_status=1");
+            $success = "Biodata Updated Successfully! Your Membership Number: $new_membership_num";
+        } else {
+            mysqli_query($conn, "INSERT INTO updated_bio (regno, username, update_status) 
+                VALUES ('$membership_num', '{$biodata['username']}', 1)
+                ON DUPLICATE KEY UPDATE update_status=1");
+            $success = "Biodata Updated Successfully!";
+        }
+
+        $lockFields = true;
+        $biodata = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM biodata WHERE regno='$membership_num'"));
+    } else {
+        $error = "Failed to Update Biodata!";
+    }
+}
 
 // Fetch existing biodata
 $biodata = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM biodata WHERE regno='$membership_num'"));
@@ -130,7 +231,7 @@ include 'db_connect.php';
             ?>
             <hr />
             <div class="form-container">
-        <form method="POST">
+        <form method="POST" enctype="multipart/form-data">
        
             <div class="col">
                 <label>First Name *</label>
@@ -154,8 +255,15 @@ include 'db_connect.php';
                 <option value="Female" <?php if (($biodata['gender'] ?? '') == 'Female') echo 'selected'; ?>>Female</option>
                 <option value="Prefer not to Say" <?php if (($biodata['gender'] ?? '') == 'Prefer not to Say') echo 'selected'; ?>>Prefer not to Say</option>
             </select>
-        
+                
+            <?php if (!empty($biodata['passport'])): ?>
+    <div style="margin-bottom: 10px;">
+        <img src="<?php echo $biodata['passport']; ?>" alt="Passport" style="width: 120px; border: 1px solid #ccc;">
+    </div>
+         <?php endif; ?>
 
+                <label>Upload Passport Photo</label>
+               <input type="file" name="passport" class="form-control" <?php echo $lockFields ? 'disabled' : ''; ?>>
     
             <label>Phone Number *</label>
             <input type="text" name="phone" class="form-control" value="<?php echo $biodata['phone'] ?? ''; ?>" <?php echo $lockFields ? 'disabled' : ''; ?> required>
@@ -187,11 +295,7 @@ include 'db_connect.php';
             <input type="text" name="wikipedia_projects" class="form-control" value="<?php echo $biodata['wikimedia_projects'] ?? ''; ?>"<?php echo $lockFields ? 'disabled' : ''; ?> required>
         
 
-           <!--
-            <label>Do you have a Wikipedia account?</label>
-            <input type="text" name="wikipedia_account" class="form-control" value="<?php// echo $biodata['wikipedia_account'] ?? ''; ?>"<?php echo $lockFields ? 'disabled' : ''; ?> required>
-            -->
-
+         
         
             <label>Are you involved in the open movement?</label>
             <textarea name="open_movement" class="form-control" <?php echo $lockFields ? 'disabled' : ''; ?>><?php echo $biodata['involvement_open_movement'] ?? ''; ?></textarea >
@@ -274,29 +378,54 @@ include 'db_connect.php';
                         <div id="recent-posts-3" class="widget widget_recent_entries kingster-widget" style="background-color:rgb(206, 234, 221) ;">
                             <?php include "regsidemenu.php"; ?>
                             <br>
-                            <?php
-                                      $showPaymentTable = false;
+                           
+                                     <?php
+$showPaymentTable = false;
 
-                                      // Check the latest payment date for regno
-                                      $paymentCheck = mysqli_query($conn, "SELECT date FROM payments WHERE membership_num='$membership_num' ORDER BY date DESC LIMIT 1");
+// Check the latest payment date for regno
+$paymentCheck = mysqli_query($conn, "SELECT date FROM payments WHERE membership_num='$membership_num' ORDER BY date DESC LIMIT 1");
 
-                                      if ($paymentCheck && mysqli_num_rows($paymentCheck) > 0) {
-                                          $paymentRow = mysqli_fetch_assoc($paymentCheck);
-                                          $lastPaymentDate = strtotime($paymentRow['date']); // Convert date to timestamp
-                                          $currentDate = time();
+if ($paymentCheck && mysqli_num_rows($paymentCheck) > 0) {
+    $paymentRow = mysqli_fetch_assoc($paymentCheck);
+    $lastPaymentDate = strtotime($paymentRow['date']);
+    $currentDate = time();
 
-                                          // Check if 365 days have passed
-                                          if (($currentDate - $lastPaymentDate) >= (365 * 24 * 60 * 60)) {
-                                              $showPaymentTable = true;
-                                          }
-                                      }
+    // Check if 365 days have passed
+    if (($currentDate - $lastPaymentDate) >= (365 * 24 * 60 * 60)) {
+        $showPaymentTable = true;
+    }
+}
 
-                                      if ($showPaymentTable) {
-                                          echo "<center><h3>Pay Your Annual Due</h3></center>";
-                                      } else {
-                                          echo "<center><h3 class='kingster-widget-title'>Annual Due for the year is Paid ✅ </h3></center>";
-                                      }
-                                      ?>
+// Show payment status
+if ($showPaymentTable) {
+    echo "<center><h5 style='color:#ffff; hover:red;' class='kingster-widget-title'><a href='payannual.php' style='color:#ffff;'>Pay Your Annual Due</a></h5></center>";
+} else {
+    echo "<center><h3 class='kingster-widget-title'>Annual Due for the year is Paid ✅ </h3></center>";
+}
+
+$categoryCheck = mysqli_query($conn, "SELECT mem_category FROM biodata WHERE regno = '$membership_num' OR username = '$membership_num'");
+
+if ($categoryCheck && mysqli_num_rows($categoryCheck) > 0) {
+    $categoryRow = mysqli_fetch_assoc($categoryCheck);
+    $mem_category = strtolower($categoryRow['mem_category']);
+
+    if ($mem_category == 'student') {
+        echo '
+        <div style="text-align: center; margin-top: 25px;">
+            <a href="#" onclick="document.getElementById(\'ref-box\').style.display=\'block\'">
+                📩 Request Reference Letter
+            </a>
+            <div id="ref-box" style="display: none; margin-top: 10px;">
+                Email us at <strong>refletters@yourorg.org</strong><br>
+                or fill out this <a href="https://forms.gle/your-google-form-link" target="_blank">Google Form</a>.
+            </div>
+        </div>';
+    }
+}
+
+?>
+
+
                         </div>
                     </div>
                 </div>

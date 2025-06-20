@@ -1,0 +1,73 @@
+<?php 
+session_start();
+include 'db_connect.php';
+?>
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+   <?php include "head.php"; ?>
+   <script src="https://js.paystack.co/v1/inline.js"></script>
+</head>
+
+<body>
+<?php include "mobilemenu.php"; ?>
+    <div class="kingster-body-outer-wrapper ">
+        <div class="kingster-body-wrapper clearfix  kingster-with-frame">
+           <?php include "headermenu.php"; ?>
+           <?php include "menu.php"; ?>
+            <div class="kingster-page-title-container">
+                <h1 class="kingster-page-title">DONATION PAGE</h1>
+            </div>
+
+            <div class="kingster-page-wrapper">
+                <div class="gdlr-core-page-builder-body">
+                    <div class="gdlr-core-pbf-sidebar-content">
+                        
+                        <!-- Display Success Message -->
+                        <?php if (isset($_SESSION['success_message'])): ?>
+                            <div style="background-color: #dff0d8; color: #3c763d; padding: 10px; border-radius: 5px;">
+                                <?php echo $_SESSION['success_message']; ?>
+                                <br><br>
+                                <a href="receipt.php?transaction_id=<?php echo $_SESSION['transaction_id']; ?>" target="_blank">
+                                    <button style="padding: 8px 12px; background-color: green; color: white; border: none;">
+                                        Print Your Receipt
+                                    </button>
+                                </a>
+                            </div>
+                            <?php 
+                            unset($_SESSION['success_message']);
+                            unset($_SESSION['transaction_id']);
+                            ?>
+                        <?php endif; ?>
+
+                        <div class="form-container">
+                            <form id="donationForm">
+                                <label>Surname:</label>
+                                <input type="text" id="surname" required><br>
+
+                                <label>Other Names:</label>
+                                <input type="text" id="othernames" required><br>
+
+                                <label>Email:</label>
+                                <input type="email" id="email" required><br>
+
+                                <label>Phone:</label>
+                                <input type="text" id="phone"><br>
+
+                                <label>Amount (NGN):</label>
+                                <input type="number" id="amount" required><br>
+
+                                <button type="button" onclick="payWithPaystack()">Donate</button>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</body>
+</html>

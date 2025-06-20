@@ -1,51 +1,12 @@
-<?php
-session_start();
-include 'db.php';
-
-
-
-if (isset($_POST['login'])) {
-    $membership_num = mysqli_real_escape_string($conn, $_POST['membership_num']);
-    $password = $_POST['password']; // Don't escape the password - we'll hash it directly
-
-    // Query the database for the user
-    $query = mysqli_query($conn, "SELECT * FROM membership_accounts WHERE membership_num='$membership_num'");
-    
-    if (mysqli_num_rows($query) == 1) {
-        $user = mysqli_fetch_assoc($query);
-        
-        // Verify the hashed password
-        if (password_verify($password, $user['password'])) {
-            // Password is correct, start session
-            $_SESSION['membership_num'] = $membership_num;
-            $_SESSION['user_id'] = $user['id']; // Store more user data if needed
-            
-            // Regenerate session ID to prevent session fixation
-            session_regenerate_id(true);
-            
-            header("Location: update_biodata.php");
-            exit();
-        } else {
-            // Password is incorrect
-            $error = "Invalid Membership Number or Password!";
-        }
-    } else {
-        // User not found
-        $error = "Invalid Membership Number or Password!";
-    }
-}
-?>
-
-
 <?php 
+ob_start();
 include 'db_connect.php';
 ?>
 <!DOCTYPE html>
 <html lang="en-US" class="no-js">
 <head>
    <?php include "head.php"; ?>
-   <script src="https://cdn.tiny.cloud/1/t9taiaqmm14eridxhtuvgduaf2quietkuuzlox6uilkap6t7/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
-
+   
 </head>
 
 <body class="home page-template-default page page-id-2039 gdlr-core-body woocommerce-no-js tribe-no-js kingster-body kingster-body-front kingster-full  kingster-with-sticky-navigation  kingster-blockquote-style-1 gdlr-core-link-to-lightbox">
@@ -57,14 +18,12 @@ include 'db_connect.php';
             <div class="kingster-page-title-wrap  kingster-style-medium kingster-center-align">
                 <div class="kingster-header-transparent-substitute"></div>
                 <div class="kingster-page-title-overlay"></div>
-                
                 <div class="kingster-page-title-container kingster-container">
                     <div class="kingster-page-title-content kingster-item-pdlr">
-                        <h1 class="kingster-page-title">MEMBERHSIP LOGIN PAGE</h1></div>
+                        <h1 class="kingster-page-title">Print Memberhip Card</h1></div>
                 </div>
             </div>
-    
-    <div class="kingster-page-wrapper" id="kingster-page-wrapper">
+            <div class="kingster-page-wrapper" id="kingster-page-wrapper">
     <div class="gdlr-core-page-builder-body">
         <div class="gdlr-core-pbf-sidebar-wrapper">
             <div class="gdlr-core-pbf-sidebar-container gdlr-core-line-height-0 clearfix gdlr-core-js gdlr-core-container">
@@ -76,26 +35,65 @@ include 'db_connect.php';
         <div class="gdlr-core-blog-item-holder gdlr-core-js-2 clearfix" data-layout="fitrows">
 
             <!-- Upcoming Events -->
-            <Center><h3>LOGIN HERE</h3></Center>
-            <?php if (isset($_GET['success'])) { echo '<div class="alert alert-success">Registration Successful! Please login.</div>'; } ?>
-           <?php if (isset($error)) { echo '<div class="alert alert-danger">'.$error.'</div>'; } ?>
+            <Center><h3>PRINT YOUR MEMBERHSIP CARD</h3></Center>
             <hr />
-            <div class="form-container">
-            <form method="POST" action="">
+            <!-- heere -->
+                <?php
+
+// Get current year
+$current_year = date("Y");
+
+// Only run this block if form was submitted
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['search_value'])) {
+
+    // Make sure you have your database connection set up here
+    $user_input = mysqli_real_escape_string($conn, $_POST['search_value']);
+
+    // Fetch user details from biodata
+    $sql = "SELECT * FROM biodata WHERE regno = '$user_input' OR username = '$user_input'";
+    $result = mysqli_query($conn, $sql);
+
+    if ($result && mysqli_num_rows($result) > 0) {
+        $user_data = mysqli_fetch_assoc($result);
+        $regno = $user_data['regno'];
+        $username = $user_data['username'];
+        $name = $user_data['first_name'] . ' ' . $user_data['last_name'];
+        $dept = $user_data['mem_category'];
         
-            <label>Membership Number</label>
-            <input type="text" name="membership_num" class="form-control" required>
-       
-        
-            <label>Password (Transaction ID)</label>
-            <input type="password" name="password" class="form-control" required>
-        
-        <button type="submit" name="login" >Login</button>
-           </br>
-           </br>
-             <center><h6>NOT REGISTERED? CREATE ACCOUNT <a href="register.php">HERE </a></h6></center>
-             </form>
-            </div>
+        // Check for membership payment
+        $payment_check = "SELECT * FROM payments WHERE (membership_num = '$regno' OR membership_num = '$username') AND YEAR(date) = '$current_year' AND payment_type = 'membership'";
+        $payment_result = mysqli_query($conn, $payment_check);
+
+        if ($payment_result && mysqli_num_rows($payment_result) > 0) {
+            echo "<div style='text-align: center; margin-top: 20px; padding: 20px;'>
+        <a href='printcard.php?regno=" . urlencode($regno) . "' target='_blank'>
+            <button class='btn btn-success'>Open Membership Card</button>
+        </a>
+      </div>";
+        } else {
+            echo "<div style='color: red; font-weight: bold;'>No membership payment found for $current_year, Hence you can not print membership card!</div>";
+        }
+    } else {
+        echo "<div style='color: red; font-weight: bold;'>User not found!</div>";
+    }
+}
+?>
+
+<!-- Search Form -->
+<form method="POST" action="card.php">
+    <label>Enter Reg No or Username:</label>
+    <input type="text" name="search_value" required>
+    <input type="submit" value="Search">
+</form>
+
+<div style="text-align: center; margin-top: 15px;">
+    <a href="update_biodata.php" style="text-decoration: none; color: blue;">
+        ← Back to Biodata Page
+    </a>
+</div>
+
+
+            <!--end -->
         </div>
     </div>
 </div>
@@ -126,6 +124,7 @@ include 'db_connect.php';
         background-color:rgb(5, 125, 79);
         color: white;
     }
+    
 </style>
 
 
@@ -136,8 +135,13 @@ include 'db_connect.php';
                 <div class="gdlr-core-pbf-sidebar-left gdlr-core-column-extend-left kingster-sidebar-area gdlr-core-column-15 gdlr-core-pbf-sidebar-padding gdlr-core-line-height">
                     <div class="gdlr-core-sidebar-item gdlr-core-item-pdlr">
                         <div id="recent-posts-3" class="widget widget_recent_entries kingster-widget" style="background-color:rgb(206, 234, 221) ;">
-                        
-                            <?php include "regsidemenu.php"; ?>
+                            <h3 class="kingster-widget-title">Menu</h3><span class="clear"></span>
+                            <ul>
+                                
+
+
+
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -147,7 +151,7 @@ include 'db_connect.php';
     </div>
 </div>
 
-<?php mysqli_close($conn); ?>
+<?php //mysqli_close($conn); ?>
 
 
             <footer>
@@ -155,13 +159,6 @@ include 'db_connect.php';
             </footer>
         </div>
     </div>
- <!-- Bootstrap CSS -->
- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
-<!-- Bootstrap JavaScript (for interactive components like modals, dropdowns, etc.) -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-
 
 
 	<script type='text/javascript' src='js/jquery/jquery.js'></script>
