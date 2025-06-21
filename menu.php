@@ -73,7 +73,19 @@
                                                 </li> 
                                                 <li class="menu-item menu-item-has-children" data-size="15"><a href="communitylead.php" class="sf-with-ul-pre">Comunity Leaders & Club leaders</a>
                                                     <ul class="sub-menu">
-                                                    
+                                                                                <?php
+                                                                      // Fetch staff members with designation 'Staff'
+                                                                      $queryStaff = "SELECT id, campus FROM staff WHERE designation = 'Campus Director'";
+                                                                      $resultStaff = $conn->query($queryStaff);
+
+                                                                      // Generate menu items dynamically
+                                                                      while ($row = $resultStaff->fetch_assoc()) {
+                                                                          $staffName = htmlspecialchars($row['campus']);
+                                                                          $staffUrl = "staff_profile.php?id=" . $row['id']; // Link to profile page
+
+                                                                          echo '<li class="menu-item"><a href="' . $staffUrl . '">' . $staffName . '</a></li>';
+                                                                         }                                                                      
+                                                                      ?>
                                                     </ul>
                                                 </li> 
                                             </ul>
@@ -85,9 +97,9 @@
                                             
                                             <li class="menu-item menu-item-has-children" data-size="60"><a href="#" class="sf-with-ul-pre">Advocacy</a>
                                                 <ul class="sub-menu">
-                                                    <li class="menu-item"><a href="#">Wiki for Human Right</a></li>
-                                                    <li class="menu-item"><a href="#">My Beautiful Africa</a></li>
-                                                    <li class="menu-item"><a href="#">New reader Awareness Campaign</a></li>
+                                                    <li class="menu-item"><a href="whr.php">Wiki for Human Right</a></li>
+                                                    <li class="menu-item"><a href="mba.php">My Beautiful Africa</a></li>
+                                                    <li class="menu-item"><a href="nrac.php">New reader Awareness Campaign</a></li>
                                                 </ul>
                                             </li>
                                             <li class="menu-item menu-item-has-children" data-size="60"><a href="#" class="sf-with-ul-pre">Gender-gap initiative</a>

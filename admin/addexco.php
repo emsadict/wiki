@@ -156,6 +156,7 @@ $communities = $conn->query("SELECT * FROM communities");
                 <option>Mr</option>
                 <option>Mrs</option>
                 <option>Miss</option>
+                <option>Ms</option>
                 <option>Dr</option>
                 <option>Amb</option>
             </select>

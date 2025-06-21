@@ -1,10 +1,18 @@
 <?php 
 include 'db_connect.php';
+if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
+    die("Invalid staff ID.");
+}
 
+$id = (int) $_GET['id'];
 
-// Fetch staff members with designation 'Staff'
-                                                            
-                                                             
+// Fetch staff details
+$query = mysqli_query($conn, "SELECT * FROM staff WHERE id = $id");
+if (!$query || mysqli_num_rows($query) === 0) {
+    die("Staff member not found.");
+}
+
+$staff = mysqli_fetch_assoc($query);
 ?>
 <!DOCTYPE html>
 <html lang="en-US" class="no-js">
@@ -24,7 +32,7 @@ include 'db_connect.php';
                 <div class="kingster-page-title-overlay"></div>
                 <div class="kingster-page-title-container kingster-container">
                     <div class="kingster-page-title-content kingster-item-pdlr">
-                        <h1 class="kingster-page-title">STAFF MEMBERS PAGE</h1></div>
+                        <h1 class="kingster-page-title">PROFILE PAGE</h1></div>
                 </div>
             </div>
             <div class="kingster-page-wrapper" id="kingster-page-wrapper">
@@ -39,58 +47,120 @@ include 'db_connect.php';
         <div class="gdlr-core-blog-item-holder gdlr-core-js-2 clearfix" data-layout="fitrows">
 
             <!-- Upcoming Events -->
-            <Center><h3>THE STAFF MEMBERS</h3></Center>
-            <hr />                                        <?php 
-$queryStaff = "SELECT * FROM staff WHERE designation = 'Staff'";
-$resultStaff = $conn->query($queryStaff);
+            <Center><h3>PROFILE</h3></Center>
+            <title><?php echo htmlspecialchars($staff['name']); ?> - Profile</title>
+            <hr />
+            
+                <div class="profile-container">
+    <img class="profile-img" src="./admin/uploads/<?php echo htmlspecialchars($staff['passport']); ?>" alt="Passport">
 
-if ($resultStaff && $resultStaff->num_rows > 0): 
+    <div class="profile-details">
+        <h2><?php echo htmlspecialchars($staff['title'] . ' ' . $staff['name']); ?></h2>
+        <p><span class="label">Designation:</span> <?php echo htmlspecialchars($staff['designation']); ?></p>
+        <?php if (!empty($staff['office'])): ?>
+            <p><span class="label">Office:</span> <?php echo htmlspecialchars($staff['office']); ?></p>
+        <?php endif; ?>
+        <?php if (!empty($staff['exco'])): ?>
+            <p><span class="label">Executive Role:</span> <?php echo htmlspecialchars($staff['exco']); ?></p>
+        <?php endif; ?>
+        <?php if (!empty($staff['board'])): ?>
+            <p><span class="label">Board Role:</span> <?php echo htmlspecialchars($staff['board']); ?></p>
+        <?php endif; ?>
+        <?php if (!empty($staff['profile'])): ?>
+            <p><span class="label">Profile:</span><br><?php echo nl2br(htmlspecialchars($staff['profile'])); ?></p>
+        <?php endif; ?>
+    </div>
+<p><span class="label">Designation:</span> <?php echo htmlspecialchars($staff['designation']); ?></p>
+
+<?php
+$designation = strtolower(trim($staff['designation']));
+
+switch ($designation) {
+    case 'staff':
+        if (!empty($staff['office'])) {
+            echo '<p><span class="label">Office:</span> ' . htmlspecialchars($staff['office']) . '</p>';
+        }
+        break;
+
+    case 'campus director':
+        if (!empty($staff['campus'])) {
+            echo '<p><span class="label">Campus:</span> ' . htmlspecialchars($staff['campus']) . '</p>';
+        }
+        break;
+
+    case 'executive committee':
+        if (!empty($staff['exco'])) {
+            echo '<p><span class="label">Executive Committee Role:</span> ' . htmlspecialchars($staff['exco']) . '</p>';
+        }
+        break;
+
+    case 'board of trustee':
+        if (!empty($staff['board'])) {
+            echo '<p><span class="label">Board Role:</span> ' . htmlspecialchars($staff['board']) . '</p>';
+        }
+        break;
+
+    default:
+        echo '<p><em>No specific role detail available for this designation.</em></p>';
+}
 ?>
 
-<div class="gdlr-core-tab-item-content" data-tab-id="4">
-    <div class="gdlr-core-personnel-item gdlr-core-item-pdb clearfix gdlr-core-left-align gdlr-core-personnel-item-style-medium gdlr-core-personnel-style-medium" style="height: 600px; overflow-y: auto; border: 1px solid #ccc; padding: 10px;">
-
-    <?php while ($row = $resultStaff->fetch_assoc()): 
-        $stafftitle = htmlspecialchars($row['office']);
-        $stafftitle2 = htmlspecialchars($row['title']);
-        $staffName = htmlspecialchars($row['name']);
-        $staffdesign = htmlspecialchars($row['office']);
-        $staffdesign2 = htmlspecialchars($row['designation']);
-        $staffpassprot = htmlspecialchars($row['passport']);
-        $staffUrl = "staff_profile.php?id=" . $row['id'];
-    ?>
-        <div class="gdlr-core-personnel-list-column gdlr-core-column-60 gdlr-core-column-first gdlr-core-item-pdlr">
-            <div class="gdlr-core-personnel-list clearfix">
-                <div class="gdlr-core-personnel-list-image gdlr-core-media-image gdlr-core-opacity-on-hover gdlr-core-zoom-on-hover">
-                    <a href="<?php echo $staffUrl; ?>">
-                        <img src="./admin/uploads/<?php echo $staffpassprot; ?>" alt="Passport" width="500" height="500" />
-                    </a>
-                </div>
-                <div class="gdlr-core-personnel-list-content-wrap">
-                    <h3 class="gdlr-core-personnel-list-title" style="font-size: 23px; font-weight: 700;">
-                        <a href="<?php echo $staffUrl; ?>"><?php echo "$stafftitle2 $staffName"; ?></a>
-                    </h3>
-                    <div class="gdlr-core-personnel-list-position gdlr-core-info-font gdlr-core-skin-caption" style="font-size: 16px;"><?php echo $staffdesign; ?></div>
-                    <div class="gdlr-core-personnel-list-position gdlr-core-info-font gdlr-core-skin-caption" style="font-size: 16px;"><?php echo $staffdesign2; ?></div>
-                    <a class="gdlr-core-personnel-list-button gdlr-core-button" href="<?php echo $staffUrl; ?>" style="background: linear-gradient(#091E3E, #091E3E);">More Detail</a>
-                </div>
-            </div>
-        </div>
-    <?php endwhile; ?>
-
-    </div>
+    <a class="back-link" href="javascript:history.back()">← Back</a>
 </div>
-
-<?php else: ?>
-    <p>No staff members found.</p>
-<?php endif; ?>
-
+                
+                
+          
 
         </div>
     </div>
 </div>
 
 <style>
+    
+    
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f4f4f4;
+            margin: 40px;
+            color: #333;
+        }
+        .profile-container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 12px rgba(0,0,0,0.1);
+        }
+        .passport {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 2px solid #ccc;
+        }
+        .info {
+            margin-top: 20px;
+        }
+        .info h2 {
+            margin: 10px 0 5px;
+        }
+        .info p {
+            margin: 4px 0;
+            font-size: 16px;
+        }
+        .back-link {
+            margin-top: 30px;
+            display: inline-block;
+            background-color: #2c3e50;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 4px;
+            text-decoration: none;
+        }
+        .back-link:hover {
+            background-color: #1a252f;
+        }
     .event-box {
         background-color: #f7f7f7;
         padding: 20px;

@@ -19,14 +19,14 @@ include 'db_connect.php';
                 <div class="kingster-page-title-overlay"></div>
                 <div class="kingster-page-title-container kingster-container">
                     <div class="kingster-page-title-content kingster-item-pdlr">
-                        <h3 class="kingster-page-title">Community Leaders and Campus Directors Page</h3></div>
+                        <h1 class="kingster-page-title">MY BEAUTIGUL AFRICA</h1></div>
                 </div>
             </div>
             <div class="kingster-page-wrapper" id="kingster-page-wrapper">
     <div class="gdlr-core-page-builder-body">
         <div class="gdlr-core-pbf-sidebar-wrapper">
             <div class="gdlr-core-pbf-sidebar-container gdlr-core-line-height-0 clearfix gdlr-core-js gdlr-core-container">
-                <div class="gdlr-core-pbf-sidebar-content gdlr-core-column-45 gdlr-core-pbf-sidebar-padding gdlr-core-line-height" style="padding: 60px 10px 30px 30px;">
+                <div class="gdlr-core-pbf-sidebar-content gdlr-core-column-60 gdlr-core-pbf-sidebar-padding gdlr-core-line-height" style="padding: 60px 10px 30px 30px;">
                     <div class="gdlr-core-pbf-background-wrap" style="background-color:rgba(158, 228, 207, 0.33) ;"></div>
                     <div class="gdlr-core-pbf-sidebar-content-inner">
 <div class="gdlr-core-pbf-element">
@@ -34,53 +34,9 @@ include 'db_connect.php';
         <div class="gdlr-core-blog-item-holder gdlr-core-js-2 clearfix" data-layout="fitrows">
 
             <!-- Upcoming Events -->
-            <Center><h3></h3></Center>
+            <Center><h3>Upcoming Events</h3></Center>
             <hr />
-                            <?php 
-$queryStaff = "SELECT * FROM staff WHERE designation = 'Campus Director'";
-$resultStaff = $conn->query($queryStaff);
-
-if ($resultStaff && $resultStaff->num_rows > 0): 
-?>
-
-<div class="gdlr-core-tab-item-content" data-tab-id="4">
-    <div class="gdlr-core-personnel-item gdlr-core-item-pdb clearfix gdlr-core-left-align gdlr-core-personnel-item-style-medium gdlr-core-personnel-style-medium" style="height: 600px; overflow-y: auto; border: 1px solid #ccc; padding: 10px;">
-
-    <?php while ($row = $resultStaff->fetch_assoc()): 
-        $stafftitle = htmlspecialchars($row['office']);
-        $stafftitle2 = htmlspecialchars($row['title']);
-        $staffName = htmlspecialchars($row['name']);
-        $staffdesign = htmlspecialchars($row['office']);
-        $staffdesign2 = htmlspecialchars($row['campus']);
-        $staffpassprot = htmlspecialchars($row['passport']);
-        $staffUrl = "staff_profile.php?id=" . $row['id'];
-    ?>
-        <div class="gdlr-core-personnel-list-column gdlr-core-column-60 gdlr-core-column-first gdlr-core-item-pdlr">
-            <div class="gdlr-core-personnel-list clearfix">
-                <div class="gdlr-core-personnel-list-image gdlr-core-media-image gdlr-core-opacity-on-hover gdlr-core-zoom-on-hover">
-                    <a href="<?php echo $staffUrl; ?>">
-                        <img src="./admin/uploads/<?php echo $staffpassprot; ?>" alt="Passport" width="500" height="500" />
-                    </a>
-                </div>
-                <div class="gdlr-core-personnel-list-content-wrap">
-                    <h3 class="gdlr-core-personnel-list-title" style="font-size: 23px; font-weight: 700;">
-                        <a href="<?php echo $staffUrl; ?>"><?php echo "$stafftitle2 $staffName"; ?></a>
-                    </h3>
-                    <div class="gdlr-core-personnel-list-position gdlr-core-info-font gdlr-core-skin-caption" style="font-size: 16px;"><?php echo $staffdesign; ?></div>
-                    <div class="gdlr-core-personnel-list-position gdlr-core-info-font gdlr-core-skin-caption" style="font-size: 16px;"><?php echo $staffdesign2; ?></div>
-                    <a class="gdlr-core-personnel-list-button gdlr-core-button" href="<?php echo $staffUrl; ?>" style="background: linear-gradient(#091E3E, #091E3E);">More Detail</a>
-                </div>
-            </div>
-        </div>
-    <?php endwhile; ?>
-
-    </div>
-</div>
-
-<?php else: ?>
-    <p>No staff members found.</p>
-<?php endif; ?>
-
+            
                 
                 
                 
@@ -122,20 +78,6 @@ if ($resultStaff && $resultStaff->num_rows > 0):
 </div>
                 </div>
                 
-                <!-- Sidebar with Recent Posts -->
-                <div class="gdlr-core-pbf-sidebar-left gdlr-core-column-extend-left kingster-sidebar-area gdlr-core-column-15 gdlr-core-pbf-sidebar-padding gdlr-core-line-height">
-                    <div class="gdlr-core-sidebar-item gdlr-core-item-pdlr">
-                        <div id="recent-posts-3" class="widget widget_recent_entries kingster-widget" style="background-color:rgb(206, 234, 221) ;">
-                            <h3 class="kingster-widget-title">Menu</h3><span class="clear"></span>
-                            <ul>
-                                
-
-
-
-                            </ul>
-                        </div>
-                    </div>
-                </div>
 
             </div>
         </div>

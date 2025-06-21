@@ -1,10 +1,5 @@
 <?php 
 include 'db_connect.php';
-
-
-// Fetch staff members with designation 'Staff'
-                                                            
-                                                             
 ?>
 <!DOCTYPE html>
 <html lang="en-US" class="no-js">
@@ -24,7 +19,7 @@ include 'db_connect.php';
                 <div class="kingster-page-title-overlay"></div>
                 <div class="kingster-page-title-container kingster-container">
                     <div class="kingster-page-title-content kingster-item-pdlr">
-                        <h1 class="kingster-page-title">STAFF MEMBERS PAGE</h1></div>
+                        <h1 class="kingster-page-title">ABOUT US</h1></div>
                 </div>
             </div>
             <div class="kingster-page-wrapper" id="kingster-page-wrapper">
@@ -39,52 +34,13 @@ include 'db_connect.php';
         <div class="gdlr-core-blog-item-holder gdlr-core-js-2 clearfix" data-layout="fitrows">
 
             <!-- Upcoming Events -->
-            <Center><h3>THE STAFF MEMBERS</h3></Center>
-            <hr />                                        <?php 
-$queryStaff = "SELECT * FROM staff WHERE designation = 'Staff'";
-$resultStaff = $conn->query($queryStaff);
-
-if ($resultStaff && $resultStaff->num_rows > 0): 
-?>
-
-<div class="gdlr-core-tab-item-content" data-tab-id="4">
-    <div class="gdlr-core-personnel-item gdlr-core-item-pdb clearfix gdlr-core-left-align gdlr-core-personnel-item-style-medium gdlr-core-personnel-style-medium" style="height: 600px; overflow-y: auto; border: 1px solid #ccc; padding: 10px;">
-
-    <?php while ($row = $resultStaff->fetch_assoc()): 
-        $stafftitle = htmlspecialchars($row['office']);
-        $stafftitle2 = htmlspecialchars($row['title']);
-        $staffName = htmlspecialchars($row['name']);
-        $staffdesign = htmlspecialchars($row['office']);
-        $staffdesign2 = htmlspecialchars($row['designation']);
-        $staffpassprot = htmlspecialchars($row['passport']);
-        $staffUrl = "staff_profile.php?id=" . $row['id'];
-    ?>
-        <div class="gdlr-core-personnel-list-column gdlr-core-column-60 gdlr-core-column-first gdlr-core-item-pdlr">
-            <div class="gdlr-core-personnel-list clearfix">
-                <div class="gdlr-core-personnel-list-image gdlr-core-media-image gdlr-core-opacity-on-hover gdlr-core-zoom-on-hover">
-                    <a href="<?php echo $staffUrl; ?>">
-                        <img src="./admin/uploads/<?php echo $staffpassprot; ?>" alt="Passport" width="500" height="500" />
-                    </a>
-                </div>
-                <div class="gdlr-core-personnel-list-content-wrap">
-                    <h3 class="gdlr-core-personnel-list-title" style="font-size: 23px; font-weight: 700;">
-                        <a href="<?php echo $staffUrl; ?>"><?php echo "$stafftitle2 $staffName"; ?></a>
-                    </h3>
-                    <div class="gdlr-core-personnel-list-position gdlr-core-info-font gdlr-core-skin-caption" style="font-size: 16px;"><?php echo $staffdesign; ?></div>
-                    <div class="gdlr-core-personnel-list-position gdlr-core-info-font gdlr-core-skin-caption" style="font-size: 16px;"><?php echo $staffdesign2; ?></div>
-                    <a class="gdlr-core-personnel-list-button gdlr-core-button" href="<?php echo $staffUrl; ?>" style="background: linear-gradient(#091E3E, #091E3E);">More Detail</a>
-                </div>
-            </div>
-        </div>
-    <?php endwhile; ?>
-
-    </div>
-</div>
-
-<?php else: ?>
-    <p>No staff members found.</p>
-<?php endif; ?>
-
+            <Center><h3>ABOUT US</h3></Center>
+            <hr />
+            
+                
+                
+                
+          
 
         </div>
     </div>

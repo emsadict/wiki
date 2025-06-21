@@ -63,7 +63,7 @@ include 'db_connect.php';
                                                          </p>
                                                     </div>
                                                     <div class="gdlr-core-pbf-element">
-                                                <div class="gdlr-core-button-item gdlr-core-item-pdlr gdlr-core-item-pdb gdlr-core-left-align"><a class="gdlr-core-button  gdlr-core-button-solid gdlr-core-button-no-border" href="membership.php" id="a_1dd7_0"><span class="gdlr-core-content" >JOIN US </span></a></div>
+                                                <div class="gdlr-core-button-item gdlr-core-item-pdlr gdlr-core-item-pdb gdlr-core-left-align"><a class="gdlr-core-button  gdlr-core-button-solid gdlr-core-button-no-border" href="register.php" id="a_1dd7_0"><span class="gdlr-core-content" >JOIN US </span></a></div>
                                             </div>
                                                 </div>
                                             </div>
@@ -93,7 +93,7 @@ include 'db_connect.php';
                                                             and do not need to work with the Wikimedia User Group Nigeria. The base requirement for an associate member is to register
 
                                                         </p>
-                                                        <div class="gdlr-core-button-item gdlr-core-item-pdlr gdlr-core-item-pdb gdlr-core-left-align"><a class="gdlr-core-button  gdlr-core-button-solid gdlr-core-button-no-border" href="membership.php" id="a_1dd7_0"><span class="gdlr-core-content" >JOIN US </span></a></div>
+                                                        <div class="gdlr-core-button-item gdlr-core-item-pdlr gdlr-core-item-pdb gdlr-core-left-align"><a class="gdlr-core-button  gdlr-core-button-solid gdlr-core-button-no-border" href="register.php" id="a_1dd7_0"><span class="gdlr-core-content" >JOIN US </span></a></div>
 
                                                     </div>
                                                 </div>

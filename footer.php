@@ -25,7 +25,7 @@
                                 <h3 class="kingster-widget-title">WHAT WE DO</h3><span class="clear"></span>
                                 <div class="menu-our-campus-container">
                                     <ul id="menu-our-campus" class="gdlr-core-custom-menu-widget gdlr-core-menu-style-plain">
-                                        <li class="menu-item"><a href="#">News</a></li>
+                                        <li class="menu-item"><a href="blog.php">News</a></li>
                                         <li class="menu-item"><a href="#">Gender Gap Initiative</a></li>
                                         <li class="menu-item"><a href="#">Education</a></li>
                                         
@@ -38,7 +38,7 @@
                                 <h3 class="kingster-widget-title">PARTNER WITH US</h3><span class="clear"></span>
                                 <div class="menu-campus-life-container">
                                     <ul id="menu-campus-life" class="gdlr-core-custom-menu-widget gdlr-core-menu-style-plain">
-                                        <li class="menu-item"><a href="#">Membership Registration</a></li>
+                                        <li class="menu-item"><a href="register.php">Membership Registration</a></li>
                                         <li class="menu-item"><a href="#">Partner with us</a></li>
                                         <li class="menu-item"><a href="#">Our Team</a></li>
                                         <li class="menu-item"><a href="#">Advocay</a></li>
@@ -54,9 +54,9 @@
                                 <div class="menu-academics-container">
                                     <ul id="menu-academics" class="gdlr-core-custom-menu-widget gdlr-core-menu-style-plain">
                                         <li class="menu-item"><a href="#">Who we are</a></li>
-                                        <li class="menu-item"><a href="#">Board of Trustees</a></li>
-                                        <li class="menu-item"><a href="#">About us</a></li>
-                                        <li class="menu-item"><a href="#">Our Team</a></li>
+                                        <li class="menu-item"><a href="board.php">Board of Trustees</a></li>
+                                        <li class="menu-item"><a href="about.php">About us</a></li>
+                                        <li class="menu-item"><a href="excos.php">Our Team</a></li>
                                         <li class="menu-item"><a href="admin/adminlogin.php">admin</a></li>
                                     </ul>
                                 </div>
