@@ -84,7 +84,7 @@
 								<a href="https://x.com/WikimediaNG" target="_blank" class="gdlr-core-social-network-icon" title="twitter">
 									<i class="fa fa-twitter" ></i>
 								</a>
-								<a href="#" target="_blank" class="gdlr-core-social-network-icon" title="instagram">
+								<a href="https://www.instagram.com/officialwikimediang" target="_blank" class="gdlr-core-social-network-icon" title="instagram">
 									<i class="fa fa-instagram" ></i>
 								</a>
                             </div>

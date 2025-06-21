@@ -682,7 +682,7 @@ $conn->close();
                                                                     <!-- Marquee Text -->
                                                          <div style="margin-top: 10px; padding: 5px;">
                                                            <marquee behavior="scroll" direction="left" style="color: #ae2c2c; font-weight: 600;font-size: 30px;">
-                                                           9-11 Okeiho Street, Dopemu, Lagos-Abeokuta Extra way, Ikeja, Lagos, Nigeria.!
+                                                           2nd Floor, Front Wing, Taewoo House, 13 Alimosho Rd, off Alaguntan, Alimosho, Lagos.!
                                                            </marquee>
                                                         </div>
                                                                     </div>
@@ -730,7 +730,7 @@ $conn->close();
 
                           <div class="gdlr-core-block-item-title-wrap  gdlr-core-left-align gdlr-core-item-mglr" style="margin-bottom: 35px ;">
                         <div class="gdlr-core-block-item-title-inner clearfix">
-                            <h3 class="gdlr-core-block-item-title" style="font-size: 24px ;font-style: normal ;text-transform: none ;letter-spacing: 0px ;color: #600909 ;"> X  POSTS</h3>
+                            <h3 class="gdlr-core-block-item-title" style="font-size: 24px ;font-style: normal ;text-transform: none ;letter-spacing: 0px ;color: #600909 ;"> INSTAGRAM  POSTS</h3>
                             <div class="gdlr-core-block-item-title-divider" style="font-size: 22px ;border-bottom-color:rgb(42, 8, 4) ;border-bottom-width: 2px ;"></div>
                         </div>
                     </div>
@@ -759,7 +759,7 @@ $conn->close();
                           <div class="gdlr-core-item-list-wrap gdlr-core-column-30">
                           <div class="gdlr-core-block-item-title-wrap  gdlr-core-left-align gdlr-core-item-mglr" style="margin-bottom: 35px ;">
                         <div class="gdlr-core-block-item-title-inner clearfix">
-                            <h3 class="gdlr-core-block-item-title" style="font-size: 24px ;font-style: normal ;text-transform: none ;letter-spacing: 0px ;color: #600909 ;">INSTAGRAM  POSTS</h3>
+                            <h3 class="gdlr-core-block-item-title" style="font-size: 24px ;font-style: normal ;text-transform: none ;letter-spacing: 0px ;color: #600909 ;">X  POSTS</h3>
                             <div class="gdlr-core-block-item-title-divider" style="font-size: 22px ;border-bottom-color:rgb(42, 8, 4) ;border-bottom-width: 2px ;"></div>
                         </div>
                     </div>
@@ -941,7 +941,7 @@ $conn->close();
                                                 <div class="gdlr-core-wp-google-map-plugin-item gdlr-core-item-pdlr gdlr-core-item-pdb " style="padding-bottom: 0px ;">
                                                     <div style="overflow:hidden;width: 100%;position: relative;">
                                                         <iframe style="width:100%; height:380px; " 
-                                                        src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3963.2936443102662!2d3.3094999999999994!3d6.610388899999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zNsKwMzYnMzcuNCJOIDPCsDE4JzM0LjIiRQ!5e0!3m2!1sen!2sng!4v1746007618526!5m2!1sen!2sng"
+                                                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4267.7669400346795!2d3.3052919999999997!3d6.610212999999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x103b9197d3a4db97%3A0xfc0baf6806d20e91!2sTaewoo%20Limited!5e1!3m2!1sen!2sng!4v1750484104082!5m2!1sen!2sng"
                                                         width="600" 
                                                         height="450" 
                                                         frameborder="4px" style="border:4px solid rgba(16, 70, 46, 0.9)" 
@@ -955,7 +955,7 @@ $conn->close();
                                                     <!-- Marquee Text -->
                                                          <div style="margin-top: 10px; padding: 5px;">
                                                            <marquee behavior="scroll" direction="left" style="color: #ae2c2c; font-weight: 600;font-size: 30px;">
-                                                           9-11 Okeiho Street, Dopemu, Lagos-Abeokuta Extra way, Ikeja, Lagos, Nigeria.!
+                                                           2nd Floor, Front Wing, Taewoo House, 13 Alimosho Rd, off Alaguntan, Alimosho, Lagos.
                                                            </marquee>
                                                         </div>
                                             </div>      
