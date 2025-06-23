@@ -19,7 +19,7 @@ include 'db_connect.php';
                 <div class="kingster-page-title-overlay"></div>
                 <div class="kingster-page-title-container kingster-container">
                     <div class="kingster-page-title-content kingster-item-pdlr">
-                        <h1 class="kingster-page-title">Contact us</h1></div>
+                        <h1 class="kingster-page-title">Organogram</h1></div>
                 </div>
             </div>
             <div class="kingster-page-wrapper" id="kingster-page-wrapper">
@@ -32,20 +32,35 @@ include 'db_connect.php';
 <div class="gdlr-core-pbf-element">
     <div class="gdlr-core-blog-item gdlr-core-item-pdb clearfix gdlr-core-style-blog-full-with-frame" style="padding-bottom: 40px;">
         <div class="gdlr-core-blog-item-holder gdlr-core-js-2 clearfix" data-layout="fitrows">
+  <center><h3 style="color: #1781cc;">Organogram</h3></center>
+  <hr />
 
-            <!-- Upcoming Events -->
-            <Center><h3>Contact us</h3></Center>
-            <hr />
-            <p style="text-align: justify;"></p>
-            <p style="text-align: justify;"></p>
-            <p style="text-align: justify;"></p>
-            <p style="text-align: justify;"></p>
-                
-                
-                
-          
+  <div class="card-container">
+    <div class="card">
+      <h4>Board of Trustees</h4>
+      <p>Meet the visionaries guiding Wikimedia Nigeria’s mission.</p>
+      <a href="board.php">View Board  →</a>
+    </div>
 
-        </div>
+    <div class="card">
+      <h4>Executive Council</h4>
+      <p>The leadership team responsible for strategy and operations.</p>
+      <a href="excos.php">Explore Team →</a>
+    </div>
+
+    <div class="card">
+      <h4>Staff Members</h4>
+      <p>Experts providing insights and guidance on key initiatives.</p>
+      <a href="staff.php">See Members of Staff →</a>
+    </div>
+
+    <div class="card">
+      <h4>Community Leaders/Campus Leaders</h4>
+      <p>The vibrant community powering local knowledge-sharing efforts.</p>
+      <a href="communitylead.php">See Leaders →</a>
+    </div>
+  </div>
+</div>
     </div>
 </div>
 
@@ -75,6 +90,51 @@ include 'db_connect.php';
         background-color:rgb(5, 125, 79);
         color: white;
     }
+      .card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+    margin-top: 30px;
+  }
+
+  .card {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    flex: 0 1 calc(48%);
+    padding: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+  }
+
+  .card h4 {
+    color: #1781cc;
+    margin-bottom: 10px;
+  }
+
+  .card p {
+    color: #555;
+    font-size: 15px;
+    margin-bottom: 15px;
+  }
+
+  .card a {
+    color: #1781cc;
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  @media (max-width: 768px) {
+    .card {
+      flex: 0 1 100%;
+    }
+  }
 </style>
 
 

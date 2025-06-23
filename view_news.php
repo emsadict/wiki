@@ -1,13 +1,5 @@
-<?php include "mobilemenu.php"; ?>
-    <div class="kingster-body-outer-wrapper ">
-        <div class="kingster-body-wrapper clearfix  kingster-with-frame">
-           <?php include "headermenu.php" ?>
-           <?php   include "menu.php";?>
-
-           <?php
-// Connect to the database
-include('db_connect.php'); // Ensure this file contains database connection details
-
+<?php
+include('db_connect.php');
 // Fetch the latest news article
 $news_id = isset($_GET['id']) ? intval($_GET['id']) : 1; // Get article ID from URL
 $sql = "SELECT title, author,  date, content, image FROM news WHERE id = ?";
@@ -63,10 +55,10 @@ $news = $result->fetch_assoc();
 </head>
 
 <body class="home page-template-default page page-id-2039 gdlr-core-body woocommerce-no-js tribe-no-js kingster-body kingster-body-front kingster-full  kingster-with-sticky-navigation  kingster-blockquote-style-1 gdlr-core-link-to-lightbox">
-
-
-
+<?php include "mobilemenu.php"; ?>
 <div class="kingster-page-wrapper" id="kingster-page-wrapper">
+    <?php include "headermenu.php" ?>
+           <?php   include "menu.php";?>
     <div class="kingster-blog-title-wrap kingster-style-custom kingster-feature-image" 
          style="background-image: url(admin/uploads/<?php echo htmlspecialchars($news['image']); ?>); height:400px">
         <div class="kingster-header-transparent-substitute"></div>

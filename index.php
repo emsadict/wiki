@@ -678,7 +678,12 @@ $conn->close();
                                                     <div class="gdlr-core-divider-line gdlr-core-skin-divider" id="div_1dd7_59"></div>
                                                 </div>
                                             </div>
-                                            
+                                             <div class="gdlr-core-pbf-element">
+                                                <div class="gdlr-core-title-item gdlr-core-item-pdb clearfix  gdlr-core-left-align gdlr-core-title-item-caption-top gdlr-core-item-pdlr"  id="gdlr-core-title-item-id-78243">
+                                                    <div class="gdlr-core-title-item-title-wrap clearfix">
+                                                        <h3 class="gdlr-core-title-item-title gdlr-core-skin-title " id="h3_1dd7_19"><a href="contact.php" target="_self" style="color:#ffffff">Contact us</a></h3></div>
+                                                </div>
+                                            </div>
                                             
                                         </div>
                                     </div>
