@@ -1,10 +1,3 @@
-<?php include "mobilemenu.php"; ?>
-    <div class="kingster-body-outer-wrapper ">
-        <div class="kingster-body-wrapper clearfix  kingster-with-frame">
-           <?php include "headermenu.php" ?>
-           <?php   include "menu.php";?>
-
-
 <?php
 include 'db_connect.php'; // Include your database connection file
 
@@ -184,10 +177,10 @@ if (isset($_GET['id'])) {
 </head>
 
 <body class="home page-template-default page page-id-2039 gdlr-core-body woocommerce-no-js tribe-no-js kingster-body kingster-body-front kingster-full  kingster-with-sticky-navigation  kingster-blockquote-style-1 gdlr-core-link-to-lightbox">
-
-
-
+<?php include "mobilemenu.php"; ?>
 <div class="kingster-page-wrapper" id="kingster-page-wrapper">
+    <?php include "headermenu.php" ?>
+           <?php   include "menu.php";?>
     <div class="kingster-blog-title-wrap kingster-style-custom kingster-feature-image" 
          style="background-image: url(admin/uploads/<?php echo htmlspecialchars($event['event_image']); ?>); height:400px">
         <div class="kingster-header-transparent-substitute"></div>
