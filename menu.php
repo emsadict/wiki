@@ -104,29 +104,29 @@
                                             </li>
                                             <li class="menu-item menu-item-has-children" data-size="60"><a href="#" class="sf-with-ul-pre">Gender-gap initiative</a>
                                                 <ul class="sub-menu">
-                                                    <li class="menu-item"><a href="#">Decolonize the Internet</a></li>
-                                                    <li class="menu-item"><a href="#">Wiki-GAP</a></li>
-                                                    <li class="menu-item"><a href="#">Wiki for Naija  Women</a></li>
-                                                    <li class="menu-item"><a href="#">visibility Project</a></li>
+                                                    <li class="menu-item"><a href="dint.php">Decolonize the Internet</a></li>
+                                                    <li class="menu-item"><a href="wikigap.php">Wiki-GAP</a></li>
+                                                    <li class="menu-item"><a href="wikinw.php">Wiki for Naija  Women</a></li>
+                                                    <li class="menu-item"><a href="visibility.php">visibility Project</a></li>
                                                 </ul>
                                             </li>
                                             <li class="menu-item menu-item-has-children" data-size="60"><a href="education.php" class="sf-with-ul-pre">Education</a>
                                                 <ul class="sub-menu">
-                                                 <li class="menu-item"><a href="#">Wiki in School</a></li>
-                                                 <li class="menu-item"><a href="#">Wiki Fans Club</a></li>
+                                                 <li class="menu-item"><a href="wikisch.php">Wiki in School</a></li>
+                                                 <li class="menu-item"><a href="wfc.php">Wiki Fans Club</a></li>
                                                  
                                                 </ul>
                                             </li>
                                             <li class="menu-item menu-item-has-children" data-size="60"><a href="glamini.php" class="sf-with-ul-pre">GLAM initiative</a>
                                                 <ul class="sub-menu">
-                                                 <li class="menu-item"><a href="#">Oral History Documentation</a></li>
-                                                 <li class="menu-item"><a href="#">Finding GLAM</a></li>
+                                                 <li class="menu-item"><a href="oralhis.php">Oral History Documentation</a></li>
+                                                 <li class="menu-item"><a href="finglam.php">Finding GLAM</a></li>
                                                  
                                                 </ul>
                                             </li>
                                             <li class="menu-item menu-item-has-children" data-size="60"><a href="capacity.php" class="sf-with-ul-pre">Capacity Training</a>
                                                 <ul class="sub-menu">
-                                                 <li class="menu-item"><a href="#">Training</a></li>
+                                                 <li class="menu-item"><a href="trian.php">Training</a></li>
                                                  
                                                 </ul>
                                             </li>
