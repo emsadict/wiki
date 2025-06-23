@@ -1,13 +1,23 @@
 <?php
 include('db_connect.php');
-// Fetch the latest news article
-$news_id = isset($_GET['id']) ? intval($_GET['id']) : 1; // Get article ID from URL
-$sql = "SELECT title, author,  date, content, image FROM news WHERE id = ?";
+
+$news_id = isset($_GET['id']) ? intval($_GET['id']) : 1;
+
+// Prepare the query
+$sql = "SELECT title, author, date, content, image FROM news WHERE id = ?";
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("i", $news_id);
-$stmt->execute();
-$result = $stmt->get_result();
-$news = $result->fetch_assoc();
+
+if ($stmt) {
+    $stmt->bind_param("i", $news_id);
+    $stmt->execute();
+    $stmt->bind_result($title, $author, $date, $content, $image);
+
+    if ($stmt->fetch()) {
+        // Now $title, $author, $date, $content, and $image are available for use later
+    }
+
+    $stmt->close();
+}
 ?>
 
 
@@ -60,38 +70,45 @@ $news = $result->fetch_assoc();
     <?php include "headermenu.php" ?>
            <?php   include "menu.php";?>
     <div class="kingster-blog-title-wrap kingster-style-custom kingster-feature-image" 
-         style="background-image: url(admin/uploads/<?php echo htmlspecialchars($news['image']); ?>); height:400px">
-        <div class="kingster-header-transparent-substitute"></div>
-        <div class="kingster-blog-title-overlay" style="opacity: 0.01;"></div>
-        <div class="kingster-blog-title-bottom-overlay"></div>
-        <div class="kingster-blog-title-container kingster-container">
-            <div class="kingster-blog-title-content kingster-item-pdlr" 
-                 style="padding-top: 200px; padding-bottom: 80px;">
-                <header class="kingster-single-article-head clearfix">
-                    <div class="kingster-single-article-date-wrapper post-date updated">
-                        <div class="kingster-single-article-date-day"><?php echo date('d', strtotime($news['date'])); ?></div>
-                        <div class="kingster-single-article-date-month"><?php echo date('M', strtotime($news['date'])); ?></div>
-                    </div>
-                    <div class="kingster-single-article-head-right">
-                        <h1 class="kingster-single-article-title"><?php echo htmlspecialchars($news['title']); ?></h1>
-                        <div class="kingster-blog-info-wrapper">
-                            <div class="kingster-blog-info kingster-blog-info-font kingster-blog-info-author">
-                                <span class="kingster-head">By</span>
-                                <span class="fn"><a href="#" rel="author"><?php echo htmlspecialchars($news['author']); ?></a></span>
-                            </div>
-                            <div class="kingster-blog-info kingster-blog-info-font kingster-blog-info-category">
-                                <a href="#" rel="tag"><?php //echo htmlspecialchars($news['category']); ?></a>
-                            </div>
-                            <div class="kingster-blog-info kingster-blog-info-font kingster-blog-info-tag">
-                                <a href="#" rel="tag"><?php //echo htmlspecialchars($news['tags']); ?></a>
-                            </div>
-                            <!-- Display the image below the content -->
+     style="background-image: url(admin/uploads/<?php echo htmlspecialchars($image); ?>); height:400px">
+    
+    <div class="kingster-header-transparent-substitute"></div>
+    <div class="kingster-blog-title-overlay" style="opacity: 0.01;"></div>
+    <div class="kingster-blog-title-bottom-overlay"></div>
+    
+    <div class="kingster-blog-title-container kingster-container">
+        <div class="kingster-blog-title-content kingster-item-pdlr" 
+             style="padding-top: 200px; padding-bottom: 80px;">
+             
+            <header class="kingster-single-article-head clearfix">
+                <div class="kingster-single-article-date-wrapper post-date updated">
+                    <div class="kingster-single-article-date-day"><?php echo date('d', strtotime($date)); ?></div>
+                    <div class="kingster-single-article-date-month"><?php echo date('M', strtotime($date)); ?></div>
+                </div>
+                
+                <div class="kingster-single-article-head-right">
+                    <h1 class="kingster-single-article-title"><?php echo htmlspecialchars($title); ?></h1>
+                    
+                    <div class="kingster-blog-info-wrapper">
+                        <div class="kingster-blog-info kingster-blog-info-font kingster-blog-info-author">
+                            <span class="kingster-head">By</span>
+                            <span class="fn"><a href="#" rel="author"><?php echo htmlspecialchars($author); ?></a></span>
+                        </div>
+                        
+                        <div class="kingster-blog-info kingster-blog-info-font kingster-blog-info-category">
+                            <!-- Optional: echo category if available -->
+                        </div>
+                        
+                        <div class="kingster-blog-info kingster-blog-info-font kingster-blog-info-tag">
+                            <!-- Optional: echo tags if available -->
                         </div>
                     </div>
-                </header>
-            </div>
+                </div>
+            </header>
         </div>
     </div>
+</div>
+
        <!-- Sidebar with Recent Posts -->
        <div class="gdlr-core-pbf-sidebar-left gdlr-core-column-extend-left kingster-sidebar-area gdlr-core-column-15 gdlr-core-pbf-sidebar-padding gdlr-core-line-height">
                     <div class="gdlr-core-sidebar-item gdlr-core-item-pdlr">
@@ -115,17 +132,17 @@ $news = $result->fetch_assoc();
                 <div class="kingster-content-wrap kingster-item-pdlr clearfix">
                     <div class="kingster-content-area">
                         <article class="post">
-                        <h5 class="kingster-single-article-title"><?php echo htmlspecialchars($news['title']); ?></h5>
+                        <h5 class="kingster-single-article-title"><?php  echo htmlspecialchars($title);  ?></h5>
 
                             <div class="kingster-single-article-content scrollable-content">
-                                <?php echo nl2br($news['content']); ?>
+                                <?php echo nl2br($content); ?>
                             </div>
                         </article>
 
                         <br >
-                        <?php if (!empty($news['image'])) { ?>
+                        <?php if (!empty($image)) { ?>
                              <div class="news-image text-center" style="align-items: center;">
-                             <img src="./admin/uploads/<?php echo htmlspecialchars($news['image']); ?>" alt="" class="img-fluid" width="705" height="70%">
+                             <img src="./admin/uploads/<?php echo htmlspecialchars($image); ?>" alt="" class="img-fluid" width="705" height="70%">
                            </div>
                         <?php } ?>
  

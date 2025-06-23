@@ -2,23 +2,62 @@
 include 'db_connect.php'; // Include your database connection file
 
 if (isset($_GET['id'])) {
-    $event_id = $_GET['id'];
-    
-    // Fetch event details from the database
-    $query = "SELECT * FROM events WHERE id = ?";
+    $event_id = intval($_GET['id']);
+
+    $query = "SELECT 
+        title, 
+        description, 
+        event_date, 
+        created_at, 
+        event_time, 
+        event_venue, 
+        event_virtual_link_facebook, 
+        event_virtual_link_twitter, 
+        event_virtual_link_zoom, 
+        event_virtual_link_googlemeet, 
+        event_virtual_link_youtube, 
+        event_virtual_link_others, 
+        event_image, 
+        event_thumbnail 
+        FROM events WHERE id = ?";
+
     $stmt = $conn->prepare($query);
-    $stmt->bind_param("i", $event_id);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    
-    if ($result->num_rows > 0) {
-        $event = $result->fetch_assoc();
+
+    if ($stmt) {
+        $stmt->bind_param("i", $event_id);
+        $stmt->execute();
+        $stmt->bind_result(
+            $title,
+            $description,
+            $event_date,
+            $created_at,
+            $event_time,
+            $event_venue,
+            $facebook,
+            $twitter,
+            $zoom,
+            $googlemeet,
+            $youtube,
+            $others,
+            $image,
+            $thumbnail
+        );
+
+        if (!$stmt->fetch()) {
+            // No matching event found
+            header("Location: index.php");
+            exit;
+        }
+
+        $stmt->close();
     } else {
-        echo "<p>Event not found.</p>";
+        // Query preparation failed
+        header("Location: index.php");
         exit;
     }
 } else {
-    echo "<p>Invalid event ID.</p>";
+    // No ID provided
+    header("Location: index.php");
     exit;
 }
 ?>
@@ -181,26 +220,30 @@ if (isset($_GET['id'])) {
 <div class="kingster-page-wrapper" id="kingster-page-wrapper">
     <?php include "headermenu.php" ?>
            <?php   include "menu.php";?>
-    <div class="kingster-blog-title-wrap kingster-style-custom kingster-feature-image" 
-         style="background-image: url(admin/uploads/<?php echo htmlspecialchars($event['event_image']); ?>); height:400px">
-        <div class="kingster-header-transparent-substitute"></div>
-        <div class="kingster-blog-title-overlay" style="opacity: 0.01;"></div>
-        <div class="kingster-blog-title-bottom-overlay"></div>
-        <div class="kingster-blog-title-container kingster-container">
-            <div class="kingster-blog-title-content kingster-item-pdlr" 
-                 style="padding-top: 200px; padding-bottom: 80px;">
-                <header class="kingster-single-article-head clearfix">
-                    <div class="kingster-single-article-date-wrapper post-date updated">
-                        <div class="kingster-single-article-date-day"><?php echo date('d', strtotime($event['event_date'])); ?></div>
-                        <div class="kingster-single-article-date-month"><?php echo date('M', strtotime($event['event_date'])); ?></div>
-                    </div>
-                    <div class="kingster-single-article-head-right">
-                        <h1 class="kingster-single-article-title"><?php echo htmlspecialchars($event['title']); ?></h1>
-                    </div>
-                </header>
-            </div>
+  <div class="kingster-blog-title-wrap kingster-style-custom kingster-feature-image" 
+     style="background-image: url(admin/uploads/<?php echo htmlspecialchars($image); ?>); height:400px">
+     
+    <div class="kingster-header-transparent-substitute"></div>
+    <div class="kingster-blog-title-overlay" style="opacity: 0.01;"></div>
+    <div class="kingster-blog-title-bottom-overlay"></div>
+    
+    <div class="kingster-blog-title-container kingster-container">
+        <div class="kingster-blog-title-content kingster-item-pdlr" 
+             style="padding-top: 200px; padding-bottom: 80px;">
+             
+            <header class="kingster-single-article-head clearfix">
+                <div class="kingster-single-article-date-wrapper post-date updated">
+                    <div class="kingster-single-article-date-day"><?php echo date('d', strtotime($date)); ?></div>
+                    <div class="kingster-single-article-date-month"><?php echo date('M', strtotime($date)); ?></div>
+                </div>
+                <div class="kingster-single-article-head-right">
+                    <h1 class="kingster-single-article-title"><?php echo htmlspecialchars($title); ?></h1>
+                </div>
+            </header>
         </div>
     </div>
+</div>
+
 
     <!-- Sidebar with Recent Posts -->
     <div class="gdlr-core-pbf-sidebar-left gdlr-core-column-extend-left kingster-sidebar-area gdlr-core-column-15 gdlr-core-pbf-sidebar-padding gdlr-core-line-height">
@@ -237,33 +280,34 @@ if (isset($_GET['id'])) {
 
         
         <div class="event-images">
-            <p><strong>Picture:</strong></p>
-            <img src="./admin/uploads/<?php echo htmlspecialchars($event['event_image']); ?>" alt="Event Thumbnail" width="75%">
-        </div>
-        
-        <h3>Virtual Event Links</h3>
-        <ul>
-            <?php if (!empty($event['event_virtual_link_facebook'])): ?>
-                <li><a href="<?php echo htmlspecialchars($event['event_virtual_link_facebook']); ?>" target="_blank"><i class="fab fa-facebook"></i> Facebook</a></li>
-            <?php endif; ?>
-            <?php if (!empty($event['event_virtual_link_twitter'])): ?>
-                <li><a href="<?php echo htmlspecialchars($event['event_virtual_link_twitter']); ?>" target="_blank"><i class="fab fa-twitter"></i> Twitter</a></li>
-            <?php endif; ?>
-            <?php if (!empty($event['event_virtual_link_zoom'])): ?>
-                <li><a href="<?php echo htmlspecialchars($event['event_virtual_link_zoom']); ?>" target="_blank"><i class="fas fa-video"></i> Zoom</a></li>
-            <?php endif; ?>
-            <?php if (!empty($event['event_virtual_link_googlemeet'])): ?>
-                <li><a href="<?php echo htmlspecialchars($event['event_virtual_link_googlemeet']); ?>" target="_blank"><i class="fab fa-google"></i> Google Meet</a></li>
-            <?php endif; ?>
-            <?php if (!empty($event['event_virtual_link_youtube'])): ?>
-                <li><a href="<?php echo htmlspecialchars($event['event_virtual_link_youtube']); ?>" target="_blank"><i class="fab fa-youtube"></i> YouTube</a></li>
-            <?php endif; ?>
-            <?php if (!empty($event['event_virtual_link_others'])): ?>
-                <li><a href="<?php echo htmlspecialchars($event['event_virtual_link_others']); ?>" target="_blank"><i class="fas fa-link"></i> Other</a></li>
-            <?php endif; ?>
-        </ul>
-        
-        <p><strong>Created on:</strong> <?php echo date('F j, Y', strtotime($event['created_at'])); ?></p>
+    <p><strong>Picture:</strong></p>
+    <img src="./admin/uploads/<?php echo htmlspecialchars($image); ?>" alt="Event Thumbnail" width="75%">
+</div>
+
+<h3>Virtual Event Links</h3>
+<ul>
+    <?php if (!empty($facebook)): ?>
+        <li><a href="<?php echo htmlspecialchars($facebook); ?>" target="_blank"><i class="fab fa-facebook"></i> Facebook</a></li>
+    <?php endif; ?>
+    <?php if (!empty($twitter)): ?>
+        <li><a href="<?php echo htmlspecialchars($twitter); ?>" target="_blank"><i class="fab fa-twitter"></i> Twitter</a></li>
+    <?php endif; ?>
+    <?php if (!empty($zoom)): ?>
+        <li><a href="<?php echo htmlspecialchars($zoom); ?>" target="_blank"><i class="fas fa-video"></i> Zoom</a></li>
+    <?php endif; ?>
+    <?php if (!empty($googlemeet)): ?>
+        <li><a href="<?php echo htmlspecialchars($googlemeet); ?>" target="_blank"><i class="fab fa-google"></i> Google Meet</a></li>
+    <?php endif; ?>
+    <?php if (!empty($youtube)): ?>
+        <li><a href="<?php echo htmlspecialchars($youtube); ?>" target="_blank"><i class="fab fa-youtube"></i> YouTube</a></li>
+    <?php endif; ?>
+    <?php if (!empty($others)): ?>
+        <li><a href="<?php echo htmlspecialchars($others); ?>" target="_blank"><i class="fas fa-link"></i> Other</a></li>
+    <?php endif; ?>
+</ul>
+
+<p><strong>Created on:</strong> <?php echo date('F j, Y', strtotime($created_at)); ?></p>
+
         
         <a href="events.php" class="back-button"><i class="fas fa-arrow-left"></i> Back to Events</a>
 
