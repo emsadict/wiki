@@ -348,16 +348,33 @@ $slides_json1 = json_encode($slides8);
                                             <div class="gdlr-core-pbf-element">
                                                 <div class="gdlr-core-title-item gdlr-core-item-pdb clearfix  gdlr-core-left-align gdlr-core-title-item-caption-bottom gdlr-core-item-pdlr" id="div_1dd7_25">
                                                     <div class="gdlr-core-title-item-title-wrap clearfix">
-                                                        <h5 class="gdlr-core-title-item-title gdlr-core-skin-title " id="h3_1dd7_5">Vision and Mission Statement</h5>
+<div style="background-color: #fff; padding: 30px 0;">
+  <h2 style="font-family: 'Segoe UI', sans-serif; font-size: 32px; color: #1781cc; text-align: center; margin: 0; letter-spacing: 1px; border-bottom: 3px solid #1781cc; display: inline-block; padding-bottom: 5px;">
+    Vision and Mission Statement
+  </h2>
+</div>
+
+
+
                                                     </div>
-                                                        <p style="color: #1781cc; background-color:rgb(229, 234, 237); text-align:justify; padding: 5px; font: size 20px;"><strong>VISION:</strong> Wikimedia Nigeria is committed to the 
-                                                            ideal of a world in which every single human
-                                                        being can freely share in the sum of all knowledge and we believe that free access 
-                                                        to knowledge is a fundamental right.</p>
-                                                        
-                                                         <p style="color: #1781cc; background-color:rgb(229, 234, 237); text-align:justify;padding: 5px;">Our mission is to support and promote free access
-                                                             to knowledge, work with volunteers across the country, partner with governmental and non-governmental 
-                                                            organizations, cultural and educational sectors and other mission-aligned groups to make knowledge available for free access.</p>
+                                                        <div style="max-width: 800px; margin: 30px auto; padding: 30px; background: linear-gradient(135deg, #e5eaed, #f3f6f9); border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); font-family: 'Segoe UI', sans-serif;">
+
+  <h2 style="color: #1781cc; font-size: 28px; margin-bottom: 15px; border-left: 5px solid #1781cc; padding-left: 10px;">VISION</h2>
+  <p style="color: #333; font-size: 17px; line-height: 1.6; text-align: justify;">
+    Wikimedia Nigeria is committed to the ideal of a world in which every single human being can freely share in the sum of all knowledge.
+    We believe that free access to knowledge is a fundamental right.
+  </p>
+
+  <hr style="margin: 30px 0; border: none; border-top: 1px solid #ccc;">
+
+  <h2 style="color: #1781cc; font-size: 28px; margin-bottom: 15px; border-left: 5px solid #1781cc; padding-left: 10px;">MISSION</h2>
+  <p style="color: #333; font-size: 17px; line-height: 1.6; text-align: justify;">
+    Our mission is to support and promote free access to knowledge, work with volunteers across the country, and partner with governmental and non-governmental 
+    organizations, as well as cultural and educational sectors and other mission-aligned groups to make knowledge freely accessible.
+  </p>
+
+</div>
+
                                                 </div>
                                             </div>
                                         </div>
@@ -620,7 +637,7 @@ $conn->close();
                                             <div class="gdlr-core-pbf-element">
                                                 <div class="gdlr-core-title-item gdlr-core-item-pdb clearfix  gdlr-core-left-align gdlr-core-title-item-caption-top gdlr-core-item-pdlr"  id="gdlr-core-title-item-id-66469">
                                                     <div class="gdlr-core-title-item-title-wrap clearfix">
-                                                        <h3 class="gdlr-core-title-item-title gdlr-core-skin-title " id="h3_1dd7_16"><a href="#" target="_self" style="color:#ffffff">Membership Login</a></h3></div>
+                                                        <h3 class="gdlr-core-title-item-title gdlr-core-skin-title " id="h3_1dd7_16"><a href="login.php" target="_self" style="color:#ffffff">Membership Login</a></h3></div>
                                                 </div>
                                             </div>
                                             <div class="gdlr-core-pbf-element">
@@ -631,7 +648,7 @@ $conn->close();
                                             <div class="gdlr-core-pbf-element">
                                                 <div class="gdlr-core-title-item gdlr-core-item-pdb clearfix  gdlr-core-left-align gdlr-core-title-item-caption-top gdlr-core-item-pdlr"  id="gdlr-core-title-item-id-42777">
                                                     <div class="gdlr-core-title-item-title-wrap clearfix">
-                                                        <h3 class="gdlr-core-title-item-title gdlr-core-skin-title " id="h3_1dd7_17"><a href="#" target="_self" style="color:#ffffff">Membership Registration</a></h3></div>
+                                                        <h3 class="gdlr-core-title-item-title gdlr-core-skin-title " id="h3_1dd7_17"><a href="register.php" target="_self" style="color:#ffffff">Membership Registration</a></h3></div>
                                                 </div>
                                             </div>
                                             <div class="gdlr-core-pbf-element">
@@ -642,7 +659,7 @@ $conn->close();
                                             <div class="gdlr-core-pbf-element">
                                                 <div class="gdlr-core-title-item gdlr-core-item-pdb clearfix  gdlr-core-left-align gdlr-core-title-item-caption-top gdlr-core-item-pdlr"  id="gdlr-core-title-item-id-51281">
                                                     <div class="gdlr-core-title-item-title-wrap clearfix">
-                                                        <h3 class="gdlr-core-title-item-title gdlr-core-skin-title " id="h3_1dd7_18"><a href="#" target="_self" style="color:#ffffff" >News</a></h3></div>
+                                                        <h3 class="gdlr-core-title-item-title gdlr-core-skin-title " id="h3_1dd7_18"><a href="blog.php" target="_self" style="color:#ffffff" >News</a></h3></div>
                                                 </div>
                                             </div>
                                             <div class="gdlr-core-pbf-element">
@@ -653,7 +670,7 @@ $conn->close();
                                             <div class="gdlr-core-pbf-element">
                                                 <div class="gdlr-core-title-item gdlr-core-item-pdb clearfix  gdlr-core-left-align gdlr-core-title-item-caption-top gdlr-core-item-pdlr"  id="gdlr-core-title-item-id-78243">
                                                     <div class="gdlr-core-title-item-title-wrap clearfix">
-                                                        <h3 class="gdlr-core-title-item-title gdlr-core-skin-title " id="h3_1dd7_19"><a href="#" target="_self" style="color:#ffffff">Events</a></h3></div>
+                                                        <h3 class="gdlr-core-title-item-title gdlr-core-skin-title " id="h3_1dd7_19"><a href="events.php" target="_self" style="color:#ffffff">Events</a></h3></div>
                                                 </div>
                                             </div>
                                             <div class="gdlr-core-pbf-element">
@@ -702,10 +719,11 @@ $conn->close();
                                         <div class="gdlr-core-pbf-column-content clearfix gdlr-core-js  gdlr-core-sync-height-content">
                                             <div class="gdlr-core-pbf-element">
                                                 <div class="gdlr-core-column-service-item gdlr-core-item-pdb  gdlr-core-left-align gdlr-core-column-service-icon-left gdlr-core-no-caption gdlr-core-item-pdlr" id="div_1dd7_70">
-                                                    <div class="gdlr-core-column-service-media gdlr-core-media-image" id="div_1dd7_71"><img src="images/logo.png" alt="" width="42" height="39" title="apply-logo" /></div>
+                                                    <div class="gdlr-core-column-service-media gdlr-core-media-image" id="div_1dd7_71"><img src="images/logo.png" alt="" width="250" height="150" title="apply-logo" /></div>
                                                     <div class="gdlr-core-column-service-content-wrapper">
                                                         <div class="gdlr-core-column-service-title-wrap">
-                                                            <h3 class="gdlr-core-column-service-title gdlr-core-skin-title" id="h3_1dd7_22">Apply To AFUED</h3></div>
+                                                            <h3 class="gdlr-core-column-service-title gdlr-core-skin-title" id="h3_1dd7_22">CONTACT US </h3>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
