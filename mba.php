@@ -36,14 +36,26 @@ include 'db_connect.php';
             <!-- Upcoming Events -->
             <Center><h3>My Beautiful Africa</h3></Center>
             <hr />
-            <p style="text-align: justify;"></p>
-            <p style="text-align: justify;"></p>
-            <p style="text-align: justify;"></p>
-            <p style="text-align: justify;"></p>
+            <p style="text-align: justify;">The Bui National park in Ghana is a renowned home of Large schools of hippopotamus. The park occupies an estimated area of 1,821 square kilometres of mostly woodland Savannah with dispersed and riverine gallery forests. This wild habitat stretches as far as Brong Ahafo and into northern Ghana and part of Ivory coast in the west.</p>
+            <p style="text-align: justify;">Some of the animals in the park include hippos, monitor Lizards, fruit bats,elephants, water buck, baboons, green monkeys, bush bucks and other species of wildlife. Other interesting attractions in Bui are stalactites caves, lush mountains and water cascades. The caves harbour bat colonies and its worth waiting to see the sun set over the mountains of Bui.
+</p>
+            <p style="text-align: justify;">Tourist activities at bui national park include game viewing, bird watching and adventure hiking.</p>
+            <p style="text-align: justify;">Nearby villages may also be visited for true African insights and Ghanaian hospitality.</p>
                 
+           
+The image was donated by user:Kelsdark during the Wiki Loves Earth Contest here
+<img src="upload/buatifulafr.jpeg" alt=""  style="align-self: center;" /> 
                 
-                
-          
+  <br>
+  <br>
+  <br>
+            <p style="text-align: justify;">La Galite Island is located in Northern Tunisia. It's made up of six islets: the main Island (Galite), the Galiton and La Fauchelle to the south- west and the 'dog' islets ( Galo Gallina and pollastro) to the north west.</p>
+          <p style="text-align: justify;">It conceals a sumptuous landscape heritage mainly because of its geographical formations that are pretty and unique. The marine and coastal protected area of the Galite presents a rich archeological heritage, important agronomical know how and an exceptional biological and ecological richness both marine and terrestrial, with many rare species such as a Greek turtle.</p>
+          <p style="text-align: justify;">The image was donated by user:Anas Zarouck during the 2017 Wiki Loves Earth Contest</p>
+
+        <img src="upload/tunisia.jpeg" alt=""  style="align-self: center;" /> 
+
+
 
         </div>
     </div>

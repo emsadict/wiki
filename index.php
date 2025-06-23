@@ -350,7 +350,7 @@ $slides_json1 = json_encode($slides8);
                                                     <div class="gdlr-core-title-item-title-wrap clearfix">
                                                         <h5 class="gdlr-core-title-item-title gdlr-core-skin-title " id="h3_1dd7_5">Vision and Mission Statement</h5>
                                                     </div>
-                                                        <p style="color: #1781cc; background-color:rgb(229, 234, 237); text-align:justify; padding: 5px;"><strong>VISION:</strong> Wikimedia Nigeria is committed to the 
+                                                        <p style="color: #1781cc; background-color:rgb(229, 234, 237); text-align:justify; padding: 5px; font: size 20px;"><strong>VISION:</strong> Wikimedia Nigeria is committed to the 
                                                             ideal of a world in which every single human
                                                         being can freely share in the sum of all knowledge and we believe that free access 
                                                         to knowledge is a fundamental right.</p>

@@ -19,7 +19,7 @@ include 'db_connect.php';
                 <div class="kingster-page-title-overlay"></div>
                 <div class="kingster-page-title-container kingster-container">
                     <div class="kingster-page-title-content kingster-item-pdlr">
-                        <h1 class="kingster-page-title">New Reader Awareness Campaign</h1></div>
+                        <h1 class="kingster-page-title">ORAL HISTORY DOCUMENTATION PROJECT</h1></div>
                 </div>
             </div>
             <div class="kingster-page-wrapper" id="kingster-page-wrapper">
@@ -34,11 +34,12 @@ include 'db_connect.php';
         <div class="gdlr-core-blog-item-holder gdlr-core-js-2 clearfix" data-layout="fitrows">
 
             <!-- Upcoming Events -->
-            <Center><h3>New Reader Awareness Campaign</h3></Center>
+            <Center><h3>Oral History Documentation Project</h3></Center>
             <hr />
-            <p style="text-align: justify;"></p>
-            <p style="text-align: justify;"></p>
-            <p style="text-align: justify;"></p>
+              
+            <p style="text-align: justify;">The Nigerian Language Oral History Audiovisual Documentation Project is project that aims at enriching the Wikimedia projects with freely licensed audiovisual files documenting spoken languages and dialects in Nigeria.</p>
+            <p style="text-align: justify;">The aim is to record more than 500 audiovisuals. It started in 2021, and a total of 52 videos were recorded. This year, we aim at recording additionmal 50. Shooting started on the 20th of April 2022, and ended on the 30th of May 2022.</p>
+            <p style="text-align: justify;">The shooting took place in at least 15 local government area in Cross River State of Nigeria, and it was done in partnership with the linguistics department of the University of Calabar.</p>
             <p style="text-align: justify;"></p>
                 
                 

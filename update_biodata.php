@@ -416,7 +416,7 @@ if ($categoryCheck && mysqli_num_rows($categoryCheck) > 0) {
                 📩 Request Reference Letter
             </a>
             <div id="ref-box" style="display: none; margin-top: 10px;">
-                Email us at <strong>refletters@yourorg.org</strong><br>
+                Email us at <strong>info@wikimedia.org.ng</strong><br>
                 or fill out this <a href="https://forms.gle/your-google-form-link" target="_blank">Google Form</a>.
             </div>
         </div>';

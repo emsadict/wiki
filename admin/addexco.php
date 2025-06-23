@@ -2,9 +2,9 @@
 session_start();
 // Database connection
 $host = "localhost";
-$user = "hikrzcom_wikimedia"; // Change to your DB username
-$password = "wikimedia2025@@"; // Change to your DB password
-$database = "hikrzcom_membership_management"; // Change to your DB name
+$user = "root"; // Change to your DB username
+$password = ""; // Change to your DB password
+$database = "membership_management"; // Change to your DB name
 $alert='';
 $conn = new mysqli($host, $user, $password, $database);
 

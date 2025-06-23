@@ -7,13 +7,14 @@
                                 <h3 class="kingster-widget-title">CONTACT</h3><span class="clear"></span>
                                 <div class="menu-our-campus-container">
                                     <ul id="menu-our-campus" class="gdlr-core-custom-menu-widget gdlr-core-menu-style-plain">
-                                        <li class="menu-item"><a href="#">9-11 Okeiho Street, </a></li>
-                                        <li class="menu-item"><a href="#">Dopemu,
-                                        Lagos-Abeokuta Extra way, </a></li>
-                                        <li class="menu-item"><a href="#">Ikeja, Lagos, Nigeria</a></li>
+                                        <li class="menu-item"><a href="#"> 2nd Floor, Front Wing, </a></li>
+                                        <li class="menu-item"><a href="#">Taewoo House, 13 Alimosho Rd,
+                                        off Alaguntan, Alimosho, Lagos. Nigeria</a></li>
+                                        
                                         <p><span id="span_1dd7_11">+2348167352512
                                     <br />+2348166620737 
                                     </span>
+                                     
                                         <br /> <span class="gdlr-core-space-shortcode" id="span_1dd7_12"></span>
                                         <br /> <a id="a_1dd7_8" href="mailto:admin@Wikimedia.org.ng">admin@Wikimedia.org.ng</a></p>
                                     </ul>
@@ -58,6 +59,7 @@
                                         <li class="menu-item"><a href="about.php">About us</a></li>
                                         <li class="menu-item"><a href="excos.php">Our Team</a></li>
                                         <li class="menu-item"><a href="admin/adminlogin.php">admin</a></li>
+                                        <li class="menu-item"><a href="contact.php">Contact us</a></li>
                                     </ul>
                                 </div>
                             </div>
