@@ -34,12 +34,41 @@ include 'db_connect.php';
         <div class="gdlr-core-blog-item-holder gdlr-core-js-2 clearfix" data-layout="fitrows">
 
             <!-- Upcoming Events -->
-            <Center><h3>New Reader Awareness Campaign</h3></Center>
+            <Center><h3>WIKI GAP</h3></Center>
             <hr />
             <p style="text-align: justify;"></p>
-            <p style="text-align: justify;"></p>
-            <p style="text-align: justify;"></p>
-            <p style="text-align: justify;"></p>
+            <div style="max-width: 900px; margin: 40px auto; font-family: Arial, sans-serif; line-height: 1.6;">
+
+<div style="max-width: 900px; margin: 40px auto; font-family: Arial, sans-serif; line-height: 1.6;">
+  <h2 style="color: #1781cc; border-bottom: 2px solid #1781cc; padding-bottom: 5px;">
+    Collaborative Campaigns and Global Engagements
+  </h2>
+
+  <p>
+    <strong>WikiGap 2018, 2019, and 2020</strong> were successfully organized in collaboration with the <strong>Igbo Wikimedians User Group</strong>, contributing significantly to the visibility of women on Wikipedia.
+  </p>
+
+  <p>
+    In <strong>April 2020</strong>, <strong>Wikimedia User Group Nigeria</strong> participated in the <strong>Visibility Project</strong>, a joint initiative with <strong>African Women in Media</strong> and sponsored by <strong>UNESCO</strong>. 
+    Uzoma Ozurumba, Co-founder of the Igbo Wikimedians User Group, served as a facilitator and mentor during the program.
+  </p>
+
+  <p>
+    The same initiative saw collaborative participation with the <strong>Wikimedia Community User Group Tanzania</strong> and <strong>Wikimedia Community User Group Uganda</strong>, fostering cross-regional engagement.
+  </p>
+
+  <p>
+    In another notable collaboration, the <strong>Wikimedia User Group Nigeria</strong>, alongside the <strong>Yoruba, Igbo, and Hausa Wikimedians User Groups</strong>, jointly executed the 
+    <strong>Decolonizing the Internet</strong> project in partnership with the <strong>Goethe-Institut</strong>.
+  </p>
+
+  <p>
+    Wikimedia User Group Nigeria has also teamed up with <strong>Afrocrowd</strong>, <strong>Oregon State University (USA)</strong>, and <strong>Federal University of Agriculture, Abeokuta</strong> 
+    to host an <strong>edit-a-thon</strong> celebrating <strong>Black History Month</strong>. 
+    The two-day event saw participation from over <strong>30 editors</strong>, with <strong>5 new articles created</strong> and more than <strong>6,020 words</strong> added to Wikipedia.
+  </p>
+</div>
+
                 
                 
                 

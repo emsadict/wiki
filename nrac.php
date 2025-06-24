@@ -34,12 +34,35 @@ include 'db_connect.php';
         <div class="gdlr-core-blog-item-holder gdlr-core-js-2 clearfix" data-layout="fitrows">
 
             <!-- Upcoming Events -->
-            <Center><h3>New Reader Awareness Campaign</h3></Center>
-            <hr />
-            <p style="text-align: justify;"></p>
-            <p style="text-align: justify;"></p>
-            <p style="text-align: justify;"></p>
-            <p style="text-align: justify;"></p>
+            
+            <div style="max-width: 900px; margin: 40px auto; font-family: Arial, sans-serif; line-height: 1.6;">
+
+  <h2 style="color: #1781cc; border-bottom: 2px solid #1781cc; padding-bottom: 5px;">
+    New Readers Awareness Campaign
+  </h2>
+
+  <p>
+    In 2017, <strong>Wikimedia User Group Nigeria</strong> collaborated with the <strong>Wikimedia Foundation</strong> to launch a major Wikipedia awareness campaign in Nigeria. 
+    To support this initiative, we partnered with <strong>Anakle</strong>, a Lagos-based organization specializing in video production, digital design, and marketing.
+  </p>
+
+  <p>
+    Anakle provided creative development, insights on audience appeal, and led all aspects of video production. 
+    Together, we devised a strategic approach for distributing the campaign across relevant digital platforms to reach new users unfamiliar with Wikipedia.
+  </p>
+
+  <p>
+    We selected creative scripts inspired by two notable cultural figures: the character <strong>Okonkwo</strong> from Chinua Achebe’s <em>Things Fall Apart</em>, and <strong>Emmanuella</strong>, 
+    a prominent Nigerian web comedian.
+  </p>
+
+  <p>
+    Two impactful videos were launched in October 2017 and achieved over <strong>10 million combined views</strong>.
+    This success earned the project team the <strong>2018 African Excellence Awards</strong>. The award ceremony was held in <strong>Dublin, Ireland</strong>.
+  </p>
+
+</div>
+>
                 
                 
                 

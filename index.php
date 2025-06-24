@@ -413,7 +413,7 @@ $slides_json1 = json_encode($slides8);
 
     <div class="gdlr-core-pbf-wrapper-content gdlr-core-js " >
         <div class="gdlr-core-pbf-wrapper-container clearfix gdlr-core-container-custom" id="div_1dd7_81">
-          <a href="">
+          <a href="whr.php">
            <div class="gdlr-core-pbf-column gdlr-core-column-15 col-lg-3 col-md-6 col-sm-12 col-xs-12">
            <div class="gdlr-core-pbf-column-content-margin gdlr-core-js" id="div_1dd7_88" data-sync-height="height-column" data-sync-height-center style="background-color:rgba(71, 152, 98, 0.52); overflow: hidden;transition: border-color 0.3s ease, transform 0.3s ease;" 
         onmouseover="this.style.borderColor='#479862'; this.style.transform='translateY(-5px)';" onmouseout="this.style.borderColor='#ddd'; this.style.transform='translateY(0)';">
@@ -439,7 +439,7 @@ $slides_json1 = json_encode($slides8);
      </div>
 
           </a>
-          <a href="">
+          <a href="wikisch.php">
             <div class="gdlr-core-pbf-column gdlr-core-column-15 col-lg-3 col-md-6 col-sm-12 col-xs-12 " style="border-radius: 20px; transition: border-color 0.3s ease, transform 0.3s ease;" onmouseover="this.style.borderColor='#479862'; this.style.transform='translateY(-5px)';"  onmouseout="this.style.transform='translateY(0)'";>
                 <div class="gdlr-core-pbf-column-content-margin gdlr-core-js " id="div_1dd7_88" data-sync-height="height-column" data-sync-height-center style="background-color:rgba(143, 181, 156, 0.77);">
                     <div class="gdlr-core-pbf-background-wrap">
@@ -464,7 +464,7 @@ $slides_json1 = json_encode($slides8);
             </div>
           </a>
           <a href="">
-            <div class="gdlr-core-pbf-column gdlr-core-column-15 col-lg-3 col-md-6 col-sm-12 col-xs-12 " style="border-radius: 20px; border: 4px solid transparent; transition: border-color 0.3s ease, transform 0.3s ease;">
+            <div class="gdlr-core-pbf-column gdlr-core-column-15 col-lg-3 col-md-6 col-sm-12 col-xs-12 "  style="border-radius: 20px; transition: border-color 0.3s ease, transform 0.3s ease;" onmouseover="this.style.borderColor='#479862'; this.style.transform='translateY(-5px)';"  onmouseout="this.style.transform='translateY(0)'";>
                 <div class="gdlr-core-pbf-column-content-margin gdlr-core-js " id="div_1dd7_88" data-sync-height="height-column" data-sync-height-center style="background-color:rgba(71, 152, 98, 0.52);">
                     <div class="gdlr-core-pbf-background-wrap">
 
@@ -484,8 +484,8 @@ $slides_json1 = json_encode($slides8);
                 </div>
             </div>
           </a>
-          <a href="">
-            <div class="gdlr-core-pbf-column gdlr-core-column-15 col-lg-3 col-md-6 col-sm-12 col-xs-12 " style="border-radius: 20px; border: 4px solid transparent; transition: border-color 0.3s ease, transform 0.3s ease;">
+          <a href="membership.php">
+            <div class="gdlr-core-pbf-column gdlr-core-column-15 col-lg-3 col-md-6 col-sm-12 col-xs-12 "  style="border-radius: 20px; transition: border-color 0.3s ease, transform 0.3s ease;" onmouseover="this.style.borderColor='#479862'; this.style.transform='translateY(-5px)';"  onmouseout="this.style.transform='translateY(0)'";>
                 <div class="gdlr-core-pbf-column-content-margin gdlr-core-js " id="div_1dd7_88" data-sync-height="height-column" data-sync-height-center style="background-color:rgba(143, 181, 156, 0.77);">
                     <div class="gdlr-core-pbf-background-wrap">
 
