@@ -34,12 +34,86 @@ include 'db_connect.php';
         <div class="gdlr-core-blog-item-holder gdlr-core-js-2 clearfix" data-layout="fitrows">
 
             <!-- Upcoming Events -->
-            <Center><h3>WIKI IN SCHOOL</h3></Center>
-            <hr />
-            <p style="text-align: justify;"></p>
-            <p style="text-align: justify;"></p>
-            <p style="text-align: justify;"></p>
-            <p style="text-align: justify;"></p>
+           
+            <div style="max-width: 950px; margin: 40px auto; font-family: Arial, sans-serif; line-height: 1.6;">
+
+  <h2 style="color: #1781cc; border-bottom: 2px solid #1781cc;">Wiki-in-School Program (WISN)</h2>
+
+  <p>
+    Eight out of every ten Nigerian lecturers are Wikipedia users who wish to learn how to contribute to the platform and pass that knowledge on to their students. 
+    The <strong>Wiki-in-School Nigeria Program (WISN)</strong> was designed to empower Nigerian academics to actively contribute to Wikipedia and other Wikimedia projects, 
+    while equipping them with the skills to integrate these tools into their classroom teaching.
+  </p>
+
+  <p>
+    The call for applications lasted two weeks and focused on identifying lecturers from tertiary institutions. The aim was to instill 21st-century digital literacy 
+    through Wikipedia contribution.
+  </p>
+
+  <h3 style="margin-top: 30px; color: #1781cc;">Implementation and Selection</h3>
+
+  <p>
+    The program launched in <strong>December 2022</strong>. We received <strong>24 applications</strong> across Nigeria’s six geopolitical zones: 
+    12 from the Southeast, 1 from the South-South, 7 from the Southwest, 2 each from North Central and North West. 
+    Among them were 3 Professors and 10 Ph.D. holders.
+  </p>
+
+  <p>
+    After interviews, the five top candidates were invited to <strong>Lagos</strong> for a three-day training session at the La Regial Airport Hotel. 
+    Training covered Wikipedia editing, assigning student topics, and assessment strategies. Stipends supported participants’ local travel and student meetups. 
+    Mentors were assigned to guide their implementation after returning to their institutions on <strong>January 28, 2023</strong>.
+  </p>
+
+  <h4>Trained Participants:</h4>
+  <ul>
+    <li>Ojo J. Osunmuyiwa – Margret Mosunmola College of Health Sciences and Technology, Owo</li>
+    <li>Engr. Dr. Luqman Kareem Salati – Kaduna Polytechnic</li>
+    <li>Dr. Davinson Chuka Anyogu – University of Nigeria</li>
+    <li>Mariam T. Gobir – Kwara State University, Malete</li>
+    <li>Prof. Verla Andrew Wirnkor – Imo State University, Owerri (did not attend)</li>
+  </ul>
+
+  <h2 style="margin-top: 50px; color: #1781cc; border-bottom: 2px solid #1781cc;">Wikimedia UG Nigeria Strategic Meeting</h2>
+
+  <p>
+    On <strong>January 14, 2023</strong>, Wikimedia Nigeria held a strategic planning meeting for the 2023–2024 fiscal year. 
+    The 8-hour session included departmental reviews of past challenges, successes, and improvement opportunities. 
+    Discussions included financial guidelines, project execution strategies, and evaluation roadmaps.
+  </p>
+
+  <p><strong>Participants included:</strong> 
+    Chair – Olaniyan Olushola, Secretary – Olatunde Isaac, Executive Director – Omolayo Ogunsiji, 
+    Program Director – Ayokanmi Oyeyemi, Networks & Club Manager – Kayode Yusuf, Program Officer – Yinka Maja.
+  </p>
+
+  <h2 style="margin-top: 50px; color: #1781cc; border-bottom: 2px solid #1781cc;">WUGN 2023 Annual Staff Retreat</h2>
+
+  <p>
+    In <strong>May 2023</strong>, Wikimedia User Group Nigeria conducted its annual staff retreat to define and align its vision for the fiscal year. 
+    The retreat adopted a coaching model, enabling team members to brainstorm, contribute ideas, and engage in goal-setting.
+  </p>
+
+  <p>
+    The retreat created space for reviewing past activities, welcoming new staff, and fostering a shared sense of purpose. 
+    Sessions led by industry experts covered critical skills in:
+  </p>
+
+  <ul>
+    <li>Human resources & management</li>
+    <li>Accounting & bookkeeping</li>
+    <li>Taxation and financial integrity</li>
+    <li>Social media management</li>
+    <li>Learning and evaluation frameworks</li>
+    <li>Office operations and workplace safety</li>
+  </ul>
+
+  <p>
+    A special segment introduced new staff to our organizational culture, ethical values, and leadership principles—ensuring team alignment and readiness 
+    for meaningful impact throughout the year.
+  </p>
+   <img src="upload/wikinschool.png"   />
+</div>
+
                 
                 
                 

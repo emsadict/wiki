@@ -85,7 +85,19 @@
                                                 </li> 
                                                 <li class="menu-item menu-item-has-children" data-size="15"><a href="communitylead.php" class="sf-with-ul-pre">Comunity Leaders & Club leaders</a>
                                                     <ul class="sub-menu">
-                                                    
+                                                    <?php
+                                                                      // Fetch staff members with designation 'Staff'
+                                                                      $queryStaff = "SELECT id, campus FROM staff WHERE designation = 'Campus Director'";
+                                                                      $resultStaff = $conn->query($queryStaff);
+
+                                                                      // Generate menu items dynamically
+                                                                      while ($row = $resultStaff->fetch_assoc()) {
+                                                                          $staffName = htmlspecialchars($row['campus']);
+                                                                          $staffUrl = "staff_profile.php?id=" . $row['id']; // Link to profile page
+
+                                                                          echo '<li class="menu-item"><a href="' . $staffUrl . '">' . $staffName . '</a></li>';
+                                                                         }                                                                      
+                                                                      ?>
                                                     </ul>
                                                 </li> 
                                             </ul>
@@ -94,36 +106,36 @@
                                     <ul class="sub-menu">
                                         <li class="menu-item menu-item-has-children" data-size="60"><a href="#" class="sf-with-ul-pre">Advocacy</a>
                                                 <ul class="sub-menu">
-                                                    <li class="menu-item"><a href="#">Wiki for Human Right</a></li>
-                                                    <li class="menu-item"><a href="#">My Beautiful Africa</a></li>
-                                                    <li class="menu-item"><a href="#">New reader Awareness Campaign</a></li>
+                                                    <li class="menu-item"><a href="whr.php">Wiki for Human Right</a></li>
+                                                    <li class="menu-item"><a href="mba.php">My Beautiful Africa</a></li>
+                                                    <li class="menu-item"><a href="nrac.php">New reader Awareness Campaign</a></li>
                                                 </ul>
                                             </li>
                                             <li class="menu-item menu-item-has-children" data-size="60"><a href="#" class="sf-with-ul-pre">Gender-gap initiative</a>
                                                 <ul class="sub-menu">
-                                                    <li class="menu-item"><a href="#">Decolonize the Internet</a></li>
-                                                    <li class="menu-item"><a href="#">Wiki-GAP</a></li>
-                                                    <li class="menu-item"><a href="#">Wiki for Naija  Women</a></li>
-                                                    <li class="menu-item"><a href="#">visibility Project</a></li>
+                                                    <li class="menu-item"><a href="dint.php">Decolonize the Internet</a></li>
+                                                    <li class="menu-item"><a href="wikigap.php">Wiki-GAP</a></li>
+                                                    <li class="menu-item"><a href="wikinw.php">Wiki for Naija  Women</a></li>
+                                                    <li class="menu-item"><a href="visibility.php">visibility Project</a></li>
                                                 </ul>
                                             </li>
                                             <li class="menu-item menu-item-has-children" data-size="60"><a href="education.php" class="sf-with-ul-pre">Education</a>
                                                 <ul class="sub-menu">
-                                                 <li class="menu-item"><a href="#">Wiki in School</a></li>
-                                                 <li class="menu-item"><a href="#">Wiki Fans Club</a></li>
+                                                 <li class="menu-item"><a href="wikisch.php">Wiki in School</a></li>
+                                                 <li class="menu-item"><a href="wfc.php">Wiki Fans Club</a></li>
                                                  
                                                 </ul>
                                             </li>
                                             <li class="menu-item menu-item-has-children" data-size="60"><a href="glamini.php" class="sf-with-ul-pre">GLAM initiative</a>
                                                 <ul class="sub-menu">
-                                                 <li class="menu-item"><a href="#">Oral History Documentation</a></li>
-                                                 <li class="menu-item"><a href="#">Finding GLAM</a></li>
+                                                 <li class="menu-item"><a href="oralhis.php">Oral History Documentation</a></li>
+                                                 <li class="menu-item"><a href="finglam.php">Finding GLAM</a></li>
                                                  
                                                 </ul>
                                             </li>
                                             <li class="menu-item menu-item-has-children" data-size="60"><a href="capacity.php" class="sf-with-ul-pre">Capacity Training</a>
                                                 <ul class="sub-menu">
-                                                 <li class="menu-item"><a href="#">Training</a></li>
+                                                 <li class="menu-item"><a href="train.php">Training</a></li>
                                                  
                                                 </ul>
                                             </li>

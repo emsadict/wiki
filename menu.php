@@ -126,7 +126,7 @@
                                             </li>
                                             <li class="menu-item menu-item-has-children" data-size="60"><a href="capacity.php" class="sf-with-ul-pre">Capacity Training</a>
                                                 <ul class="sub-menu">
-                                                 <li class="menu-item"><a href="trian.php">Training</a></li>
+                                                 <li class="menu-item"><a href="train.php">Training</a></li>
                                                  
                                                 </ul>
                                             </li>

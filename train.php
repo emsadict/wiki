@@ -19,7 +19,7 @@ include 'db_connect.php';
                 <div class="kingster-page-title-overlay"></div>
                 <div class="kingster-page-title-container kingster-container">
                     <div class="kingster-page-title-content kingster-item-pdlr">
-                        <h1 class="kingster-page-title">New Reader Awareness Campaign</h1></div>
+                        <h1 class="kingster-page-title">Training</h1></div>
                 </div>
             </div>
             <div class="kingster-page-wrapper" id="kingster-page-wrapper">
@@ -34,7 +34,7 @@ include 'db_connect.php';
         <div class="gdlr-core-blog-item-holder gdlr-core-js-2 clearfix" data-layout="fitrows">
 
             <!-- Upcoming Events -->
-            <Center><h3>New Reader Awareness Campaign</h3></Center>
+            <Center><h3>Training</h3></Center>
             <hr />
             <p style="text-align: justify;"></p>
             <p style="text-align: justify;"></p>
