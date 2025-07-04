@@ -121,13 +121,24 @@
                                                 <ul class="sub-menu">
                                                  <li class="menu-item"><a href="oralhis.php">Oral History Documentation</a></li>
                                                  <li class="menu-item"><a href="finglam.php">Finding GLAM</a></li>
-                                                 
+                                                 <li class="menu-item"><a href="#">WikiHeritage Fellowship</a></li>
                                                 </ul>
                                             </li>
                                             <li class="menu-item menu-item-has-children" data-size="60"><a href="capacity.php" class="sf-with-ul-pre">Capacity Training</a>
                                                 <ul class="sub-menu">
                                                  <li class="menu-item"><a href="train.php">Training</a></li>
-                                                 
+                                                  <li class="menu-item"><a href="#">Train the Trainers</a></li>
+                                                  <li class="menu-item"><a href="#">WikiBoost</a></li>
+                                                  <li class="menu-item"><a href="#">WikiAcademy</a></li>
+                                                </ul>
+                                            </li>
+                                            <li class="menu-item menu-item-has-children" data-size="60"><a href="#" class="sf-with-ul-pre">Campaigns</a>
+                                                <ul class="sub-menu">
+                                                 <li class="menu-item"><a href="#">Wiki loves Africa</a></li>
+                                                  <li class="menu-item"><a href="#">Wiki Loves Earth</a></li>
+                                                  <li class="menu-item"><a href="#">Wiki loves Folkore</a></li>
+                                                  <li class="menu-item"><a href="#">WikiFestival</a></li>
+                                                  <li class="menu-item"><a href="#">Wikipedia Pages wanting Photos</a></li>
                                                 </ul>
                                             </li>
                                             <li class="menu-item menu-item-has-children" data-size="60"><a href="allconferences.php" class="sf-with-ul-pre">Conferences</a>
@@ -135,7 +146,9 @@
                                                  <li class="menu-item"><a href="wikiindaba.php">Wiki in Daba 2019</a></li>
                                                  <li class="menu-item"><a href="wikimaster.php">Wiki Master Conference 2018</a></li>
                                                  <li class="menu-item"><a href="wikimania.php">Wikimania</a></li>
+                                                 <li class="menu-item"><a href="#">Wiki Conference Nigeria</a></li>
                                                  <li class="menu-item"><a href="conference.php">Upcoming Conferences</a></li>
+                                                 <li class="menu-item"><a href="conference.php">Voulunteer Recongnition and Support Initialize</a></li>
                                                 </ul>
                                             </li>
                                         </ul>
