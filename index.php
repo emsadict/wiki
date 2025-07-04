@@ -5,16 +5,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Fetch latest news
-//Consumer Keys
-// twitter API: 5NkUybmUExSFcoVLy2w4RyzLC
-// API Key Secret : VIk1PDVa9xqt6RMIHCr1OBEt45YZ1RwDsNlT8SggylzivLMLFo
 
-//Authentication Tokens
-//Bearer Token: AAAAAAAAAAAAAAAAAAAAADWxpAEAAAAA6dR1vosC6BUPhPGtv710tm%2F806k%3D3C7wP3pcbLEqCxTaAVc94xECbHXIWL16fPYZg0h6AUh0hrMIXt
-
-//Access Token : 1489219526348660743-SbpKjn3NNZd1wW3AdiT5UthkGLjJag
-//Access Token Secret: GzzUcjO3gWSxfZ30UwQFmoN5PZJ0WSpIiuYGv3JOaobga
 $sql = "SELECT id, title, image, date,  content, author  FROM news ORDER BY date DESC LIMIT 5";
 $result = $conn->query($sql);
 
@@ -996,19 +987,19 @@ $conn->close();
                                     <div class="gdlr-core-gallery-item gdlr-core-item-pdb clearfix  gdlr-core-gallery-item-style-grid" id="div_1dd7_110">
                                         <div class="gdlr-core-gallery-item-holder gdlr-core-js-2 clearfix" data-layout="fitrows">
                                             <div class="gdlr-core-item-list gdlr-core-gallery-column  gdlr-core-column-12 gdlr-core-column-first gdlr-core-item-pdlr gdlr-core-item-mgb">
-                                                <div class="gdlr-core-gallery-list gdlr-core-media-image"><img src="upload/banner-1.png" alt="" width="248" height="120" title="banner-1" /></div>
+                                                <div class="gdlr-core-gallery-list gdlr-core-media-image"><img src="upload/" alt="" width="248" height="120" title="banner-1" /></div>
                                             </div>
                                             <div class="gdlr-core-item-list gdlr-core-gallery-column  gdlr-core-column-12 gdlr-core-item-pdlr gdlr-core-item-mgb">
-                                                <div class="gdlr-core-gallery-list gdlr-core-media-image"><img src="upload/banner-2.png" alt="" width="248" height="120" title="banner-2" /></div>
+                                                <div class="gdlr-core-gallery-list gdlr-core-media-image"><img src="upload/" alt="" width="248" height="120" title="banner-2" /></div>
                                             </div>
                                             <div class="gdlr-core-item-list gdlr-core-gallery-column  gdlr-core-column-12 gdlr-core-item-pdlr gdlr-core-item-mgb">
-                                                <div class="gdlr-core-gallery-list gdlr-core-media-image"><img src="upload/banner-3.png" alt="" width="248" height="120" title="banner-3" /></div>
+                                                <div class="gdlr-core-gallery-list gdlr-core-media-image"><img src="upload/" alt="" width="248" height="120" title="banner-3" /></div>
                                             </div>
                                             <div class="gdlr-core-item-list gdlr-core-gallery-column  gdlr-core-column-12 gdlr-core-item-pdlr gdlr-core-item-mgb">
-                                                <div class="gdlr-core-gallery-list gdlr-core-media-image"><img src="upload/banner-4-1.png" alt="" width="248" height="120" title="banner-4" /></div>
+                                                <div class="gdlr-core-gallery-list gdlr-core-media-image"><img src="upload/" alt="" width="248" height="120" title="banner-4" /></div>
                                             </div>
                                             <div class="gdlr-core-item-list gdlr-core-gallery-column  gdlr-core-column-12 gdlr-core-item-pdlr gdlr-core-item-mgb">
-                                                <div class="gdlr-core-gallery-list gdlr-core-media-image"><img src="upload/banner-5.png" alt="" width="248" height="120" title="banner-5" /></div>
+                                                <div class="gdlr-core-gallery-list gdlr-core-media-image"><img src="upload/" alt="" width="248" height="120" title="banner-5" /></div>
                                             </div>
                                         </div>
                                     </div>
@@ -1309,7 +1300,7 @@ document.addEventListener("DOMContentLoaded", function () {
         slideElement.classList.add("swiper-slide");
         slideElement.innerHTML = `
             <div class="gdlr-core-image-item">
-                <img src="./admin/uploads/${slide.image_path}" alt="${slide.title}" style="width:90%; height:auto; border-radius:10px;">
+                <img src="uploads/${slide.image_path}" alt="${slide.title}" style="width:90%; height:auto; border-radius:10px;">
                 <h5 style="text-align:center; margin-top:10px;">${slide.title}</h5>
             </div>
         `;
@@ -1337,7 +1328,7 @@ document.addEventListener("DOMContentLoaded", function () {
     slideElement.classList.add("swiper-slide");
     slideElement.innerHTML = `
         <div class="slider-image-container">
-            <img src="./admin/uploads/${slide.image_path}" alt="${slide.title}" class="slider-img">
+            <img src="uploads/${slide.image_path}" alt="${slide.title}" class="slider-img">
             <div class="slider-description">${slide.description}</div>
             <h3 class="slider-title">${slide.title}</h3>
         </div>
