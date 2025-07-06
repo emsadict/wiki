@@ -37,7 +37,7 @@ include 'db_connect.php';
             <Center><h3>WikiAcademy</h3></Center>
             <hr />
             
-                
+                 WikiAcademy Nigeria is an initiative of Wikimedia Nigeria that offers Wikimedia training to interested individuals from the public in a structured physical in-person manner
                 
                 
           

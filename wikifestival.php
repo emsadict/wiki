@@ -36,6 +36,24 @@ include 'db_connect.php';
             <!-- Upcoming Events -->
             <Center><h3>WikiFestival</h3></Center>
             <hr />
+            <p>
+  <strong>WikiFestival Campaign</strong> is an annual international campaign organized by 
+  <em>Wikimedia UG Nigeria</em> and held every November. It invites Wikimedia contributors, 
+  photographers, videographers, and writers from around the world to upload photos and videos 
+  of festivals to <a href="https://commons.wikimedia.org/wiki/Main_Page" target="_blank">Wikimedia Commons</a>, 
+  and to improve Wikipedia articles related to those festivals.
+</p>
+<p>
+  Festivals—whether cultural, religious, traditional, or modern—are vibrant expressions of the 
+  identity, beliefs, and values of communities across the globe. However, many of these rich 
+  celebrations remain underrepresented or undocumented on Wikimedia platforms.
+</p>
+<p>
+  For more information, visit the 
+  <a href="https://meta.wikimedia.org/wiki/WikiFestival_Campaign" target="_blank">
+    landing page
+  </a>.
+</p>
         </div>
     </div>
 </div>

@@ -19,7 +19,7 @@ include 'db_connect.php';
                 <div class="kingster-page-title-overlay"></div>
                 <div class="kingster-page-title-container kingster-container">
                     <div class="kingster-page-title-content kingster-item-pdlr">
-                        <h1 class="kingster-page-title">Training the Trainers</h1></div>
+                        <h1 class="kingster-page-title">Train the Trainers</h1></div>
                 </div>
             </div>
             <div class="kingster-page-wrapper" id="kingster-page-wrapper">
@@ -34,11 +34,24 @@ include 'db_connect.php';
         <div class="gdlr-core-blog-item-holder gdlr-core-js-2 clearfix" data-layout="fitrows">
 
             <!-- Upcoming Events -->
-            <Center><h3>Training the Trainers</h3></Center>
+            <Center><h3>Train the Trainers</h3></Center>
             <hr />
             
                 
-                
+                <p>
+    <strong>Train the Trainers Nigeria</strong> (TTTNG) is a residential training program. 
+    The program aims to groom leadership skills, provide refreshing training on Wikimedia projects, 
+    and build soft skill sets among members of the Nigerian Wikimedia community.
+  </p>
+  <p>
+    It is an annual capacity-building initiative conducted across each geographical zone in Nigeria.
+  </p>
+  <p>
+    For more information, visit the 
+    <a href="https://meta.wikimedia.org/wiki/Train_the_Trainers_Nigeria" target="_blank">
+      Meta page
+    </a>.
+  </p>
                 
           
 

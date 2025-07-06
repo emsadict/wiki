@@ -127,7 +127,7 @@
                                             <li class="menu-item menu-item-has-children" data-size="60"><a href="capacity.php" class="sf-with-ul-pre">Capacity Training</a>
                                                 <ul class="sub-menu">
                                                  <li class="menu-item"><a href="train.php">Training</a></li>
-                                                  <li class="menu-item"><a href="traintr.php">Training the Trainers</a></li>
+                                                  <li class="menu-item"><a href="traintr.php">Train the Trainers</a></li>
                                                   <li class="menu-item"><a href="wikiboost.php">WikiBoost</a></li>
                                                   <li class="menu-item"><a href="wikiacad.php">WikiAcademy</a></li>
                                                 </ul>
@@ -139,6 +139,10 @@
                                                   <li class="menu-item"><a href="wikifolkore.php">Wiki loves Folkore</a></li>
                                                   <li class="menu-item"><a href="wikifestival.php">WikiFestival</a></li>
                                                   <li class="menu-item"><a href="wikiwantphoto.php">Wikipedia Pages wanting Photos</a></li>
+                                                  <li class="menu-item"><a href="1lib1ref.php">1Lib1Ref campaign</a></li>
+                                                  <li class="menu-item"><a href="wikimonu.php">Wiki Loves Monuments</a></li>
+                                                  
+                                                  
                                                 </ul>
                                             </li>
                                             <li class="menu-item menu-item-has-children" data-size="60"><a href="allconferences.php" class="sf-with-ul-pre">Conferences</a>
@@ -148,8 +152,11 @@
                                                  <li class="menu-item"><a href="wikimania.php">Wikimania</a></li>
                                                  <li class="menu-item"><a href="wikiconference.php">Wiki Conference Nigeria</a></li>
                                                  <li class="menu-item"><a href="conference.php">Upcoming Conferences</a></li>
-                                                 <li class="menu-item"><a href="conference.php">Voulunteer Recongnition and Support Initialize</a></li>
+                                                
                                                 </ul>
+                                            </li>
+                                            <li class="menu-item menu-item-has-children" data-size="60"><a href="vrsi.php" >Voulunteer Recongnition and Support Initialize</a>
+                                                
                                             </li>
                                         </ul>
                                     </li>

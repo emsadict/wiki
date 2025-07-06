@@ -39,6 +39,23 @@ include 'db_connect.php';
             
                 
                 
+  <p>
+    <strong>WikiHeritage Fellowship</strong> is a project organized by 
+    <em>Wikimedia User Group Nigeria</em> (registered as <em>Wikimedia Nigeria Foundation</em>) 
+    in collaboration with <em>Young Innovation Leaders Fellowship (YIL)</em> and 
+    <em>Lagos State Records and Archive Bureau (LASRAB)</em>.
+  </p>
+  <p>
+    The initiative aims to digitize and transform Nigerian archival and cultural materials 
+    into accessible, well-sourced digital content, enhancing the global visibility of 
+    Nigeria’s rich heritage.
+  </p>
+  <p>
+    For more information, visit the 
+    <a href="https://meta.wikimedia.org/wiki/WikiHeritage_Fellowship" target="_blank">
+      Meta page
+    </a>.
+  </p>
                 
           
 

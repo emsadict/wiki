@@ -34,10 +34,34 @@ include 'db_connect.php';
         <div class="gdlr-core-blog-item-holder gdlr-core-js-2 clearfix" data-layout="fitrows">
 
             <!-- Upcoming Events -->
-            <Center><h3>Wiki Loves Earth</h3></Center>
+            <Center><h3>Wiki Loves Earth in Nigeria</h3></Center>
             <hr />
             
-                
+                <p>
+  <strong>Wiki Loves Earth</strong> is an international photography competition that promotes 
+  natural heritage sites around the world through Wikimedia projects, primarily 
+  <a href="https://www.wikipedia.org/" target="_blank">Wikipedia</a> and 
+  <a href="https://commons.wikimedia.org/wiki/Main_Page" target="_blank">Wikimedia Commons</a>.
+</p>
+<p>
+  This is the fifth time Nigeria will be participating in the contest, which will be held 
+  from <strong>1 June — 31 July 2025</strong>. In the first and second editions, over 1,000 
+  quality images were uploaded by participants in Nigeria.
+</p>
+<p>
+  Everyone is welcome to get involved—whether as a participant (photographer), 
+  organizational volunteer, or both. Join us in contributing free-licensed images of 
+  Nigeria’s natural heritage.
+</p>
+<p>
+  Since 2017, over 8,000 images have been uploaded by 1,052 contributors from Nigeria.
+</p>
+<p>
+  For more information, visit the 
+  <a href="https://meta.wikimedia.org/wiki/Wiki_Loves_Earth_in_Nigeria" target="_blank">
+    landing page
+  </a>.
+</p>
                 
                 
           

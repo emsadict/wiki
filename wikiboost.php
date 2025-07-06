@@ -38,7 +38,22 @@ include 'db_connect.php';
             <hr />
             
                 
-                
+                <p>
+    <strong>WikiBoost</strong> is a project that aims to enhance and boost the knowledge of 
+    Wikimedia projects among the Nigerian community. The project's objective is to improve 
+    Wikimedia literacy for both experienced editors and newcomers.
+  </p>
+  <p>
+    With a strong focus on community engagement and collaboration, WikiBoost strives to make 
+    a meaningful impact within the Wikimedia Nigeria community and beyond. It especially 
+    emphasizes onboarding and supporting newbies in contributing to Wikipedia.
+  </p>
+  <p>
+    For more information, visit the 
+    <a href="https://meta.wikimedia.org/wiki/WikiBoost" target="_blank">
+      landing page
+    </a>.
+  </p>
                 
           
 

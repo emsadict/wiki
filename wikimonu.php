@@ -19,7 +19,7 @@ include 'db_connect.php';
                 <div class="kingster-page-title-overlay"></div>
                 <div class="kingster-page-title-container kingster-container">
                     <div class="kingster-page-title-content kingster-item-pdlr">
-                        <h1 class="kingster-page-title">Wikipedia Pages wanting Photos</h1></div>
+                        <h1 class="kingster-page-title">Wiki Loves Monuments in Nigeria (WLM)</h1></div>
                 </div>
             </div>
             <div class="kingster-page-wrapper" id="kingster-page-wrapper">
@@ -34,26 +34,29 @@ include 'db_connect.php';
         <div class="gdlr-core-blog-item-holder gdlr-core-js-2 clearfix" data-layout="fitrows">
 
             <!-- Upcoming Events -->
-            <Center><h3>Wikipedia Pages wanting Photos</h3></Center>
+            <Center><h3>Wiki Loves Monuments in Nigeria (WLM)</h3></Center>
             <hr />
-            <p>
-  <strong>WikiFestival Campaign</strong> is an annual international campaign organized by 
-  <em>Wikimedia UG Nigeria</em> and held every November. It invites Wikimedia contributors, 
-  photographers, videographers, and writers from around the world to upload photos and videos 
-  of festivals to <a href="https://commons.wikimedia.org/wiki/Main_Page" target="_blank">Wikimedia Commons</a>, 
-  and to improve Wikipedia articles related to those festivals.
+            
+                    <strong>Wiki Loves Monuments in Nigeria (WLM)</strong> is a public photo competition focused on 
+  Nigeria’s cultural heritage monuments, organized by <em>Wikimedia UG Nigeria</em>. The public is 
+  invited to take photographs of monuments, upload them to 
+  <a href="https://commons.wikimedia.org/wiki/Main_Page" target="_blank">Wikimedia Commons</a>, 
+  and make them available for use on Wikipedia and other Wikimedia platforms.
 </p>
 <p>
-  Festivals—whether cultural, religious, traditional, or modern—are vibrant expressions of the 
-  identity, beliefs, and values of communities across the globe. However, many of these rich 
-  celebrations remain underrepresented or undocumented on Wikimedia platforms.
+  The goal of the competition is to make the world’s heritage monuments more visible and accessible 
+  to a global audience.
+</p>
+<p>
+  Since 2017, over 9,000 images have been uploaded by 402 contributors from across Nigeria.
 </p>
 <p>
   For more information, visit the 
-  <a href="https://meta.wikimedia.org/wiki/WikiFestival_Campaign" target="_blank">
+  <a href="https://meta.wikimedia.org/wiki/Wiki_Loves_Monuments_in_Nigeria" target="_blank">
     landing page
   </a>.
 </p>
+
         </div>
     </div>
 </div>

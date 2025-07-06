@@ -19,7 +19,7 @@ include 'db_connect.php';
                 <div class="kingster-page-title-overlay"></div>
                 <div class="kingster-page-title-container kingster-container">
                     <div class="kingster-page-title-content kingster-item-pdlr">
-                        <h1 class="kingster-page-title">Wiki loves Folkore</h1></div>
+                        <h1 class="kingster-page-title">Wiki loves Folklore</h1></div>
                 </div>
             </div>
             <div class="kingster-page-wrapper" id="kingster-page-wrapper">
@@ -34,8 +34,36 @@ include 'db_connect.php';
         <div class="gdlr-core-blog-item-holder gdlr-core-js-2 clearfix" data-layout="fitrows">
 
             <!-- Upcoming Events -->
-            <Center><h3>Wiki loves Folkore</h3></Center>
+            <Center><h3>Wiki loves Folklore</h3></Center>
             <hr />
+            <p>
+  <strong>Wiki Loves Folklore</strong> is an international photographic competition that celebrates 
+  cultural diversity from around the world through Wikimedia projects, primarily 
+  <a href="https://www.wikipedia.org/" target="_blank">Wikipedia</a> and 
+  <a href="https://commons.wikimedia.org/wiki/Main_Page" target="_blank">Wikimedia Commons</a>. 
+  Everyone is welcome to participate.
+</p>
+<p>
+  <strong>Wiki Loves Folklore in Nigeria</strong> is organized by <em>Wikimedia Nigeria</em> 
+  in collaboration with other Wikimedia affiliates in Nigeria. Participants are encouraged to 
+  explore their photo archives or visit local sites connected to Nigerian culture, folklore, 
+  or storytelling and upload their media to win!
+</p>
+<p>
+  The core aim of the competition is to collect photographs that showcase human cultural diversity 
+  to illustrate articles on Wikipedia and other Wikimedia Foundation projects. Submissions should 
+  align with the theme, including but not limited to: festivals, material culture, dances, cuisine, 
+  clothing, or daily life routines that emphasize the folk culture of Nigeria.
+</p>
+<p>
+  Since 2021, over 5,000 images have been uploaded by 218 contributors from Nigeria.
+</p>
+<p>
+  For more information, visit the 
+  <a href="https://meta.wikimedia.org/wiki/Wiki_Loves_Folklore_in_Nigeria" target="_blank">
+    landing page
+  </a>.
+</p>
         </div>
     </div>
 </div>

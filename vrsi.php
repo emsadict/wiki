@@ -19,7 +19,7 @@ include 'db_connect.php';
                 <div class="kingster-page-title-overlay"></div>
                 <div class="kingster-page-title-container kingster-container">
                     <div class="kingster-page-title-content kingster-item-pdlr">
-                        <h1 class="kingster-page-title">Wikipedia Pages wanting Photos</h1></div>
+                        <h1 class="kingster-page-title">Volunteer Recognition and Support Initiative (VRSI)</h1></div>
                 </div>
             </div>
             <div class="kingster-page-wrapper" id="kingster-page-wrapper">
@@ -34,26 +34,25 @@ include 'db_connect.php';
         <div class="gdlr-core-blog-item-holder gdlr-core-js-2 clearfix" data-layout="fitrows">
 
             <!-- Upcoming Events -->
-            <Center><h3>Wikipedia Pages wanting Photos</h3></Center>
+            <Center><h3>Volunteer Recognition and Support Initiative (VRSI)</h3></Center>
             <hr />
-            <p>
-  <strong>WikiFestival Campaign</strong> is an annual international campaign organized by 
-  <em>Wikimedia UG Nigeria</em> and held every November. It invites Wikimedia contributors, 
-  photographers, videographers, and writers from around the world to upload photos and videos 
-  of festivals to <a href="https://commons.wikimedia.org/wiki/Main_Page" target="_blank">Wikimedia Commons</a>, 
-  and to improve Wikipedia articles related to those festivals.
+            
+                   <p>
+  <strong>Nigeria Wikimedia Community Distinguished Awards</strong> is an annual event that celebrates 
+  individuals who have made significant contributions to the Wikimedia community in Nigeria. 
+  This award honors the commitment and dedication of these individuals in promoting the values of 
+  free knowledge and open access to information.
 </p>
 <p>
-  Festivals—whether cultural, religious, traditional, or modern—are vibrant expressions of the 
-  identity, beliefs, and values of communities across the globe. However, many of these rich 
-  celebrations remain underrepresented or undocumented on Wikimedia platforms.
+  By recognizing the efforts of community members, the award encourages others to step forward and 
+  become community heroes themselves.
 </p>
 <p>
   For more information, visit the 
-  <a href="https://meta.wikimedia.org/wiki/WikiFestival_Campaign" target="_blank">
+  <a href="https://meta.wikimedia.org/wiki/Volunteer_Recognition_and_Support_Initiative" target="_blank">
     landing page
-  </a>.
-</p>
+  </a>. 
+
         </div>
     </div>
 </div>
@@ -90,21 +89,7 @@ include 'db_connect.php';
 </div>
                 </div>
                 
-                <!-- Sidebar with Recent Posts 
-                <div class="gdlr-core-pbf-sidebar-left gdlr-core-column-extend-left kingster-sidebar-area gdlr-core-column-15 gdlr-core-pbf-sidebar-padding gdlr-core-line-height">
-                    <div class="gdlr-core-sidebar-item gdlr-core-item-pdlr">
-                        <div id="recent-posts-3" class="widget widget_recent_entries kingster-widget" style="background-color:rgb(206, 234, 221) ;">
-                            <h3 class="kingster-widget-title">Menu</h3><span class="clear"></span>
-                            <ul>
-                                
-
-
-
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                        -->
+                
             </div>
         </div>
     </div>

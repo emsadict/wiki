@@ -34,9 +34,25 @@ include 'db_connect.php';
         <div class="gdlr-core-blog-item-holder gdlr-core-js-2 clearfix" data-layout="fitrows">
 
             <!-- Upcoming Events -->
-            <Center><h3>Wiki loves Africa</h3></Center>
+            <Center><h3>Wiki Loves Africa in Nigeria</h3></Center>
             <hr />
-            
+            <p>
+  <strong>Wiki Loves Africa in Nigeria</strong> is an annual public contest organized by 
+  <em>Wiki in Africa</em> and coordinated in Nigeria by <em>Wikimedia UG Nigeria</em>. 
+  The contest encourages people across Nigeria to contribute media (photographs, video, and audio) 
+  about their environment to <a href="https://commons.wikimedia.org/wiki/Main_Page" target="_blank">Wikimedia Commons</a> 
+  for use on Wikipedia and other Wikimedia Foundation project websites.
+</p>
+<p>
+  Nigeria has been participating since 2014, with over 20,000 images submitted by 1,852 competitors 
+  from across the country under a free license.
+</p>
+<p>
+  For more information, visit the 
+  <a href="https://meta.wikimedia.org/wiki/Wiki_Loves_Africa_in_Nigeria" target="_blank">
+    landing page
+  </a>.
+</p>
                 
                 
                 

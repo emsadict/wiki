@@ -36,6 +36,22 @@ include 'db_connect.php';
             <!-- Upcoming Events -->
             <Center><h3>Wiki Conference Nigeria</h3></Center>
             <hr />
+             <strong>WikiConference Nigeria</strong> is the national conference for all Nigerian Wikimedia contributors. 
+  It provides a common platform to learn, meet, connect, and share experiences, best practices, and challenges 
+  related to the Wikimedia movement in Nigeria.
+</p>
+<p>
+  The 2024 and maiden edition of the conference was held from <strong>12–14 September 2024</strong> in 
+  <em>Abuja, FCT, Nigeria</em>.
+</p>
+<p>
+  For more information, visit the 
+  <a href="https://meta.wikimedia.org/wiki/WikiConference_Nigeria" target="_blank">
+    landing page
+  </a>.
+</p>
+
+
         </div>
     </div>
 </div>

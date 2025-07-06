@@ -19,7 +19,7 @@ include 'db_connect.php';
                 <div class="kingster-page-title-overlay"></div>
                 <div class="kingster-page-title-container kingster-container">
                     <div class="kingster-page-title-content kingster-item-pdlr">
-                        <h1 class="kingster-page-title">Wikipedia Pages wanting Photos</h1></div>
+                        <h1 class="kingster-page-title">1Lib1Ref campaign</h1></div>
                 </div>
             </div>
             <div class="kingster-page-wrapper" id="kingster-page-wrapper">
@@ -34,23 +34,22 @@ include 'db_connect.php';
         <div class="gdlr-core-blog-item-holder gdlr-core-js-2 clearfix" data-layout="fitrows">
 
             <!-- Upcoming Events -->
-            <Center><h3>Wikipedia Pages wanting Photos</h3></Center>
+            <Center><h3>1Lib1Ref campaign</h3></Center>
             <hr />
             <p>
-  <strong>WikiFestival Campaign</strong> is an annual international campaign organized by 
-  <em>Wikimedia UG Nigeria</em> and held every November. It invites Wikimedia contributors, 
-  photographers, videographers, and writers from around the world to upload photos and videos 
-  of festivals to <a href="https://commons.wikimedia.org/wiki/Main_Page" target="_blank">Wikimedia Commons</a>, 
-  and to improve Wikipedia articles related to those festivals.
+  The <strong>1Lib1Ref campaign</strong> is hosted by the <em>Wikimedia Foundation</em> and 
+  organized in Nigeria by <em>Wikimedia UG Nigeria</em>. Every year, 
+  <strong>#1Lib1Ref</strong>—short for <em>One Librarian, One Reference</em>—calls on librarians, 
+  Wikipedians across Nigeria, and anyone passionate about free knowledge to add missing references 
+  to Wikipedia articles.
 </p>
 <p>
-  Festivals—whether cultural, religious, traditional, or modern—are vibrant expressions of the 
-  identity, beliefs, and values of communities across the globe. However, many of these rich 
-  celebrations remain underrepresented or undocumented on Wikimedia platforms.
+  <strong>#1Lib1RefNG</strong> aims to unite Nigerian editors and librarians to improve the 
+  reliability and credibility of Wikipedia by strengthening its references.
 </p>
 <p>
   For more information, visit the 
-  <a href="https://meta.wikimedia.org/wiki/WikiFestival_Campaign" target="_blank">
+  <a href="https://meta.wikimedia.org/wiki/1Lib1Ref_in_Nigeria" target="_blank">
     landing page
   </a>.
 </p>
