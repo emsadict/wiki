@@ -1,11 +1,5 @@
 <?php
-// Database connection
-$conn = new mysqli("localhost", "root", "", "membership_management");
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-
+include "db_connect.php";
 $sql = "SELECT id, title, image, date,  content, author  FROM news ORDER BY date DESC LIMIT 5";
 $result = $conn->query($sql);
 
