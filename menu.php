@@ -157,8 +157,8 @@
                                             </li>
                                             <li class="menu-item menu-item-has-children" data-size="60"><a href="vrsi.php" class="sf-with-ul-pre">Voulunteer Recongnition and Support Initialize</a>
                                                 <ul class="sub-menu">
-                                                 <li class="menu-item"><a href="wikiindaba.php">Monthly Outstanding Editors Recognition (MOER)</a></li>
-                                                 
+                                                 <li class="menu-item"><a href="moer.php">Monthly Outstanding Editors Recognition (MOER)</a></li>
+                                                 <li class="menu-item"><a href="micro.php">Wikimedia Nigeria Community Support Fund (Micro Grant)</a></li>
                                                 
                                                 </ul>
                                             </li>
