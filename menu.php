@@ -155,8 +155,12 @@
                                                 
                                                 </ul>
                                             </li>
-                                            <li class="menu-item menu-item-has-children" data-size="60"><a href="vrsi.php" >Voulunteer Recongnition and Support Initialize</a>
+                                            <li class="menu-item menu-item-has-children" data-size="60"><a href="vrsi.php" class="sf-with-ul-pre">Voulunteer Recongnition and Support Initialize</a>
+                                                <ul class="sub-menu">
+                                                 <li class="menu-item"><a href="wikiindaba.php">Monthly Outstanding Editors Recognition (MOER)</a></li>
+                                                 
                                                 
+                                                </ul>
                                             </li>
                                         </ul>
                                     </li>
