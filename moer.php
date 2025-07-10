@@ -37,21 +37,20 @@ include 'db_connect.php';
             <Center><h3>Monthly Outstanding Editors Recognition (MOER)</h3></Center>
             <hr />
             <p>
-  <strong>Wiki Loves Africa in Nigeria</strong> is an annual public contest organized by 
-  <em>Wiki in Africa</em> and coordinated in Nigeria by <em>Wikimedia UG Nigeria</em>. 
-  The contest encourages people across Nigeria to contribute media (photographs, video, and audio) 
-  about their environment to <a href="https://commons.wikimedia.org/wiki/Main_Page" target="_blank">Wikimedia Commons</a> 
-  for use on Wikipedia and other Wikimedia Foundation project websites.
-</p>
-<p>
-  Nigeria has been participating since 2014, with over 20,000 images submitted by 1,852 competitors 
-  from across the country under a free license.
-</p>
-<p>
-  For more information, visit the 
-  <a href="https://meta.wikimedia.org/wiki/Wiki_Loves_Africa_in_Nigeria" target="_blank">
-    landing page
-  </a>.
+  <p>
+      The <strong>Monthly Outstanding Editor Recognition (MOER)</strong> is an initiative of 
+      <em>Wikimedia UG Nigeria</em> to honor and acknowledge the remarkable efforts of Nigerian volunteer editors 
+      who tirelessly dedicate their time and resources to enriching the Wikimedia ecosystem.
+    </p>
+    <p>
+      Every month, the initiative will design a mechanism to identify the highest contributor in each small Wikipedia 
+      representing Nigeria's indigenous languages (English inclusive). The initiative will help recognize outstanding 
+      contributions, motivate members to remain focused on the core objective of the community, and help create bonding 
+      among the country's different languages and community members.
+    </p>
+    <p>
+      <a href="https://meta.wikimedia.org/wiki/Monthly_Outstanding_Editors_Recognition" target="_blank">Landing page</a>
+    </p>
 </p>
                 
                 
