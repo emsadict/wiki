@@ -129,10 +129,11 @@ if ($resultStaff && $resultStaff->num_rows > 0):
 
 .council-member img {
     border-radius: 30%;
-    object-fit: cover;
+    object-fit: contain;
     width: 150px;
     height: 150px;
     margin-bottom: 10px;
+    object-position: top center;
 }
 
 .details-button {
