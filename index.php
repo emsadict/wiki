@@ -1294,7 +1294,7 @@ document.addEventListener("DOMContentLoaded", function () {
         slideElement.classList.add("swiper-slide");
         slideElement.innerHTML = `
             <div class="gdlr-core-image-item">
-                <img src="uploads/${slide.image_path}" alt="${slide.title}" style="width:90%; height:auto; border-radius:10px;">
+                <img src="./admin/uploads/${slide.image_path}" alt="${slide.title}" style="width:90%; height:auto; border-radius:10px;">
                 <h5 style="text-align:center; margin-top:10px;">${slide.title}</h5>
             </div>
         `;
@@ -1322,7 +1322,7 @@ document.addEventListener("DOMContentLoaded", function () {
     slideElement.classList.add("swiper-slide");
     slideElement.innerHTML = `
         <div class="slider-image-container">
-            <img src="uploads/${slide.image_path}" alt="${slide.title}" class="slider-img">
+            <img src="./admin/uploads/${slide.image_path}" alt="${slide.title}" class="slider-img">
             <div class="slider-description">${slide.description}</div>
             <h3 class="slider-title">${slide.title}</h3>
         </div>
