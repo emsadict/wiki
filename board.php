@@ -41,46 +41,32 @@ include 'db_connect.php';
             <!-- Upcoming Events -->
             <Center><h3>THE BOARD</h3></Center>
             <hr />                                        <?php 
+            
 $queryStaff = "SELECT * FROM staff WHERE designation = 'Board of Trustee'";
 $resultStaff = $conn->query($queryStaff);
 
 if ($resultStaff && $resultStaff->num_rows > 0): 
 ?>
-
-<div class="gdlr-core-tab-item-content" data-tab-id="4">
-    <div class="gdlr-core-personnel-item gdlr-core-item-pdb clearfix gdlr-core-left-align gdlr-core-personnel-item-style-medium gdlr-core-personnel-style-medium" style="height: 600px; overflow-y: auto; border: 1px solid #ccc; padding: 10px;">
-
-    <?php while ($row = $resultStaff->fetch_assoc()): 
-        $stafftitle = htmlspecialchars($row['board']);
-        $stafftitle2 = htmlspecialchars($row['title']);
-        $staffName = htmlspecialchars($row['name']);
-        $staffdesign = htmlspecialchars($row['profile']);
-        $staffdesign2 = htmlspecialchars($row['designation']);
-        $staffpassprot = htmlspecialchars($row['passport']);
-        $staffUrl = "staff_profile.php?id=" . $row['id'];
-    ?>
-        <div class="gdlr-core-personnel-list-column gdlr-core-column-60 gdlr-core-column-first gdlr-core-item-pdlr">
-            <div class="gdlr-core-personnel-list clearfix">
-                <div class="gdlr-core-personnel-list-image gdlr-core-media-image gdlr-core-opacity-on-hover gdlr-core-zoom-on-hover">
-                    <a href="<?php echo $staffUrl; ?>">
-                        <img src="./admin/uploads/<?php echo $staffpassprot; ?>" alt="Passport" width="500" height="500" />
-                    </a>
-                </div>
-                <div class="gdlr-core-personnel-list-content-wrap">
-                    <h3 class="gdlr-core-personnel-list-title" style="font-size: 23px; font-weight: 700;">
-                        <a href="<?php echo $staffUrl; ?>"><?php echo "$stafftitle2 $staffName"; ?></a>
-                    </h3>
-                    <div class="gdlr-core-personnel-list-position gdlr-core-info-font gdlr-core-skin-caption" style="font-size: 16px;"><?php echo $stafftitle; ?></div>
-                    <div class="gdlr-core-personnel-list-position gdlr-core-info-font gdlr-core-skin-caption" style="font-size: 16px;"><?php echo $staffdesign2; ?></div>
-                    <a class="gdlr-core-personnel-list-button gdlr-core-button" href="<?php echo $staffUrl; ?>" style="background: linear-gradient(#091E3E, #091E3E);">More Detail</a>
-                </div>
-            </div>
+    <div class="council-container">
+        <?php while ($row = $resultStaff->fetch_assoc()): 
+            $staffUrl = "staff_profile.php?id=" . $row['id'];
+            $passport = !empty($row['passport']) ? "admin/uploads/{$row['passport']}" : "admin/uploads/default.jpg";
+        ?>
+        <div class="council-member">
+            <a href="<?php echo $staffUrl; ?>">
+                <img src="<?php echo $passport; ?>" alt="Passport" width="180" height="180" />
+            </a>
+            <h3>
+                <a href="<?php echo $staffUrl; ?>">
+                    <?php echo htmlspecialchars($row['title'] . " " . $row['name']); ?>
+                </a>
+            </h3>
+            <p><strong><?php echo htmlspecialchars($row['board']); ?></strong></p>
+            <p><?php echo htmlspecialchars($row['designation']); ?></p>
+            <a class="details-button" href="<?php echo $staffUrl; ?>">More Detail</a>
         </div>
-    <?php endwhile; ?>
-
+        <?php endwhile; ?>
     </div>
-</div>
-
 <?php else: ?>
     <p>No Board of Trustee members found.</p>
 <?php endif; ?>
@@ -116,27 +102,63 @@ if ($resultStaff && $resultStaff->num_rows > 0):
         background-color:rgb(5, 125, 79);
         color: white;
     }
+
+
+    
+.council-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    padding: 20px;
+}
+
+.council-member {
+    border: 1px solid #ccc;
+    padding: 15px;
+    width: 250px;
+    background: #f9f9f9;
+    text-align: center;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: 0.3s ease;
+}
+.council-member:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.council-member img {
+    border-radius: 30%;
+    object-fit: cover;
+    width: 150px;
+    height: 150px;
+    margin-bottom: 10px;
+}
+
+.details-button {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 8px 14px;
+    background: linear-gradient(#091E3E, #091E3E);
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+}
+.details-button:hover {
+    background-color: #073166;
+}
+.council-member h3 {
+    font-size: 18px;  /* You can try 16px or smaller if needed */
+    margin: 10px 0;
+}
+
 </style>
 
 
 </div>
                 </div>
                 
-                <!-- Sidebar with Recent Posts 
-                <div class="gdlr-core-pbf-sidebar-left gdlr-core-column-extend-left kingster-sidebar-area gdlr-core-column-15 gdlr-core-pbf-sidebar-padding gdlr-core-line-height">
-                    <div class="gdlr-core-sidebar-item gdlr-core-item-pdlr">
-                        <div id="recent-posts-3" class="widget widget_recent_entries kingster-widget" style="background-color:rgb(206, 234, 221) ;">
-                            <h3 class="kingster-widget-title">Menu</h3><span class="clear"></span>
-                            <ul>
-                                
-
-
-
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                        -->
+               
             </div>
         </div>
     </div>
