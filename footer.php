@@ -40,8 +40,8 @@
                                 <div class="menu-campus-life-container">
                                     <ul id="menu-campus-life" class="gdlr-core-custom-menu-widget gdlr-core-menu-style-plain">
                                         <li class="menu-item"><a href="register.php">Membership Registration</a></li>
-                                        <li class="menu-item"><a href="#">Partner with us</a></li>
-                                        <li class="menu-item"><a href="#">Our Team</a></li>
+                                        <li class="menu-item"><a href="mailto:admin@Wikimedia.org.ng">Partner with us</a></li>
+                                        <li class="menu-item"><a href="board.php">Our Team</a></li>
                                         <li class="menu-item"><a href="#">Advocay</a></li>
                                         <li class="menu-item"><a href="#">Gender-gap-initiatives</a></li>
                                       
