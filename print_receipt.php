@@ -1,5 +1,5 @@
 <?php
-$conn = new mysqli("localhost", "root", "", "membership_management");
+include 'db.php';
 
 if ($_GET["id"]) {
     $id = $_GET["id"];
@@ -28,6 +28,7 @@ if ($_GET["id"]) {
                 <p><strong>Email:</strong> <?php echo $row["email"]; ?></p>
                 <p><strong>Phone:</strong> <?php echo $row["phone"]; ?></p>
                 <p><strong>Amount:</strong> <?php echo $row["amount"]; ?> NGN</p>
+                <p><strong>Membership Number:</strong> <?php echo $row["membership_num"]; ?></p>
                 <p><strong>Transaction ID:</strong> <?php echo $row["transaction_id"]; ?></p>
                 <p><strong>Payment Type:</strong> <?php echo $row["payment_type"]; ?></p>
                 <p><strong>Date:</strong> <?php echo $row["date"]; ?></p>
