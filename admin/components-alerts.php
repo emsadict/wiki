@@ -19,6 +19,47 @@ if ($result) {
 $sql = "SELECT * FROM biodata where mem_category='student'";
 $result = $conn->query($sql);
 
+
+    if (isset($_GET['reactivate'])) {
+    $identifier = mysqli_real_escape_string($conn, $_GET['reactivate']);
+
+    // Try updating by username or regno
+    $reactivateQuery = "UPDATE updated_bio SET update_status = 0 
+                        WHERE regno = '$identifier' OR username = '$identifier'";
+
+    if (mysqli_query($conn, $reactivateQuery)) {
+        $reactivateMessage = "<div class='alert alert-success'>User reactivated successfully</div>";
+
+    } else {
+         $reactivateMessage = "<div class='alert alert-danger'>❌ Reactivation failed: " . mysqli_error($conn) . "</div>";
+    }
+}
+
+
+if (isset($_GET['delete'])) {
+    $identifier = mysqli_real_escape_string($conn, $_GET['delete']);
+
+    // Get membership_num from biodata
+    $lookup = mysqli_query($conn, "SELECT regno FROM biodata WHERE regno='$identifier' OR username='$identifier'");
+    if ($lookup && mysqli_num_rows($lookup) > 0) {
+        $userRow = mysqli_fetch_assoc($lookup);
+        $membership_num = $userRow['regno'];
+
+        // Delete from membership_accounts
+        mysqli_query($conn, "DELETE FROM membership_accounts WHERE membership_num='$membership_num'");
+
+        // Delete from biodata
+        mysqli_query($conn, "DELETE FROM biodata WHERE regno='$membership_num'");
+
+        // Optionally delete from updated_bio
+        mysqli_query($conn, "DELETE FROM updated_bio WHERE regno='$membership_num'");
+
+        $deleteMessage = "<div class='alert alert-success'>🗑️ User deleted successfully.</div>";
+    } else {
+       $deleteMessage = "<div class='alert alert-danger'>❌ User not found for deletion.</div>";
+    }
+}
+
 ?>
 
 
@@ -100,6 +141,8 @@ $result = $conn->query($sql);
 <?php 
               echo "</head>";
     //echo "<body>";
+    if (!empty($reactivateMessage)) echo $reactivateMessage; 
+    if (!empty($deleteMessage)) echo $deleteMessage;
     echo "<meta name='viewport' content='width=device-width,initial-scale=1.0'>";
     echo "<div class='col-md-12 container-fluid  '>";
     echo "<div class='box container-fluid' style='border:1px solid grey; margin-top:40px;  padding:10px; border-radius: 5px; box-shadow: 3px 3px 3px gray; background-color:; float: center;'>";
@@ -122,6 +165,7 @@ $result = $conn->query($sql);
     echo "<hr>";
     echo "<div class='text-primary'><center><h3>ALL APPLICANTS </h3></center>";
     echo "</br>";
+
   echo "<table class='table table-striped table-bordered table-responsive'>";
     echo "<tr>";
     echo "<th>S.no</th>";
@@ -134,6 +178,7 @@ $result = $conn->query($sql);
 
   echo "<th>Delete Users</th>";
     echo "<th>Edit User Details</th>";
+    echo "<th>Reactivate </th>";
     echo "<th>User Details</th>";
     echo "</tr>";
     
@@ -156,8 +201,10 @@ $result = $conn->query($sql);
       echo "<th>$lastname</th>";
       //echo "<th style='width:70px;'>$lastname</th>";
       echo "<th><img src='../pass/$pro' height='100px' width='100px'></th>";
-      echo "<th><a href='#'><button class='btn btn-danger'>Delete</button></th>";
+     // echo "<th><a href='#'><button class='btn btn-danger'>Delete</button></th>";
+      echo "<th><a href='components-alerts.php?delete=$id' onclick=\"return confirm('Are you sure you want to delete this user?');\"><button class='btn btn-danger'>Delete</button></a></th>";
       echo "<th><a href='#'><button class='btn btn-primary'>Edit</button></th>";
+      echo "<th><a href='components-alerts.php?reactivate=$id'><button class='btn btn-warning'>Reactivate</button></a></th>";
       echo "<th><a href='userdata.php?user=$id';><button class='btn btn-primary' style='float:right; margin-right:40px; padding:4px; '>Details</button></th>";
       echo "</tr>";
     }
