@@ -97,7 +97,7 @@ if ($result['status'] && $result['data']['status'] == 'success') {
     session_destroy();
 
     // Redirect to login page
-    header("Location: login.php?success=1");
+    header("Location: login.php?success=1&membership_num=$membership_num&transaction_id=$transaction_id");
     exit();
 
 } else {

@@ -1,6 +1,14 @@
 <?php
 session_start();
 include 'db.php';
+
+
+if (isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true) {
+    header("Location: update_biodata.php");
+    exit();
+}
+
+
 $years_query = "SELECT DISTINCT year FROM calendar ORDER BY year DESC";
 $years_result = mysqli_query($conn, $years_query);
 if ($row = mysqli_fetch_assoc($years_result)) {
@@ -98,8 +106,9 @@ tinymce.init({
                                                            <input type="hidden" name="membership_num" value="<?php echo htmlspecialchars($membership_num); ?>">
         
                                                            <input type="hidden" id="year" name="year" value="<?php echo $year; ?>">
-                                                           
-                                                           <label>Membership Number:</label>
+                                                           <h6>(WRITE DOWN YOUR REGISTRATION NUMBER, YOU WILL LATER USE IT TO LOGIN AFTER PAYMENT)</h6>
+                                                           <label>Membership Number:<BR>
+                                                           </label>
                                                            <input type="text" class="form-control" value="<?php echo htmlspecialchars($membership_num); ?>" readonly>
                                                            
 
@@ -162,7 +171,7 @@ tinymce.init({
                                 <div class="gdlr-core-sidebar-item gdlr-core-item-pdlr">
                                   <!--  <button class="btn btn-success"> Back to admin</button> --> <br />
                                     <div id="recent-posts-3" class="widget widget_recent_entries kingster-widget" style="background-color:rgb(206, 234, 221) ; margin-top:10px;">
-                                    <?php include "regsidemenu.php"; ?>
+                                    <?php include "loginmenu.php"; ?>
                                     </div>
                                 </div>
                             </div>
@@ -201,7 +210,7 @@ tinymce.init({
     <script type='text/javascript' src='js/jquery/ui/effect.min.js'></script>
     <script type='text/javascript'>
         var kingster_script_core = {
-            "home_url": "index.html"
+            "home_url": "index.php"
         };
     </script>
     <script type='text/javascript' src='js/plugins.min.js'></script>

@@ -3,6 +3,11 @@ session_start();
 include 'db.php';
 
 
+if (isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true) {
+    header("Location: update_biodata.php");
+    exit();
+}
+
 
 if (isset($_POST['login'])) {
     $membership_num = mysqli_real_escape_string($conn, $_POST['membership_num']);
@@ -15,17 +20,15 @@ if (isset($_POST['login'])) {
         $user = mysqli_fetch_assoc($query);
         
         // Verify the hashed password
-        if (password_verify($password, $user['password'])) {
-            // Password is correct, start session
-            $_SESSION['membership_num'] = $membership_num;
-            $_SESSION['user_id'] = $user['id']; // Store more user data if needed
-            
-            // Regenerate session ID to prevent session fixation
-            session_regenerate_id(true);
-            
-            header("Location: update_biodata.php");
-            exit();
-        } else {
+       if (password_verify($password, $user['password'])) {
+    $_SESSION['membership_num'] = $membership_num;
+    $_SESSION['user_id'] = $user['id'];
+    $_SESSION['is_logged_in'] = true; // ✅ THIS IS CRUCIAL
+    session_regenerate_id(true);
+    header("Location: update_biodata.php");
+    exit();
+}
+ else {
             // Password is incorrect
             $error = "Invalid Membership Number or Password!";
         }
@@ -79,6 +82,35 @@ include 'db_connect.php';
             <Center><h3>LOGIN HERE</h3></Center>
             <?php if (isset($_GET['success'])) { echo '<div class="alert alert-success">Registration Successful! Please login.</div>'; } ?>
            <?php if (isset($error)) { echo '<div class="alert alert-danger">'.$error.'</div>'; } ?>
+
+<!-- new notification from paymetn redirects-->
+
+<?php
+if (isset($_GET['success']) && isset($_GET['membership_num'])) {
+    $membership_num = mysqli_real_escape_string($conn, $_GET['membership_num']);
+    
+    // Fetch transaction ID
+    $paymentQuery = mysqli_query($conn, "SELECT transaction_id FROM payments WHERE membership_num='$membership_num' ORDER BY id DESC LIMIT 1");
+    $transaction_id = '';
+    
+    if ($paymentQuery && mysqli_num_rows($paymentQuery) > 0) {
+        $paymentRow = mysqli_fetch_assoc($paymentQuery);
+        $transaction_id = $paymentRow['transaction_id'];
+    }
+
+    echo '<div class="alert alert-success">';
+    echo '<strong>Registration Successful! Please login.</strong><br>';
+    echo 'Membership Number: <strong>' . strtoupper($membership_num) . '</strong><br>';
+    echo 'Transaction ID: <strong>' . $transaction_id . '</strong>';
+    echo '</div>';
+}
+
+if (isset($error)) {
+    echo '<div class="alert alert-danger">' . $error . '</div>';
+}
+?>
+
+<!-- end of notification from payment redirects -->
             <hr />
             <div class="form-container">
             <form method="POST" action="">
@@ -137,7 +169,7 @@ include 'db_connect.php';
                     <div class="gdlr-core-sidebar-item gdlr-core-item-pdlr">
                         <div id="recent-posts-3" class="widget widget_recent_entries kingster-widget" style="background-color:rgb(206, 234, 221) ;">
                         
-                            <?php include "regsidemenu.php"; ?>
+                            <?php include "loginmenu.php"; ?>
                         </div>
                     </div>
                 </div>

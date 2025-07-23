@@ -1,79 +1,6 @@
 <?php
 session_start();
 include 'db.php';
-/*
-if (!isset($_SESSION['membership_num'])) {
-    header('Location: login.php');
-    exit();
-}
-
-$membership_num = $_SESSION['membership_num'];
-$lockFields = false;
-
-// Check if regno exists in updated_bio (lock fields if update_status = 1)
-$updateCheck = mysqli_query($conn, "SELECT update_status FROM updated_bio WHERE regno='$membership_num'");
-if ($updateCheck && mysqli_num_rows($updateCheck) > 0) {
-    $updateRow = mysqli_fetch_assoc($updateCheck);
-    if ($updateRow['update_status'] == 1) {
-        $lockFields = true;
-    }
-}
-
-// Fetch biodata
-$biodata = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM biodata WHERE regno='$membership_num'"));
-
-if (isset($_POST['update']) && !$lockFields) {
-    $firstname = mysqli_real_escape_string($conn, $_POST['firstname']);
-    $lastname = mysqli_real_escape_string($conn, $_POST['lastname']);
-    $email = mysqli_real_escape_string($conn, $_POST['email']);
-    $gender = mysqli_real_escape_string($conn, $_POST['gender']);
-    $phone = mysqli_real_escape_string($conn, $_POST['phone']);
-    $address = mysqli_real_escape_string($conn, $_POST['address']);
-    $city = mysqli_real_escape_string($conn, $_POST['city']);
-    $state = mysqli_real_escape_string($conn, $_POST['state']); // State is now available after update
-    $country = mysqli_real_escape_string($conn, $_POST['country']);
-    $wikipedia_projects = mysqli_real_escape_string($conn, $_POST['wikipedia_projects']);
-    $wikipedia_account = mysqli_real_escape_string($conn, $_POST['wikipedia_account']);
-    $open_movement = mysqli_real_escape_string($conn, $_POST['open_movement']);
-    $wugn_activities = mysqli_real_escape_string($conn, $_POST['wugn_activities']);
-    $fan_club = mysqli_real_escape_string($conn, $_POST['fan_club']);
-    $other_usergroups = mysqli_real_escape_string($conn, $_POST['other_usergroups']);
-    $declaration = mysqli_real_escape_string($conn, $_POST['declaration']);
-
-    // Update biodata (store state first)
-    $updateBiodata = mysqli_query($conn, "UPDATE biodata SET 
-        first_name='$firstname', last_name='$lastname', email='$email', gender='$gender',
-        phone='$phone', street_address='$address', city='$city', state='$state', country='$country',
-        wikimedia_projects='$wikipedia_projects',
-        involvement_open_movement='$open_movement', involvement_wugn_activities='$wugn_activities',
-        fan_club_network='$fan_club', other_usergroups='$other_usergroups', agreement='$declaration'
-        WHERE regno='$membership_num'
-    ");
-
-    if ($updateBiodata) {
-        // Now that biodata is updated, generate membership number WG/state/4-digit
-        do {
-            $random_number = str_pad(rand(0, 9999), 4, '0', STR_PAD_LEFT);
-           $new_membership_num = "WG/" . strtoupper($state) . "/{$random_number}";
-            $exists = mysqli_query($conn, "SELECT username  FROM biodata WHERE username='$new_membership_num' 
-                UNION SELECT username FROM updated_bio WHERE username='$new_membership_num'")->num_rows;
-        } while ($exists > 0);
-
-        // Update biodata with generated membership number
-        $updateMembership = mysqli_query($conn, "UPDATE biodata SET username='$new_membership_num' WHERE regno='$membership_num'");
-
-        // Insert into updated_bio
-        $updateBioQuery = mysqli_query($conn, "INSERT INTO updated_bio (regno, username,  update_status) 
-            VALUES ('$membership_num',  '$new_membership_num', 1) 
-            ON DUPLICATE KEY UPDATE update_status=1");
-
-        $success = "Biodata Updated Successfully! Your Membership Number: $new_membership_num";
-        $lockFields = true;
-    } else {
-        $error = "Failed to Update Biodata!";
-    }
-}
-    */
 
 if (!isset($_SESSION['membership_num'])) {
     header('Location: login.php');
@@ -82,6 +9,8 @@ if (!isset($_SESSION['membership_num'])) {
 
 $membership_num = $_SESSION['membership_num'];
 $lockFields = false;
+
+
 
 // Check if regno exists in updated_bio (lock fields if update_status = 1)
 $updateCheck = mysqli_query($conn, "SELECT update_status FROM updated_bio WHERE regno='$membership_num'");
@@ -115,27 +44,29 @@ if (isset($_POST['update']) && !$lockFields) {
 
     // Passport handling
     $passportFileName = $biodata['passport']; // fallback to current if no new file
-    if (isset($_FILES['passport']) && $_FILES['passport']['error'] === UPLOAD_ERR_OK) {
-        $fileSize = $_FILES['passport']['size'];
-        $ext = strtolower(pathinfo($_FILES['passport']['name'], PATHINFO_EXTENSION));
 
-        if ($fileSize <= 102400 && in_array($ext, ['jpg', 'jpeg', 'png'])) { // 100KB max
-            $uploadDir = 'uploads/passports/';
-            $newFilename = uniqid('passport_', true) . '.' . $ext;
-            $targetPath = $uploadDir . $newFilename;
+        // passport handling
+        if (isset($_FILES['passport']) && $_FILES['passport']['error'] === UPLOAD_ERR_OK) {
+    $fileSize = $_FILES['passport']['size'];
+    $ext = strtolower(pathinfo($_FILES['passport']['name'], PATHINFO_EXTENSION));
 
-            if (!is_dir($uploadDir)) {
-                mkdir($uploadDir, 0777, true);
-            }
-
-            if (move_uploaded_file($_FILES['passport']['tmp_name'], $targetPath)) {
-                $passportFileName = $targetPath;
-            }
-        } else {
-            $error = "Passport upload failed: must be JPG/PNG and ≤ 100KB.";
-        }
+    if ($fileSize > 102400 || !in_array($ext, ['jpg', 'jpeg', 'png'])) {
+        $error = "Passport upload failed: must be JPG/PNG and ≤ 100KB.";
+        return; // 🚫 Exit the script early — stops the form from processing!
     }
 
+    $uploadDir = 'uploads/passports/';
+    $newFilename = uniqid('passport_', true) . '.' . $ext;
+    $targetPath = $uploadDir . $newFilename;
+
+    if (!is_dir($uploadDir)) {
+        mkdir($uploadDir, 0777, true);
+    }
+
+    if (move_uploaded_file($_FILES['passport']['tmp_name'], $targetPath)) {
+        $passportFileName = $targetPath;
+    }
+}
     // Update biodata
     $updateBiodata = mysqli_query($conn, "UPDATE biodata SET 
         first_name='$firstname', last_name='$lastname', email='$email', gender='$gender',
@@ -219,15 +150,34 @@ include 'db_connect.php';
            <?php  echo "<h5 style='color:green; align:center;float:center;'><center>Your Membership Number: " . strtoupper(($biodata['username']) ?? 'Not Assigned Yet') . "</center></h5>"; ?>
 
             <?php
-                $message = "<h3>Update your Biodata</h3>"; // Default message
+            $membership_num = $_SESSION['membership_num'];
+$lockFields = false;
+$message = "<h3>Update your Biodata</h3>"; // Default message
+$userIDDisplay = $membership_num; // Default ID to regno
 
-                // Check if regno exists in updated_bio (update_status = 1)
-                $updateCheck = mysqli_query($conn, "SELECT update_status FROM updated_bio WHERE regno='$membership_num'");
-                if ($updateCheck && mysqli_num_rows($updateCheck) > 0) {
-                $message = "<h3>You have updated your biodata</h3>"; // Change message if already updated
-                }
+// Check if regno exists in updated_bio
+$updateCheck = mysqli_query($conn, "SELECT update_status, username FROM updated_bio WHERE regno='$membership_num'");
+if ($updateCheck && mysqli_num_rows($updateCheck) > 0) {
+    $updateRow = mysqli_fetch_assoc($updateCheck);
+    if ($updateRow['update_status'] == 1) {
+        $lockFields = true;
+        $message = "<h6>You have updated your biodata</h6>";
+        $userIDDisplay = $updateRow['username'];
+    }
+}
 
-               echo "<center>{$message}</center>";
+// Fetch biodata
+$biodata = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM biodata WHERE regno='$membership_num'"));
+
+// Display personalized greeting
+echo "<center>
+    <p>Hi, welcome to <strong>Wikimedia Usergroup Nigeria</strong> membership page!</p>
+    {$message}
+    <p>Name: <strong>{$biodata['first_name']} {$biodata['last_name']}</strong></p>
+    <p>Membership Category: <strong>{$biodata['mem_category']}</strong></p>
+    <p>State: <strong>{$biodata['state']}</strong></p>
+    <p>Your ID: <strong>" . strtoupper($userIDDisplay) . "</strong></p>
+</center>";
             ?>
             <hr />
             <div class="form-container">
@@ -261,8 +211,8 @@ include 'db_connect.php';
         <img src="<?php echo $biodata['passport']; ?>" alt="Passport" style="width: 120px; border: 1px solid #ccc;">
     </div>
          <?php endif; ?>
-
-                <label>Upload Passport Photo</label>
+           
+                <label>Upload Passport Photo:<h6>(Passport must be less than 10mb)</h6></label>
                <input type="file" name="passport" class="form-control" <?php echo $lockFields ? 'disabled' : ''; ?>>
     
             <label>Phone Number *</label>
