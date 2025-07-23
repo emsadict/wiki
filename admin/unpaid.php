@@ -6,7 +6,35 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
     header("Location: adminlogin.php");
     exit();
 }
+    $actionMessage = "";
+$conn2 = new mysqli("localhost", "root", "", "membership_management");
+if ($conn2->connect_error) {
+    die("Connection failed: " . $conn2->connect_error);
+}
+if (isset($_GET['update'])) {
+    $txid = mysqli_real_escape_string($conn2, $_GET['update']);
     
+    // Update payment_status
+    $updateQuery = "UPDATE payments SET payment_status='PAID', date=NOW() WHERE transaction_id='$txid'";
+    if (mysqli_query($conn2, $updateQuery)) {
+        $actionMessage = "<div class='alert alert-success'>✅ Payment <strong>{$txid}</strong> has been marked as <strong>PAID</strong>.</div>";
+    } else {
+        $actionMessage = "<div class='alert alert-danger'>❌ Failed to update payment <strong>{$txid}</strong>: " . mysqli_error($conn2) . "</div>";
+    }
+}
+
+
+if (isset($_GET['delete'])) {
+    $txid = mysqli_real_escape_string($conn2, $_GET['delete']);
+    $delete = mysqli_query($conn2, "DELETE FROM payments WHERE transaction_id='$txid'");
+
+    if ($delete) {
+        $actionMessage = "<div class='alert alert-success'>🗑️ Payment {$txid} deleted successfully.</div>";
+    } else {
+        $actionMessage = "<div class='alert alert-danger'>❌ Failed to delete payment: " . mysqli_error($conn2) . "</div>";
+    }
+}
+
   
 
 
@@ -74,6 +102,8 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
 
           <div class="card">
             <div class="card-body">
+              <?php if (!empty($actionMessage)) echo $actionMessage; ?>
+
               <h5 class="card-title"> Payment Records</h5>
 
               <!-- Search Form -->
@@ -97,10 +127,12 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
                     <th>Surname</th>
                     <th>othernames</th>
                     <th>Payment Type</th>
+                    <th>Transaction ID</th>
                     <th>Membership Category</th>
                     <th>Amount</th>
                     <th>Year</th>
                     <th>Status</th>
+                    <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -133,10 +165,18 @@ $query .= " ORDER BY membership_category, date";
                       echo "<td>" . $row['surname'] . "</td>";
                       echo "<td>" . $row['othernames'] . "</td>";
                       echo "<td>" . $row['payment_type'] . "</td>";
+                       echo "<td>" . $row['transaction_id'] . "</td>";
                       echo "<td>" . $row['membership_category'] . "</td>";
                       echo "<td>" . $row['amount'] . "</td>";
                       echo "<td>" . $row['year'] . "</td>";
                       echo "<td>" . $row['payment_status'] . "</td>";
+                      $txid = urlencode($row['transaction_id']); // for safe GET use
+
+echo "<td>
+    <a href='unpaid.php?update=$txid' class='btn btn-success btn-sm'>Mark as PAID</a>
+
+    <a href='unpaid.php?delete=$txid' class='btn btn-danger btn-sm' onclick=\"return confirm('Are you sure you want to delete this payment?');\">Delete</a>
+</td>";
                       echo "</tr>";
                     }
                   } else {
