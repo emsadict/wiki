@@ -98,10 +98,11 @@ if (isset($_GET['success']) && isset($_GET['membership_num'])) {
         $transaction_id = $paymentRow['transaction_id'];
     }
 
-    echo '<div class="alert alert-success">';
+    echo '<div class="alert alert-danger">';
     echo '<strong>Registration Successful! Please login.</strong><br>';
-    echo 'Membership Number: <strong>' . strtoupper($membership_num) . '</strong><br>';
-    echo 'Transaction ID: <strong>' . $transaction_id . '</strong>';
+    echo 'Registration Number: <strong>' . strtoupper($membership_num) . '</strong><br>';
+    echo 'Transaction ID: <strong>' . $transaction_id . '</strong><br><br>';
+    echo '<strong>Use your Registration Number as username and The Transaction ID as Password</strong><br>';
     echo '</div>';
 }
 
@@ -115,7 +116,7 @@ if (isset($error)) {
             <div class="form-container">
             <form method="POST" action="">
         
-            <label>Membership Number</label>
+            <label>Membership Number/Username</label>
             <input type="text" name="membership_num" class="form-control" required>
        
         

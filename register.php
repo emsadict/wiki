@@ -106,7 +106,7 @@ tinymce.init({
                                                            <input type="hidden" name="membership_num" value="<?php echo htmlspecialchars($membership_num); ?>">
         
                                                            <input type="hidden" id="year" name="year" value="<?php echo $year; ?>">
-                                                           <h6>(WRITE DOWN YOUR REGISTRATION NUMBER, YOU WILL LATER USE IT TO LOGIN AFTER PAYMENT)</h6>
+                                                           <h6 style="color: red;">(WRITE DOWN YOUR REGISTRATION NUMBER, YOU WILL LATER USE IT TO LOGIN AFTER PAYMENT)</h6>
                                                            <label>Membership Number:<BR>
                                                            </label>
                                                            <input type="text" class="form-control" value="<?php echo htmlspecialchars($membership_num); ?>" readonly>
