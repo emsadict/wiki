@@ -99,7 +99,8 @@ $paystack_public_key = "pk_test_1d2af7bafefdf00bf8abbb18740392a67a7530ed";
         email: '<?php echo htmlspecialchars($email); ?>',
         amount: <?php echo (int)$amount * 100; ?>, // Convert to kobo
         currency: 'NGN',
-        ref: 'WUGN_' + Math.floor((Math.random() * 1000000000) + 1),
+        ref: '<?php echo $transaction_id; ?>',
+       // ref: 'WUGN_' + Math.floor((Math.random() * 1000000000) + 1),
         metadata: {
             custom_fields: [
                 {
