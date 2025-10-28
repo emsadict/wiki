@@ -9,10 +9,10 @@ if (!isset($_SESSION['membership_num'])) {
 
 $membership_num = $_SESSION['membership_num'];
 $lockFields = false;
+$error = null; // 🔴 Add this up front to track upload error
+$success = null;
 
-
-
-// Check if regno exists in updated_bio (lock fields if update_status = 1)
+// Check if regno exists in updated_bio
 $updateCheck = mysqli_query($conn, "SELECT update_status FROM updated_bio WHERE regno='$membership_num'");
 if ($updateCheck && mysqli_num_rows($updateCheck) > 0) {
     $updateRow = mysqli_fetch_assoc($updateCheck);
@@ -23,7 +23,7 @@ if ($updateCheck && mysqli_num_rows($updateCheck) > 0) {
 
 // Fetch current biodata
 $biodata = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM biodata WHERE regno='$membership_num'"));
-$wikipedia_account="";
+
 if (isset($_POST['update']) && !$lockFields) {
     $firstname = mysqli_real_escape_string($conn, $_POST['firstname']);
     $lastname = mysqli_real_escape_string($conn, $_POST['lastname']);
@@ -35,76 +35,105 @@ if (isset($_POST['update']) && !$lockFields) {
     $state = mysqli_real_escape_string($conn, $_POST['state']);
     $country = mysqli_real_escape_string($conn, $_POST['country']);
     $wikipedia_projects = mysqli_real_escape_string($conn, $_POST['wikipedia_projects']);
-    $wikipedia_account = mysqli_real_escape_string($conn, $_POST['wikipedia_account']);
     $open_movement = mysqli_real_escape_string($conn, $_POST['open_movement']);
     $wugn_activities = mysqli_real_escape_string($conn, $_POST['wugn_activities']);
     $fan_club = mysqli_real_escape_string($conn, $_POST['fan_club']);
     $other_usergroups = mysqli_real_escape_string($conn, $_POST['other_usergroups']);
     $declaration = mysqli_real_escape_string($conn, $_POST['declaration']);
 
-    // Passport handling
-    $passportFileName = $biodata['passport']; // fallback to current if no new file
+    // Passport fallback
+    $passportFileName = $biodata['passport'];
 
-        // passport handling
-        if (isset($_FILES['passport']) && $_FILES['passport']['error'] === UPLOAD_ERR_OK) {
-    $fileSize = $_FILES['passport']['size'];
-    $ext = strtolower(pathinfo($_FILES['passport']['name'], PATHINFO_EXTENSION));
+    // Passport upload check
+    if (isset($_FILES['passport']) && $_FILES['passport']['error'] === UPLOAD_ERR_OK) {
+        $fileSize = $_FILES['passport']['size'];
+        $ext = strtolower(pathinfo($_FILES['passport']['name'], PATHINFO_EXTENSION));
 
-    if ($fileSize > 102400 || !in_array($ext, ['jpg', 'jpeg', 'png'])) {
-        $error = "Passport upload failed: must be JPG/PNG and ≤ 100KB.";
-        return; // 🚫 Exit the script early — stops the form from processing!
-    }
-
-    $uploadDir = 'uploads/passports/';
-    $newFilename = uniqid('passport_', true) . '.' . $ext;
-    $targetPath = $uploadDir . $newFilename;
-
-    if (!is_dir($uploadDir)) {
-        mkdir($uploadDir, 0777, true);
-    }
-
-    if (move_uploaded_file($_FILES['passport']['tmp_name'], $targetPath)) {
-        $passportFileName = $targetPath;
-    }
-}
-    // Update biodata
-    $updateBiodata = mysqli_query($conn, "UPDATE biodata SET 
-        first_name='$firstname', last_name='$lastname', email='$email', gender='$gender',
-        phone='$phone', street_address='$address', city='$city', state='$state', country='$country',
-        wikimedia_projects='$wikipedia_projects', involvement_open_movement='$open_movement',
-        involvement_wugn_activities='$wugn_activities', fan_club_network='$fan_club',
-        other_usergroups='$other_usergroups', agreement='$declaration', passport='$passportFileName'
-        WHERE regno='$membership_num'
-    ");
-
-    if ($updateBiodata) {
-        // Generate username if none exists
-        if (empty($biodata['username'])) {
-            do {
-                $random_number = str_pad(rand(0, 9999), 4, '0', STR_PAD_LEFT);
-                $new_membership_num = "WG/" . strtoupper($state) . "/$random_number";
-                $exists = mysqli_query($conn, "SELECT username FROM biodata WHERE username='$new_membership_num'
-                    UNION SELECT username FROM updated_bio WHERE username='$new_membership_num'")->num_rows;
-            } while ($exists > 0);
-
-            mysqli_query($conn, "UPDATE biodata SET username='$new_membership_num' WHERE regno='$membership_num'");
-            mysqli_query($conn, "INSERT INTO updated_bio (regno, username, update_status) 
-                VALUES ('$membership_num', '$new_membership_num', 1)
-                ON DUPLICATE KEY UPDATE update_status=1");
-            $success = "Biodata Updated Successfully! Your Membership Number: $new_membership_num";
+        if ($fileSize > 2097152 || !in_array($ext, ['jpg', 'jpeg', 'png'])) {
+            $error = "Passport upload failed: must be JPG/PNG and ≤ 2MB.";
         } else {
-            mysqli_query($conn, "INSERT INTO updated_bio (regno, username, update_status) 
-                VALUES ('$membership_num', '{$biodata['username']}', 1)
-                ON DUPLICATE KEY UPDATE update_status=1");
-            $success = "Biodata Updated Successfully!";
+            $uploadDir = 'uploads/passports/';
+            $newFilename = uniqid('passport_', true) . '.' . $ext;
+            $targetPath = $uploadDir . $newFilename;
+
+            if (!is_dir($uploadDir)) {
+                mkdir($uploadDir, 0777, true);
+            }
+
+            if (move_uploaded_file($_FILES['passport']['tmp_name'], $targetPath)) {
+                $passportFileName = $newFilename;
+            }
+        }
+    }
+
+    // ID Card fallback
+$idcardFileName = $biodata['idcard'] ?? '';
+
+// ID Card upload check
+if (isset($_FILES['idcard']) && $_FILES['idcard']['error'] === UPLOAD_ERR_OK) {
+    $fileSize = $_FILES['idcard']['size'];
+    $ext = strtolower(pathinfo($_FILES['idcard']['name'], PATHINFO_EXTENSION));
+
+    if ($fileSize > 2097152 || !in_array($ext, ['jpg', 'jpeg', 'png'])) {
+        $error = "ID Card upload failed: must be JPG/PNG and ≤ 2MB.";
+    } else {
+        $uploadDir = 'uploads/idcards/';
+        $newFilename = uniqid('idcard_', true) . '.' . $ext;
+        $targetPath = $uploadDir . $newFilename;
+
+        if (!is_dir($uploadDir)) {
+            mkdir($uploadDir, 0777, true);
         }
 
-        $lockFields = true;
-        $biodata = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM biodata WHERE regno='$membership_num'"));
-    } else {
-        $error = "Failed to Update Biodata!";
+        if (move_uploaded_file($_FILES['idcard']['tmp_name'], $targetPath)) {
+            $idcardFileName = $newFilename;
+        }
     }
 }
+
+    // 🔒 Don't process anything else if there was an error
+    if (!$error) {
+        $updateBiodata = mysqli_query($conn, "UPDATE biodata SET 
+            first_name='$firstname', last_name='$lastname', email='$email', gender='$gender',
+            phone='$phone', street_address='$address', city='$city', state='$state', country='$country',
+            wikimedia_projects='$wikipedia_projects', involvement_open_movement='$open_movement',
+            involvement_wugn_activities='$wugn_activities', fan_club_network='$fan_club',
+            other_usergroups='$other_usergroups', agreement='$declaration', passport='$passportFileName', 
+            idcard='$idcardFileName'
+            WHERE regno='$membership_num'
+        ");
+
+        if ($updateBiodata) {
+            // Username logic
+            if (empty($biodata['username'])) {
+                do {
+                    $random_number = str_pad(rand(0, 9999), 4, '0', STR_PAD_LEFT);
+                    $new_membership_num = "WG/" . strtoupper($state) . "/$random_number";
+                    $exists = mysqli_query($conn, "SELECT username FROM biodata WHERE username='$new_membership_num'
+                        UNION SELECT username FROM updated_bio WHERE username='$new_membership_num'")->num_rows;
+                } while ($exists > 0);
+
+                mysqli_query($conn, "UPDATE biodata SET username='$new_membership_num' WHERE regno='$membership_num'");
+                mysqli_query($conn, "INSERT INTO updated_bio (regno, username, update_status) 
+                    VALUES ('$membership_num', '$new_membership_num', 1)
+                    ON DUPLICATE KEY UPDATE update_status=1");
+
+                $success = "Biodata Updated Successfully! Your Membership Number: $new_membership_num";
+            } else {
+                mysqli_query($conn, "INSERT INTO updated_bio (regno, username, update_status) 
+                    VALUES ('$membership_num', '{$biodata['username']}', 1)
+                    ON DUPLICATE KEY UPDATE update_status=1");
+                $success = "Biodata Updated Successfully!";
+            }
+
+            $lockFields = true;
+            $biodata = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM biodata WHERE regno='$membership_num'"));
+        } else {
+            $error = "Failed to Update Biodata!";
+        }
+    }
+}
+
 
 // Fetch existing biodata
 $biodata = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM biodata WHERE regno='$membership_num'"));
@@ -208,13 +237,23 @@ echo "<center>
                 
             <?php if (!empty($biodata['passport'])): ?>
     <div style="margin-bottom: 10px;">
-        <img src="<?php echo $biodata['passport']; ?>" alt="Passport" style="width: 120px; border: 1px solid #ccc;">
+        <img src="uploads/passports/<?php echo $biodata['passport']; ?>" alt="Passport" style="width: 120px; height: 120px; object-fit: cover; border: 1px solid #ccc;">
     </div>
-         <?php endif; ?>
-           
+<?php endif; ?>
+         
                 <label>Upload Passport Photo:<h6>(Passport must be less than 10mb)</h6></label>
                <input type="file" name="passport" class="form-control" <?php echo $lockFields ? 'disabled' : ''; ?>>
-    
+ 
+<br>
+<?php if (!empty($biodata['idcard'])): ?>
+     <div style="margin-bottom: 10px;">
+        <img src="uploads/idcards/<?php echo $biodata['idcard']; ?>" alt="Passport" style="width: 120px; height: 120px; object-fit: cover; border: 1px solid #ccc;">
+    </div>
+                  <?php endif; ?>
+<label>Upload ID Card(for students members):<h6>(ID  card must be less than 10mb)</h6></label>
+               <input type="file" name="idcard" class="form-control" <?php echo $lockFields ? 'disabled' : ''; ?>>
+      
+
             <label>Phone Number *</label>
             <input type="text" name="phone" class="form-control" value="<?php echo $biodata['phone'] ?? ''; ?>" <?php echo $lockFields ? 'disabled' : ''; ?> required>
         

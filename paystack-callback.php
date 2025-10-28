@@ -6,11 +6,13 @@ include 'db.php';
 $paystack_secret_key = 'sk_test_58c756f536a0913d05397d08e13bc36de0fdd644';
 
 // Get reference and transaction_id from URL
-$ref = $_GET['reference'];
+//$ref = $_GET['reference'];
 $transaction_id = $_GET['transaction_id']; // This is YOUR generated ID
 
 // Verify payment with Paystack
-$url = "https://api.paystack.co/transaction/verify/" . rawurlencode($ref);
+//$url = "https://api.paystack.co/transaction/verify/" . rawurlencode($ref);
+$url = "https://api.paystack.co/transaction/verify/" . rawurlencode($transaction_id);
+
 
 $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL, $url);
@@ -98,6 +100,8 @@ if ($result['status'] && $result['data']['status'] == 'success') {
 
     // Redirect to login page
     header("Location: login.php?success=1&membership_num=$membership_num&transaction_id=$transaction_id");
+    
+
     exit();
 
 } else {

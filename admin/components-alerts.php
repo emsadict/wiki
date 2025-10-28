@@ -200,7 +200,7 @@ if (isset($_GET['delete'])) {
       echo "<th>$surname</th>";
       echo "<th>$lastname</th>";
       //echo "<th style='width:70px;'>$lastname</th>";
-      echo "<th><img src='../pass/$pro' height='100px' width='100px'></th>";
+      echo "<th><img src='../uploads/passports/$pro' height='100px' width='100px'></th>";
      // echo "<th><a href='#'><button class='btn btn-danger'>Delete</button></th>";
       echo "<th><a href='components-alerts.php?delete=$id' onclick=\"return confirm('Are you sure you want to delete this user?');\"><button class='btn btn-danger'>Delete</button></a></th>";
       echo "<th><a href='#'><button class='btn btn-primary'>Edit</button></th>";

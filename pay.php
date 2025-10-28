@@ -101,23 +101,40 @@ $paystack_public_key = "pk_test_1d2af7bafefdf00bf8abbb18740392a67a7530ed";
         currency: 'NGN',
         ref: '<?php echo $transaction_id; ?>',
        // ref: 'WUGN_' + Math.floor((Math.random() * 1000000000) + 1),
-        metadata: {
-            custom_fields: [
-                {
-                    display_name: "Phone Number",
-                    variable_name: "phone",
-                    value: "<?php echo htmlspecialchars($phone); ?>"
-                },
-                {
-                    display_name: "Membership Number",
-                    variable_name: "membership_num",
-                    value: "<?php echo htmlspecialchars($membership_num); ?>"
-                }
-            ]
+      metadata: {
+    custom_fields: [
+        {
+            display_name: "Phone Number",
+            variable_name: "phone",
+            value: "<?php echo htmlspecialchars($phone); ?>"
         },
+        {
+            display_name: "Membership Number",
+            variable_name: "membership_num",
+            value: "<?php echo htmlspecialchars($membership_num); ?>"
+        },
+        {
+            display_name: "Surname",
+            variable_name: "surname",
+            value: "<?php echo htmlspecialchars($surname); ?>"
+        },
+        {
+            display_name: "Other Names",
+            variable_name: "othernames",
+            value: "<?php echo htmlspecialchars($othernames); ?>"
+        },
+        {
+            display_name: "Payment Type",
+            variable_name: "payment_type",
+            value: "<?php echo htmlspecialchars($payment_type); ?>"
+        }
+    ]
+},
         callback: function(response) {
             // Redirect to callback page with reference and transaction ID
-            window.location.href = "paystack-callback.php?reference=" + response.reference + "&transaction_id=<?php echo $transaction_id; ?>";
+           // window.location.href = "paystack-callback.php?reference=" + response.reference + "&transaction_id=<?php //echo $transaction_id; ?>";
+           window.location.href = "paystack-callback.php?reference=" + response.reference + "&transaction_id=" + "<?php echo $transaction_id; ?>";
+
         },
         onClose: function() {
             alert('Transaction was cancelled');

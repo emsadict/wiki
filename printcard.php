@@ -103,7 +103,7 @@ $user = mysqli_fetch_assoc($result);
 <body>
 
 <div class="card">
-    <img src="<?php echo $user['passport']; ?>" alt="Passport">
+    <img src="uploads/passports/<?php echo $user['passport']; ?>" alt="Passport">
     <h2>Membership Card</h2>
     <p><strong>Name:</strong> <?php echo $user['first_name'] . ' ' . $user['last_name']; ?></p>
     <p><strong>Membership No:</strong> <?php echo strtoupper($user['username']); ?></p>

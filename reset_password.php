@@ -1,48 +1,21 @@
 <?php
-session_start();
 include 'db.php';
 
-
-if (isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true) {
-    header("Location: update_biodata.php");
-    exit();
-}
-
-
-if (isset($_POST['login'])) {
+if (isset($_POST['reset'])) {
     $membership_num = mysqli_real_escape_string($conn, $_POST['membership_num']);
-    $password = $_POST['password']; // Don't escape the password - we'll hash it directly
 
-    // Query the database for the user
+    // Check if user exists
     $query = mysqli_query($conn, "SELECT * FROM membership_accounts WHERE membership_num='$membership_num'");
-    
     if (mysqli_num_rows($query) == 1) {
-        $user = mysqli_fetch_assoc($query);
-        
-        // Verify the hashed password
-       if (password_verify($password, $user['password'])) {
-    $_SESSION['membership_num'] = $membership_num;
-    $_SESSION['user_id'] = $user['id'];
-    $_SESSION['is_logged_in'] = true; // ✅ THIS IS CRUCIAL
-    session_regenerate_id(true);
-    header("Location: update_biodata.php");
-    exit();
-}
- else {
-            // Password is incorrect
-            $error = "Invalid Membership Number or Password!";
-        }
+        // Redirect to password update form
+        header("Location: update_password.php?membership_num=$membership_num");
+        exit();
     } else {
-        // User not found
-        $error = "Invalid Membership Number or Password!";
+        $error = "Membership number not found.";
     }
 }
 ?>
 
-
-<?php 
-include 'db_connect.php';
-?>
 <!DOCTYPE html>
 <html lang="en-US" class="no-js">
 <head>
@@ -79,56 +52,44 @@ include 'db_connect.php';
         <div class="gdlr-core-blog-item-holder gdlr-core-js-2 clearfix" data-layout="fitrows">
 
             <!-- Upcoming Events -->
-            <Center><h3>LOGIN HERE</h3></Center>
+            <Center><h3>RESET YOUR PASSWORD HERE</h3></Center>
             <?php if (isset($_GET['success'])) { echo '<div class="alert alert-success">Registration Successful! Please login.</div>'; } ?>
            <?php if (isset($error)) { echo '<div class="alert alert-danger">'.$error.'</div>'; } ?>
 
 <!-- new notification from paymetn redirects-->
-
-<?php
-if (isset($_GET['success']) && isset($_GET['membership_num'])) {
-    $membership_num = mysqli_real_escape_string($conn, $_GET['membership_num']);
-    
-    // Fetch transaction ID
-    $paymentQuery = mysqli_query($conn, "SELECT transaction_id FROM payments WHERE membership_num='$membership_num' ORDER BY id DESC LIMIT 1");
-    $transaction_id = '';
-    
-    if ($paymentQuery && mysqli_num_rows($paymentQuery) > 0) {
-        $paymentRow = mysqli_fetch_assoc($paymentQuery);
-        $transaction_id = $paymentRow['transaction_id'];
-    }
-
-    echo '<div class="alert alert-danger">';
-    echo '<strong>Registration Successful! Please login.</strong><br>';
-    echo 'Registration Number: <strong>' . strtoupper($membership_num) . '</strong><br>';
-    echo 'Transaction ID: <strong>' . $transaction_id . '</strong><br><br>';
-    echo '<strong>Use your Registration Number as username and The Transaction ID as Password</strong><br>';
-    echo '</div>';
-}
-
-if (isset($error)) {
-    echo '<div class="alert alert-danger">' . $error . '</div>';
-}
-?>
-
 <!-- end of notification from payment redirects -->
             <hr />
             <div class="form-container">
-            <form method="POST" action="">
-        
-            <label>Membership Number/Username</label>
-            <input type="text" name="membership_num" class="form-control" required>
-       
-        
-            <label>Password (Transaction ID)</label>
-            <input type="password" name="password" class="form-control" required>
-        
-        <button type="submit" name="login" >Login</button>
-           </br>
-           </br>
-             <center><h6>NOT REGISTERED? CREATE ACCOUNT <a href="register.php">HERE </a></h6></center>
-           <center> <h6>FORGOT PASSWORD? <a href="reset_password.php">CLICK HERE</a></h6> </center>
-            </form>
+            
+
+
+<?php
+include 'db.php';
+
+if (isset($_POST['reset'])) {
+    $membership_num = mysqli_real_escape_string($conn, $_POST['membership_num']);
+
+    // Check if user exists
+    $query = mysqli_query($conn, "SELECT * FROM membership_accounts WHERE membership_num='$membership_num'");
+    if (mysqli_num_rows($query) == 1) {
+        // Redirect to password update form
+        header("Location: update_password.php?membership_num=$membership_num");
+        exit();
+    } else {
+        $error = "Membership number not found.";
+    }
+}
+?>
+
+<h3>Reset Password</h3>
+<?php if (isset($error)) { echo "<div class='alert alert-danger'>$error</div>"; } ?>
+<form method="POST">
+    <label>Enter Your Membership Number</label>
+    <input type="text" name="membership_num" required>
+    <button type="submit" name="reset">Proceed</button><br />
+    <center> <h6>back to login? <a href="login.php">CLICK HERE</a></h6> </center>
+</form>
+
 
 
 

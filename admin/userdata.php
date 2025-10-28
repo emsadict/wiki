@@ -17,7 +17,7 @@ if (isset($id)) {
           $name=$retrieve['first_name'];
           $last=$retrieve['last_name'];
           $sex=$retrieve['gender'];
-         // $dob=$retrieve['dob'];
+         $idcard=$retrieve['idcard'];
          // $maritalstatus=$retrieve['maritalstatus'];
           $nationality=$retrieve['country'];
           $state=$retrieve['state'];
@@ -113,7 +113,7 @@ img{
 <a href='components-alerts.php'><button class='btn btn-outline-warning' style='float: right;margin-top:20px; padding-right: 10px; margin-left: 5px;'>Back</button></a>
     <a href="logout.php"><button class='btn btn-outline-danger' style='float: right;margin-top:20px;margin-left: 10px;'>Logout</button></a>
  <center><h2 style="margin-left: 140px;"><?php  echo ucfirst($name. " ". $last); ?></h2></center> 
-<center><img src="../pass/<?php  echo $image; ?>" class="img-fluid img-thumbnail" width="100" height="80"></center>
+<center><img src="../uploads/passports/<?php  echo $image; ?>" class="img-fluid img-thumbnail" width="100" height="80"></center>
 <center>
 <h5><?php echo "$category"; ?></h5>
 <h5><?php //echo "$dept"; ?></h5>
@@ -170,7 +170,7 @@ img{
          </tr>
           <tr>
             <td>Phone: <b></b></td>
-            <td style="text-align: left;"> <b> 0<?php echo "$phoneno"; ?></b></td>
+            <td style="text-align: left;"> <b> <?php echo "$phoneno"; ?></b></td>
    
          </tr>
           <tr>
@@ -200,6 +200,9 @@ img{
             </tr>    
 </table>
 <br><br>
+<center><img src="../uploads/idcards/<?php  echo $idcard; ?>" class="img-fluid img-thumbnail" width="400" height="100"></center>
+
+<br>
 <center><button class="btn btn-success"  onClick="printdiv('printable_div_datapage');">PRINT</button></center>
 
 <script>
