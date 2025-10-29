@@ -96,6 +96,11 @@
         </a>
         <ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
+            <a href="createacc.php">
+              <i class="bi bi-circle"></i><span>Create Account</span>
+            </a>
+          </li>
+          <li>
             <a href="addexco.php">
               <i class="bi bi-circle"></i><span>Add A Staff/exco</span>
             </a>
