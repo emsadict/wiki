@@ -2,17 +2,27 @@
 session_start();
 include 'db.php';
 
+// PHPMailer
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require 'phpmailer/src/Exception.php';
+require 'phpmailer/src/PHPMailer.php';
+require 'phpmailer/src/SMTP.php';
+
 // Paystack Secret Key
 $paystack_secret_key = 'sk_test_58c756f536a0913d05397d08e13bc36de0fdd644';
 
-// Get reference and transaction_id from URL
-//$ref = $_GET['reference'];
-$transaction_id = $_GET['transaction_id']; // This is YOUR generated ID
+// Get transaction_id from URL
+$transaction_id = $_GET['transaction_id'] ?? '';
+
+if (empty($transaction_id)) {
+    echo "Transaction ID missing.";
+    exit();
+}
 
 // Verify payment with Paystack
-//$url = "https://api.paystack.co/transaction/verify/" . rawurlencode($ref);
 $url = "https://api.paystack.co/transaction/verify/" . rawurlencode($transaction_id);
-
 
 $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL, $url);
@@ -27,34 +37,34 @@ curl_close($ch);
 
 $result = json_decode($response, true);
 
-if ($result['status'] && $result['data']['status'] == 'success') {
+if ($result['status'] && $result['data']['status'] === 'success') {
     // Payment was successful
 
-    // Fetch payment record using transaction_id only
+    // Fetch payment record
     $fetch_payment_query = "SELECT * FROM payments WHERE transaction_id = '$transaction_id' AND year = YEAR(CURDATE())";
     $fetch_payment_result = mysqli_query($conn, $fetch_payment_query);
 
-    if (mysqli_num_rows($fetch_payment_result) == 0) {
+    if (mysqli_num_rows($fetch_payment_result) === 0) {
         echo "Payment record not found in database.";
         exit();
     }
 
     $payment_data = mysqli_fetch_assoc($fetch_payment_result);
 
-    $membership_num = $payment_data['membership_num'];
-    $surname = $payment_data['surname'];
-    $othernames = $payment_data['othernames'];
-    $phone = $payment_data['phone'];
-    $email = $payment_data['email'];
+    $membership_num      = $payment_data['membership_num'];
+    $surname             = $payment_data['surname'];
+    $othernames          = $payment_data['othernames'];
+    $phone               = $payment_data['phone'];
+    $email               = $payment_data['email'];
     $membership_category = $payment_data['membership_category'];
-    $payment_type = $payment_data['payment_type'];
-    $year = $payment_data['year'];
-    $date = date("Y-m-d H:i:s");
+    $payment_type        = $payment_data['payment_type'];
+    $year                = $payment_data['year'];
+    $amount              = $payment_data['amount'];
+    $date                = date("Y-m-d H:i:s");
 
-    // Update the payment status in the payments table
+    // Update payment status
     $update_payment_query = "UPDATE payments 
-                             SET payment_status = 'PAID', 
-                                 date = '$date' 
+                             SET payment_status = 'PAID', date = '$date' 
                              WHERE transaction_id = '$transaction_id' 
                              AND membership_num = '$membership_num' 
                              AND year = '$year'";
@@ -64,49 +74,97 @@ if ($result['status'] && $result['data']['status'] == 'success') {
         exit();
     }
 
+    // Send payment confirmation email
+    $mail = new PHPMailer(true);
+    try {
+        $mail->isSMTP();
+        $mail->Host       = 'smtp.yourhost.com'; // e.g. smtp.gmail.com
+        $mail->SMTPAuth   = true;
+        $mail->Username   = 'no-reply@yourdomain.com';
+        $mail->Password   = 'SMTP_PASSWORD';
+        $mail->SMTPSecure = 'tls'; // or 'ssl'
+        $mail->Port       = 587;
+
+        $mail->setFrom('no-reply@yourdomain.com', 'WUGN Membership');
+        $mail->addAddress($email);
+
+        $mail->isHTML(true);
+        $mail->Subject = "Payment Successful - WUGN Membership";
+        $mail->Body    = "
+            <p>Dear $surname $othernames,</p>
+            <p>Your payment of ₦$amount has been successfully received.</p>
+            <p>Transaction ID: $transaction_id<br>
+            Membership Number: $membership_num<br>
+            Year: $year</p>
+        ";
+
+        $mail->send();
+    } catch (Exception $e) {
+        error_log("Mailer Error (Payment): {$mail->ErrorInfo}");
+    }
+
     // Insert into membership_accounts if not existing
     $check_account_query = "SELECT * FROM membership_accounts WHERE membership_num = '$membership_num'";
     $check_account_result = mysqli_query($conn, $check_account_query);
 
-    if (mysqli_num_rows($check_account_result) == 0) {
+    if (mysqli_num_rows($check_account_result) === 0) {
         $hashed_password = password_hash($transaction_id, PASSWORD_BCRYPT);
-
         $insert_account_query = "INSERT INTO membership_accounts (membership_num, password, phone, date) 
                                  VALUES ('$membership_num', '$hashed_password', '$phone', '$date')";
-
         if (!mysqli_query($conn, $insert_account_query)) {
             echo "Error inserting account record: " . mysqli_error($conn);
             exit();
         }
     }
-    //new insert into biodata
-  //  $insert_biodata_query = "INSERT INTO biodata (regno, first_name, last_name, email, phone, mem_category, wikimedia_username) 
-    //                     VALUES ('$membership_num', '$surname', '$othernames', '$email', '$phone', '$membership_category', '$wikimedia_username')";
-$wikimedia_username = $_SESSION['wikimedia_username'] ?? '';
 
     // Insert into biodata if not existing
+    $wikimedia_username = $_SESSION['wikimedia_username'] ?? '';
     $check_biodata_query = "SELECT * FROM biodata WHERE regno = '$membership_num'";
     $check_biodata_result = mysqli_query($conn, $check_biodata_query);
 
-    if (mysqli_num_rows($check_biodata_result) == 0) {
-       $insert_biodata_query = "INSERT INTO biodata (regno, first_name, last_name, email, phone, mem_category, wikimedia_username) 
-                         VALUES ('$membership_num', '$surname', '$othernames', '$email', '$phone', '$membership_category', '$wikimedia_username')";
-
-
+    if (mysqli_num_rows($check_biodata_result) === 0) {
+        $insert_biodata_query = "INSERT INTO biodata (regno, first_name, last_name, email, phone, mem_category, wikimedia_username) 
+                                 VALUES ('$membership_num', '$surname', '$othernames', '$email', '$phone', '$membership_category', '$wikimedia_username')";
         if (!mysqli_query($conn, $insert_biodata_query)) {
             echo "Error inserting biodata record: " . mysqli_error($conn);
             exit();
         }
+
+        // Send biodata confirmation email
+        $mail = new PHPMailer(true);
+        try {
+            $mail->isSMTP();
+            $mail->Host       = 'smtp.yourhost.com';
+            $mail->SMTPAuth   = true;
+            $mail->Username   = 'no-reply@yourdomain.com';
+            $mail->Password   = 'SMTP_PASSWORD';
+            $mail->SMTPSecure = 'tls';
+            $mail->Port       = 587;
+
+            $mail->setFrom('no-reply@yourdomain.com', 'WUGN Membership');
+            $mail->addAddress($email);
+
+            $mail->isHTML(true);
+            $mail->Subject = "Biodata Recorded - WUGN Membership";
+            $mail->Body    = "
+                <p>Dear $surname $othernames,</p>
+                <p>Your biodata has been successfully recorded.</p>
+                <p>Membership Number: $membership_num<br>
+                Wikimedia Username: $wikimedia_username</p>
+            ";
+
+            $mail->send();
+        } catch (Exception $e) {
+            error_log("Mailer Error (Biodata): {$mail->ErrorInfo}");
+        }
     }
 
-    // Clear session if any
+    // Clear session
     session_unset();
     session_destroy();
 
     // Redirect to login page
     header("Location: login.php?success=1&membership_num=$membership_num&transaction_id=$transaction_id");
-    
-
     exit();
 
 } else {
