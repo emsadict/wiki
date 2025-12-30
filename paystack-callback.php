@@ -77,15 +77,19 @@ if ($result['status'] && $result['data']['status'] === 'success') {
     // Send payment confirmation email
     $mail = new PHPMailer(true);
     try {
+        $mail->SMTPDebug = 2; // show debug output 
+        $mail->Debugoutput = 'error_log';
+
+
         $mail->isSMTP();
-        $mail->Host       = 'smtp.yourhost.com'; // e.g. smtp.gmail.com
+        $mail->Host       = 'das101.truehost.cloud'; // e.g. smtp.gmail.com
         $mail->SMTPAuth   = true;
         $mail->Username   = 'info@ugele.com.ng';
         $mail->Password   = 'TcB44?BHDInnrDh8';
         $mail->SMTPSecure = 'tls'; // or 'ssl'
         $mail->Port       = 587;
 
-        $mail->setFrom('emsaditsolution.com.ng', 'WUGN Membership');
+        $mail->setFrom('info@ugele.com.ng', 'WUGN Membership');
         $mail->addAddress($email);
 
         $mail->isHTML(true);
@@ -133,15 +137,18 @@ if ($result['status'] && $result['data']['status'] === 'success') {
         // Send biodata confirmation email
         $mail = new PHPMailer(true);
         try {
+             $mail->SMTPDebug = 2; // show debug output 
+        $mail->Debugoutput = 'error_log';
+
             $mail->isSMTP();
-            $mail->Host       = 'smtp.yourhost.com';
+            $mail->Host       = 'das101.truehost.cloud';
             $mail->SMTPAuth   = true;
             $mail->Username   = 'info@ugele.com.ng';
             $mail->Password   = 'TcB44?BHDInnrDh8';
             $mail->SMTPSecure = 'tls';
             $mail->Port       = 587;
 
-            $mail->setFrom('emsaditsolution.com.ng', 'WUGN Membership');
+            $mail->setFrom('info@ugele.com.ng', 'WUGN Membership');
             $mail->addAddress($email);
 
             $mail->isHTML(true);
