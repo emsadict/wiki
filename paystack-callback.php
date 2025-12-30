@@ -80,12 +80,12 @@ if ($result['status'] && $result['data']['status'] === 'success') {
         $mail->isSMTP();
         $mail->Host       = 'smtp.yourhost.com'; // e.g. smtp.gmail.com
         $mail->SMTPAuth   = true;
-        $mail->Username   = 'no-reply@yourdomain.com';
-        $mail->Password   = 'SMTP_PASSWORD';
+        $mail->Username   = 'info@ugele.com.ng';
+        $mail->Password   = 'TcB44?BHDInnrDh8';
         $mail->SMTPSecure = 'tls'; // or 'ssl'
         $mail->Port       = 587;
 
-        $mail->setFrom('no-reply@yourdomain.com', 'WUGN Membership');
+        $mail->setFrom('emsaditsolution.com.ng', 'WUGN Membership');
         $mail->addAddress($email);
 
         $mail->isHTML(true);
@@ -136,12 +136,12 @@ if ($result['status'] && $result['data']['status'] === 'success') {
             $mail->isSMTP();
             $mail->Host       = 'smtp.yourhost.com';
             $mail->SMTPAuth   = true;
-            $mail->Username   = 'no-reply@yourdomain.com';
-            $mail->Password   = 'SMTP_PASSWORD';
+            $mail->Username   = 'info@ugele.com.ng';
+            $mail->Password   = 'TcB44?BHDInnrDh8';
             $mail->SMTPSecure = 'tls';
             $mail->Port       = 587;
 
-            $mail->setFrom('no-reply@yourdomain.com', 'WUGN Membership');
+            $mail->setFrom('emsaditsolution.com.ng', 'WUGN Membership');
             $mail->addAddress($email);
 
             $mail->isHTML(true);
