@@ -1,35 +1,36 @@
 <?php
+// Initialize variables
+$errors = [];
+$surname = $othernames = $phone = $email = $membership_category = $amount =$wikimedia_username= "";
 session_start();
 include 'db.php';
-
 
 if (isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'] === true) {
     header("Location: update_biodata.php");
     exit();
 }
 
-
+// Get current year
 $years_query = "SELECT DISTINCT year FROM calendar ORDER BY year DESC";
 $years_result = mysqli_query($conn, $years_query);
 if ($row = mysqli_fetch_assoc($years_result)) {
-    $year = $row['year']; // Fetch the year value from the database
+    $year = $row['year'];
 }
-// Function to generate random membership number like WUG12345
+
+// Generate membership number if not already in session
 function generateMembershipNumber() {
     $randomNumber = rand(10000, 99999);
     return "WG" . $randomNumber;
 }
-
-// Generate and store membership number in session
-
 if (!isset($_SESSION['membership_num'])) {
     $_SESSION['membership_num'] = generateMembershipNumber();
 }
 $membership_num = $_SESSION['membership_num'];
 
-// Initialize variables
+// Initialize variables (do NOT overwrite $wikimedia_username here)
 $errors = [];
 $surname = $othernames = $phone = $email = $membership_category = $amount = "";
+$wikimedia_username = $_SESSION['wikimedia_username'] ?? "";
 
 // Handle form submission
 
@@ -118,7 +119,10 @@ tinymce.init({
                                                            <label>Other Names:</label><br>
                                                            <input type="text" class="form-control" name="othernames" id="othernames" value="<?php echo htmlspecialchars($othernames); ?>">
                                                            
-                                                           
+                                                           <label for="wikimedia_username" class="form-label">Wikimedia Username</label>
+<input type="text" class="form-control" name="wikimedia_username" id="wikimedia_username" 
+       value="<?php echo htmlspecialchars($wikimedia_username); ?>">
+
        
                                                             <label for="phone" class="form-label">Phone Number</label>
                                                             <input type="text" class="form-control" name="phone" id="phone" value="<?php echo htmlspecialchars($phone); ?>">

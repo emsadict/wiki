@@ -10,11 +10,15 @@ $othernames = trim($_POST['othernames'] ?? '');
 $phone = trim($_POST['phone'] ?? '');
 $email = trim($_POST['email'] ?? '');
 $membership_category = trim($_POST['payment_category'] ?? '');
+$wikimedia_username = trim($_POST['wikimedia_username'] ?? ''); 
+$_SESSION['wikimedia_username'] = $wikimedia_username;
+
 
 $payment_type = trim($_POST['payment_type'] ?? '');
 $amount = trim($_POST['amount'] ?? '');
 $membership_num = trim($_POST['membership_num'] ?? '');
 $year = trim($_POST['year'] ?? date('Y'));
+
 
 // Validate required fields
 if (empty($surname)) $errors[] = "Surname is required.";
@@ -62,7 +66,8 @@ if (mysqli_num_rows($paid_result) > 0) {
 // ✅ Allow multiple unpaid attempts (do not block)
 $transaction_id = "WUGN" . date("Y") . rand(1000, 9999);
 
-// Insert into payments table (as unpaid attempt)
+// Insert into payments table (as unpaid attempt)if (empty($wikimedia_username)) $errors[] = "Wikimedia Username is required.";
+
 $insert_payment_query = "INSERT INTO payments (
     membership_num, membership_category, phone, email, 
     payment_type, amount, transaction_id, surname, othernames, 

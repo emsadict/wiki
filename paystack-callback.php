@@ -79,14 +79,19 @@ if ($result['status'] && $result['data']['status'] == 'success') {
             exit();
         }
     }
+    //new insert into biodata
+  //  $insert_biodata_query = "INSERT INTO biodata (regno, first_name, last_name, email, phone, mem_category, wikimedia_username) 
+    //                     VALUES ('$membership_num', '$surname', '$othernames', '$email', '$phone', '$membership_category', '$wikimedia_username')";
+$wikimedia_username = $_SESSION['wikimedia_username'] ?? '';
 
     // Insert into biodata if not existing
     $check_biodata_query = "SELECT * FROM biodata WHERE regno = '$membership_num'";
     $check_biodata_result = mysqli_query($conn, $check_biodata_query);
 
     if (mysqli_num_rows($check_biodata_result) == 0) {
-        $insert_biodata_query = "INSERT INTO biodata (regno, first_name, last_name, email, phone, mem_category) 
-                                 VALUES ('$membership_num', '$surname', '$othernames', '$email', '$phone', '$membership_category')";
+       $insert_biodata_query = "INSERT INTO biodata (regno, first_name, last_name, email, phone, mem_category, wikimedia_username) 
+                         VALUES ('$membership_num', '$surname', '$othernames', '$email', '$phone', '$membership_category', '$wikimedia_username')";
+
 
         if (!mysqli_query($conn, $insert_biodata_query)) {
             echo "Error inserting biodata record: " . mysqli_error($conn);
