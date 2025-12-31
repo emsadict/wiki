@@ -1,6 +1,6 @@
 <?php
 session_start();
-
+include 'functions.php';
 // Database connection
 $host = "localhost";
 $user = "root"; // Change to your DB username
@@ -43,13 +43,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $_SESSION['admin_logged_in'] = true;
             $_SESSION['admin_username'] = $db_username;
             $_SESSION['admin_id'] = $id;
+            log_audit($conn, $db_username, "Admin logged in successfully"); 
             header("Location: admindashboad.php");
             exit();
         } else {
+          log_audit($conn, $username, "Failed login attempt (incorrect password)"); 
             echo "<script>alert('Incorrect password.'); window.history.back();</script>";
             exit();
         }
     } else {
+      log_audit($conn, $username, "Failed login attempt (account not found)");
         echo "<script>alert('Admin account not found.'); window.history.back();</script>";
         exit();
     }

@@ -91,13 +91,19 @@
       </li>
       
       <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
+        <a class="nav-link collapsed" data-bs-target="#tabless-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-layout-text-window-reverse"></i><span>Send Mails</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
-        <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+        <ul id="tabless-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
             <a href="sendmail.php">
-              <i class="bi bi-circle"></i><span>Download members</span>
+              <i class="bi bi-circle"></i><span>Send Mails</span>
+             
+            </a>
+            <a href="previous_emails.php">
+              <i class="bi bi-circle"></i><span>Previous Mails</span>
+              
+              
             </a>
           </li>
           
@@ -167,7 +173,23 @@
           <i class="bi bi-person"></i>
           <span>Profile</span>
         </a>
-      </li> <!--End Profile Page Nav -->
+      </li>
+      <li class="nav-item">
+        <a class="btn btn-danger" href="backup.php">
+          <i class="bi bi-person"></i>
+          <span>Download SQL Backup</span>
+        </a>
+        
+      </li> <br >
+      <li class="nav-item">
+        <a class="btn btn-success" href="backup_csv.php">
+          <i class="bi bi-person"></i>
+          <span>Download CSV Backup</span>
+        </a>
+        
+      </li><br >
+     
+     <!--End Profile Page Nav -->
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="reset_profile.php">

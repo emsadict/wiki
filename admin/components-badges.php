@@ -1,6 +1,7 @@
 <?php
 session_start();
 include "../db.php";
+include 'functions.php';
 // Check if admin is logged in
 if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== true) {
     header("Location: adminlogin.php");

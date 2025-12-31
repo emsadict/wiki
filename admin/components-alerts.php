@@ -1,6 +1,7 @@
 <?php
 session_start();
 include "../db.php";
+include 'functions.php';
 // Check if admin is logged in
 if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== true) {
     header("Location: adminlogin.php");
@@ -29,9 +30,13 @@ $result = $conn->query($sql);
 
     if (mysqli_query($conn, $reactivateQuery)) {
         $reactivateMessage = "<div class='alert alert-success'>User reactivated successfully</div>";
+         // ✅ Log audit trail 
+         log_audit($conn, $_SESSION['admin_username'], "Reactivated user $identifier");
 
     } else {
          $reactivateMessage = "<div class='alert alert-danger'>❌ Reactivation failed: " . mysqli_error($conn) . "</div>";
+          // ✅ Log failed attempt 
+          log_audit($conn, $_SESSION['admin_username'], "Failed reactivation attempt for $identifier");
     }
 }
 
@@ -55,8 +60,12 @@ if (isset($_GET['delete'])) {
         mysqli_query($conn, "DELETE FROM updated_bio WHERE regno='$membership_num'");
 
         $deleteMessage = "<div class='alert alert-success'>🗑️ User deleted successfully.</div>";
+        // ✅ Log audit trail 
+        log_audit($conn, $_SESSION['admin_username'], "Deleted user $membership_num");
     } else {
        $deleteMessage = "<div class='alert alert-danger'>❌ User not found for deletion.</div>";
+       // ✅ Log failed attempt 
+       log_audit($conn, $_SESSION['admin_username'], "Failed deletion attempt for $identifier");
     }
 }
 

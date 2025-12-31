@@ -1,6 +1,7 @@
 <?php
 session_start();
 include "../db.php";
+include 'functions.php';
 // Check if admin is logged in
 if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== true) {
     header("Location: adminlogin.php");
@@ -31,9 +32,12 @@ $result = $conn->query($sql);
 
     if (mysqli_query($conn, $reactivateQuery)) {
         $reactivateMessage = "<div class='alert alert-success'>User reactivated successfully</div>";
-
+// ✅ Log audit trail 
+         log_audit($conn, $_SESSION['admin_username'], "Reactivated user $identifier");
     } else {
          $reactivateMessage = "<div class='alert alert-danger'>❌ Reactivation failed: " . mysqli_error($conn) . "</div>";
+          // ✅ Log failed attempt 
+          log_audit($conn, $_SESSION['admin_username'], "Failed reactivation attempt for $identifier");
     }
 }
 

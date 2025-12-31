@@ -1,6 +1,7 @@
 <?php 
 session_start();
 include "../db.php";
+include 'functions.php';
 // Check if admin is logged in
 if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== true) {
     header("Location: adminlogin.php");
@@ -18,9 +19,13 @@ if (isset($_GET['update'])) {
     $updateQuery = "UPDATE payments SET payment_status='PAID', date=NOW() WHERE transaction_id='$txid'";
     if (mysqli_query($conn2, $updateQuery)) {
         $actionMessage = "<div class='alert alert-success'>✅ Payment <strong>{$txid}</strong> has been marked as <strong>PAID</strong>.</div>";
-    } else {
+        // ✅ Log audit trail 
+        log_audit($conn2, $_SESSION['admin_username'], "Updated payment {$txid} to PAID");
+      } else {
         $actionMessage = "<div class='alert alert-danger'>❌ Failed to update payment <strong>{$txid}</strong>: " . mysqli_error($conn2) . "</div>";
-    }
+         // ✅ Log failed attempt 
+         log_audit($conn2, $_SESSION['admin_username'], "Failed to update payment {$txid}");
+      }
 }
 
 
@@ -30,8 +35,11 @@ if (isset($_GET['delete'])) {
 
     if ($delete) {
         $actionMessage = "<div class='alert alert-success'>🗑️ Payment {$txid} deleted successfully.</div>";
+        // ✅ Log audit trail 
+        log_audit($conn2, $_SESSION['admin_username'], "Deleted payment {$txid}");
     } else {
         $actionMessage = "<div class='alert alert-danger'>❌ Failed to delete payment: " . mysqli_error($conn2) . "</div>";
+         // ✅ Log failed attempt log_audit($conn2, $_SESSION['admin_username'], "Failed to delete payment {$txid}");
     }
 }
 
