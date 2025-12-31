@@ -2,6 +2,15 @@
 session_start();
 include 'db.php';
 
+// PHPMailer
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require 'phpmailer/src/Exception.php';
+require 'phpmailer/src/PHPMailer.php';
+require 'phpmailer/src/SMTP.php';
+
+
 if (!isset($_SESSION['membership_num'])) {
     header('Location: login.php');
     exit();
@@ -30,6 +39,7 @@ if (isset($_POST['update']) && !$lockFields) {
     $email = mysqli_real_escape_string($conn, $_POST['email']);
     $gender = mysqli_real_escape_string($conn, $_POST['gender']);
     $phone = mysqli_real_escape_string($conn, $_POST['phone']);
+    $dob = mysqli_real_escape_string($conn, $_POST['dob']);
     $address = mysqli_real_escape_string($conn, $_POST['address']);
     $city = mysqli_real_escape_string($conn, $_POST['city']);
     $state = mysqli_real_escape_string($conn, $_POST['state']);
@@ -98,7 +108,7 @@ if (isset($_FILES['idcard']) && $_FILES['idcard']['error'] === UPLOAD_ERR_OK) {
             phone='$phone', street_address='$address', city='$city', state='$state', country='$country',
             wikimedia_projects='$wikipedia_projects', involvement_open_movement='$open_movement',
             involvement_wugn_activities='$wugn_activities', fan_club_network='$fan_club',
-            other_usergroups='$other_usergroups', agreement='$declaration', passport='$passportFileName', 
+            other_usergroups='$other_usergroups',dob='$dob', agreement='$declaration', passport='$passportFileName', 
             idcard='$idcardFileName'
             WHERE regno='$membership_num'
         ");
@@ -128,6 +138,31 @@ if (isset($_FILES['idcard']) && $_FILES['idcard']['error'] === UPLOAD_ERR_OK) {
 
             $lockFields = true;
             $biodata = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM biodata WHERE regno='$membership_num'"));
+             // ✅ Send biodata confirmation email here 
+             $mail = new PHPMailer(true); 
+             try { 
+                $mail->SMTPDebug = 2; 
+                $mail->Debugoutput = 'error_log'; 
+                $mail->isSMTP(); 
+                $mail->Host = 'das101.truehost.cloud'; 
+                $mail->SMTPAuth = true; 
+                $mail->Username = 'info@ugele.com.ng'; 
+                $mail->Password = 'TcB44?BHDInnrDh8'; 
+                $mail->SMTPSecure = 'tls'; 
+                $mail->Port = 587; 
+                $mail->setFrom('info@ugele.com.ng', 'WUGN Membership'); 
+                $mail->addAddress($email); $mail->isHTML(true); 
+                $mail->Subject = "Biodata Recorded - WUGN Membership"; 
+                $mail->Body = " <p>Dear {$firstname} {$lastname},</p> 
+                                <p>Your biodata has been successfully recorded.</p> 
+                                <p>Membership Number:$membership_num<br>
+                                 Date of Birth: $dob</p> 
+                              "; 
+                              
+                $mail->send(); 
+            } catch (Exception $e) {
+                 error_log("Mailer Error (Biodata): {$mail->ErrorInfo}"); 
+                }
         } else {
             $error = "Failed to Update Biodata!";
         }
@@ -206,6 +241,8 @@ echo "<center>
     <p>Membership Category: <strong>{$biodata['mem_category']}</strong></p>
     <p>State: <strong>{$biodata['state']}</strong></p>
     <p>Your ID: <strong>" . strtoupper($userIDDisplay) . "</strong></p>
+    <p>Your WIKIMEDIA USERNAME: <strong>{$biodata['wikimedia_username']}</strong></p>
+    
 </center>";
             ?>
             <hr />
@@ -256,6 +293,11 @@ echo "<center>
 
             <label>Phone Number *</label>
             <input type="text" name="phone" class="form-control" value="<?php echo $biodata['phone'] ?? ''; ?>" <?php echo $lockFields ? 'disabled' : ''; ?> required>
+        
+
+            
+            <label>Date of Birth *</label>
+            <input type="date" name="dob" class="form-control" value="<?php echo $biodata['dob'] ?? ''; ?>" <?php echo $lockFields ? 'disabled' : ''; ?> required>
         
 
         

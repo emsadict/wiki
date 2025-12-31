@@ -98,8 +98,9 @@ if ($result['status'] && $result['data']['status'] === 'success') {
             <p>Dear $surname $othernames,</p>
             <p>Your payment of ₦$amount has been successfully received.</p>
             <p>Transaction ID: $transaction_id<br>
-            Membership Number: $membership_num<br>
+            Registration Number: $membership_num<br>
             Year: $year</p>
+            <p>Use your Registration Number:$membership_num as username and $transaction_id as Password to login and update your profile </p>
         ";
 
         $mail->send();

@@ -88,7 +88,22 @@
           </li>
           
         </ul>
-      </li><!-- End Tables Nav -->
+      </li>
+      
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-layout-text-window-reverse"></i><span>Send Mails</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="sendmail.php">
+              <i class="bi bi-circle"></i><span>Download members</span>
+            </a>
+          </li>
+          
+        </ul>
+      </li>
+      <!-- End Tables Nav -->
 
       <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
@@ -157,7 +172,13 @@
       <li class="nav-item">
         <a class="nav-link collapsed" href="reset_profile.php">
           <i class="bi bi-question-circle"></i>
-          <span>Reset  Password</span>
+          <span>Reset Members Password</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="reset_admin_password.php">
+          <i class="bi bi-question-circle"></i>
+          <span>Reset  Admin Password</span>
         </a>
       </li>
       
